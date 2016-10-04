@@ -169,6 +169,8 @@ return [
 
         //
         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
