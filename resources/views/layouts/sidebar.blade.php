@@ -43,6 +43,18 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{url('admin/unit')}}">
+                        <i class="fa fa-sitemap"></i>
+                        <p>Unit/Deputi</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url('admin/jabatan')}}">
+                        <i class="fa fa-shield"></i>
+                        <p>Jabatan</p>
+                    </a>
+                </li>
+                <li>
                     <a href="{{url('admin/grade')}}">
                         <i class="fa fa-sort-amount-asc"></i>
                         <p>Grade Gaji</p>
