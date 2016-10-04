@@ -15,5 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('dashboard', ['as' => 'admin.dashboard', 'uses' => 'DashboardController@index']);
+
+//IKHWANMAFTUH
+Route::get('admin/dashboard', ['as' => 'admin.dashboard', 'uses' => 'DashboardController@index']);
 Route::get('userdatatables', ['as' => 'admin.dashboard.user.datatables', 'uses' => 'DashboardController@listData']);
+Route::get('admin/jabatan', ['as' => 'admin.jabatan', 'uses' => 'JabatnController@index']);
+
+
+
+//MASAGUNG
