@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('page_title')
-Dashboard
+Manajemen Unit
 @endsection
 
 @section('css')
@@ -51,14 +51,20 @@ Dashboard
 			        <tbody>
 			        	@forelse($unit as $k => $v)
 			        		<tr>
-			        			<td>{{($k+1)}}</td>
+			        			<td>{{($v->id)}}</td>
 			        			<td>{{$v->nama_unit}}</td>
-			        			<td>{{$v->id}}</td>
+			        			<td>
+			        				<a href="{{url('/admin/unit/' . $v->id )}}" class="btn btn-default btn-sm"><i class="fa fa-eye"></i></a>
+			        				<a href="{{url('/admin/unit/edit/' . $v->id )}}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
+			        			</td>
 			        		</tr>
 			        	@empty
 			        	@endforelse
 			        </tbody>
 			    </table>
+			    <div class="" style="text-align: center;">
+			    	{{$unit->links()}}
+			    </div>
             </div>
         </div>
     </div>
@@ -66,23 +72,6 @@ Dashboard
 @endsection
 
 @section('js')
-<script type="text/javascript" src="{{asset('js/jquery.dataTables.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/dataTables.bootstrap.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/dataTables.buttons.min.js')}}"></script>
-
 <script type="text/javascript">
-	// $(function() {
-	//     $('#users-table').DataTable({
-	//         processing: true,
-	//         serverSide: true,
-	//         ajax: '{!! route('admin.dashboard.user.datatables') !!}',
-	//         columns: [
-	//             { data: 'id', name: 'id' },
-	//             { data: 'name', name: 'name' },
-	//             { data: 'email', name: 'email' },
-	//             { data: 'action', name: 'action', searchable:false }
-	//         ]
-	//     });
-	// });
 </script>
 @endsection
