@@ -16,4 +16,17 @@ class UnitController extends Controller
     	$unit = Unit::paginate(10);
     	return view('admin.unit.index', compact('unit', $unit));
     }
+
+    public function store(Request $r)
+    {
+    	$this->validate($r, [
+    		'nama_unit' => 'required|max:255'
+    	]);
+
+    	$unit = new Unit();
+    	$unit->nama_unit = $r->nama_unit;
+    	$unit->save();
+
+    	return redirect()->back();
+    }
 }

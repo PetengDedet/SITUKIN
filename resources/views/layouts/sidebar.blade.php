@@ -27,12 +27,6 @@
                 <li>
                     <a href="{{url('admin/users')}}">
                         <i class="ti-user"></i>
-                        <p>User</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('admin/pegawai')}}">
-                        <i class="fa fa-users"></i>
                         <p>Pegawai</p>
                     </a>
                 </li>

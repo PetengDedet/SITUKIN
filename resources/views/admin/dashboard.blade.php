@@ -13,8 +13,7 @@ Dashboard
     <div class="col-md-12">
         <div class="card">
             <div class="header">
-                <h4 class="title">Users Behavior</h4>
-                <p class="category">24 Hours performance</p>
+                <h4 class="title">Data Pegawai</h4>
             </div>
             <div class="content">
                 <table class="table table-responsive table-full-width" id="users-table">

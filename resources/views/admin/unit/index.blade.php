@@ -13,14 +13,20 @@ Dashboard
 	<div class="col-md-12">
 		<div class="card">
 			<div class="header">
-				<h4>Tambah Unit</h4>
+				<h4 class="title">Tambah Unit/Deputi</h4>
 			</div>
 			<div class="content">
 				<form role="form" class="form-horizontal" method="post" action="">
             		<div class="form-group">
-            			<label for="" class="control-label col-md-3">Nama Unit/Deputi</label>
-            			<div class="col-md-9">
+            			<div class="col-md-12">
+	            			<label for="" class="control-label">Nama Unit/Deputi</label>
             				<input type="text" name="nama_unit" class="form-control border-input" id="nama_unit">
+            			</div>
+            		</div>
+            		<div class="form-group">
+            			<input type="hidden" name="_token" value="{{csrf_token()}}">
+            			<div class="col-md-12">
+            				<button type="submit" class="btn btn-primary pull-right"><i class="fa fa-floppy-o"></i>&nbsp; Simpan</button>
             			</div>
             		</div>
             	</form>
@@ -31,7 +37,7 @@ Dashboard
     <div class="col-md-12">
         <div class="card">
             <div class="header">
-                <h4 class="title">Unit / Deputi</h4>
+                <h4 class="title">Data Unit / Deputi</h4>
             </div>
             <div class="content">
                 <table class="table table-responsive table-full-width" id="users-table">

@@ -21,6 +21,7 @@ Route::get('admin/dashboard', ['as' => 'admin.dashboard', 'uses' => 'DashboardCo
 Route::get('userdatatables', ['as' => 'admin.dashboard.user.datatables', 'uses' => 'DashboardController@listData']);
 Route::get('admin/jabatan', ['as' => 'admin.jabatan', 'uses' => 'JabatanController@index']);
 Route::get('admin/unit', ['as' => 'admin.unit', 'uses' => 'UnitController@index']);
+Route::post('admin/unit', ['as' => 'admin.unit', 'uses' => 'UnitController@store']);
 
 
 
