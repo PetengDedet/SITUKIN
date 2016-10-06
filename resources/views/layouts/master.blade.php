@@ -6,11 +6,11 @@
 	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Si TUKIN</title>
+	<title>Si Tukin</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
-
+ 
 
     <!-- Bootstrap core CSS     -->
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" />
@@ -31,9 +31,16 @@
 
 @yield('css')
 
-@include('layouts.sidebar')
-@include('layouts.topnav')
+</head>
+<body>
 
+<div class="wrapper">
+@include('layouts.sidebar')
+<div class="main-panel">
+@include('layouts.topnav')
+   <div class="content">
+            <div class="container-fluid">
+                <div class="row">
 @yield('content')
 
                 </div>

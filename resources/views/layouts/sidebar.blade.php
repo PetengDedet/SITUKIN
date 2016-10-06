@@ -1,8 +1,3 @@
-
-</head>
-<body>
-
-<div class="wrapper">
 	<div class="sidebar" data-background-color="white" data-active-color="danger">
 
     <!--
@@ -19,19 +14,19 @@
 
             <ul class="nav">
                 <li>
-                    <a href="{{url('admin/dashboard')}}">
+                    <a href="{{url('dashboard')}}">
                         <i class="ti-pie-chart"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('admin/users')}}">
+                    <a href="{{url('users')}}">
                         <i class="ti-user"></i>
                         <p>Pegawai</p>
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('admin/settings')}}">
+                    <a href="{{url('settings')}}">
                         <i class="fa fa-cogs"></i>
                         <p>Settings</p>
                     </a>
@@ -43,13 +38,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('admin/jabatan')}}">
+                    <a href="{{url('jabatan')}}">
                         <i class="fa fa-shield"></i>
                         <p>Jabatan</p>
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('admin/grade')}}">
+                    <a href="{{url('grade')}}">
                         <i class="fa fa-sort-amount-asc"></i>
                         <p>Grade Gaji</p>
                     </a>

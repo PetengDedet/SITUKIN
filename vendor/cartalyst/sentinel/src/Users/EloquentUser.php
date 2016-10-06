@@ -41,6 +41,7 @@ class EloquentUser extends Model implements RoleableInterface, PermissibleInterf
      */
     protected $fillable = [
         'email',
+        'nip',
         'password',
         'last_name',
         'first_name',
@@ -69,7 +70,7 @@ class EloquentUser extends Model implements RoleableInterface, PermissibleInterf
      *
      * @var array
      */
-    protected $loginNames = ['email'];
+    protected $loginNames = ['email','nip'];
 
     /**
      * The Eloquent roles model name.
