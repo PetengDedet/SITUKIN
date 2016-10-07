@@ -53,7 +53,7 @@ class JabatanController extends Controller
         	$jabatan->nama_jabatan = $r->nama_jabatan;
         	$jabatan->save();
 
-        	return redirect('admin/jabatan');
+        	return redirect('jabatan');
         }
     }
 
@@ -98,7 +98,7 @@ class JabatanController extends Controller
             $jabatan->nama_jabatan = $r->nama_jabatan;
             $jabatan->save();
 
-            return redirect('admin/jabatan');
+            return redirect('jabatan');
         }
     }
 

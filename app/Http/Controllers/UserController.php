@@ -70,4 +70,20 @@ class UserController extends Controller
 	        }
     	}
     }
+
+    public function pegawaicreate(){
+        if(!Sentinel::check()){
+            return Redirect::route('login')->with('error', 'Silahkan melakukan login terlebih dahulu');
+        }else{
+            return view('admin.pegawai.add');
+        }
+    }
+
+    public function detailpegawai($id){
+        if(!Sentinel::check()){
+            return Redirect::route('login')->with('error', 'Silahkan melakukan login terlebih dahulu');
+        }else{
+            return view('admin.pegawai.detail')->with('id',$id);
+        }
+    }
 }

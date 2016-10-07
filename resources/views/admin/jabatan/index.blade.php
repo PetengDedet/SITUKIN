@@ -15,7 +15,7 @@ Manajemen Jabatan
                 <h4 class="title">Data Jabatan</h4>
             </div>
             <div class="content">
-            	<a href="/admin/jabatan/create" class="btn btn-success btn-fill"><i class="fa fa-plus"></i>&nbsp; Tambah Jabatan</a>
+            	<a href="/jabatan/create" class="btn btn-success btn-fill"><i class="fa fa-plus"></i>&nbsp; Tambah Jabatan</a>
                 <table class="table table-responsive table-full-width" id="users-table">
 			        <thead>
 			            <tr>
@@ -34,8 +34,8 @@ Manajemen Jabatan
 			        			<td>{{$v->kelas_jabatan}}</td>
 			        			<td>{{\App\Unit::find($v->unit_id)->nama_unit}}</td>
 			        			<td>
-			        				<a href="{{url('/admin/jabatan/' . $v->id )}}" class="btn btn-default btn-sm"><i class="fa fa-eye"></i></a>
-			        				<a href="{{url('/admin/jabatan/edit/' . $v->id )}}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
+			        				<a href="{{url('/jabatan/' . $v->id )}}" class="btn btn-default btn-sm"><i class="fa fa-eye"></i></a>
+			        				<a href="{{url('/jabatan/edit/' . $v->id )}}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
 			        			</td>
 			        		</tr>
 			        	@empty

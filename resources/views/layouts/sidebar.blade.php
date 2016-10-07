@@ -32,7 +32,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('admin/unit')}}">
+                    <a href="{{url('hukuman-disiplin')}}">
+                        <i class="ti-user"></i>
+                        <p>Hukuman Disiplin</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url('unit')}}">
                         <i class="fa fa-sitemap"></i>
                         <p>Unit/Deputi</p>
                     </a>

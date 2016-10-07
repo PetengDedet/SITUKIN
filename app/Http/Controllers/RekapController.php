@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Unit;
 use Redirect;
 use Sentinel;
+use DB;
 
 class RekapController extends Controller
 {
@@ -18,5 +19,20 @@ class RekapController extends Controller
         }else{
         	return view('admin.rekap.list');
         }
+    }
+
+
+    public function update(){
+    	/*$data = DB::table('jabatan')->get();
+
+    	foreach($data as $datas){
+			$unit = DB::table('unit')->get();
+
+			foreach ($unit as $units) {
+				if($units->nama_unit == $datas->nama_jabatan){
+					DB::table('jabatan')->where('id','=',$datas->id)->delete();
+				}
+			}
+    	}*/
     }
 }

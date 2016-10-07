@@ -16,7 +16,7 @@ Manajemen Grade
 				<h4 class="title">Edit Grade</h4>
 			</div>
 			<div class="content">
-				<form role="form" class="form-horizontal" method="post" action="/admin/grade/update">
+				<form role="form" class="form-horizontal" method="post" action="grade/update">
             		<div class="form-group">
             			<div class="col-md-12">
 	            			<label for="" class="control-label">Grade</label>
@@ -90,7 +90,7 @@ Manajemen Grade
 	$(document).ready(function(){
 		$('#id').change(function(){
 			$.ajax({
-				url: '{{url('admin/grade')}}/' + $(this).val(),
+				url: '{{url('grade')}}/' + $(this).val(),
 				dataType: 'json',
 				type:'GET',
 				success: function (data) {

@@ -79,7 +79,7 @@ class GradeController extends Controller
         	$grade->dasar_hukum = $r->dasar_hukum;
         	$grade->save();
 
-            return redirect(url('admin/grade'));
+            return redirect(url('grade'));
         }
     }
 }

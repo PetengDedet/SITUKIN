@@ -71,7 +71,7 @@ class UnitController extends Controller
             $unit->nama_unit = $r->nama_unit;
             $unit->save();
 
-            return redirect(url('admin/unit'));
+            return redirect(url('unit'));
         }
     }
 }

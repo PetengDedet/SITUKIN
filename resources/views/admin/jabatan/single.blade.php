@@ -28,9 +28,9 @@ Detail Jabatan
 					</dl>
 				</div>
 				<div class="footer text-center">
-            		<a href="/admin/jabatan" class="btn btn-default btn-fill"><i class="fa fa-arrow-left"></i>&nbsp; Kembali</a>
-            		<a href="/admin/jabatan/edit/{{$jabatan->id}}" class="btn btn-primary btn-fill"><i class="fa fa-pencil"></i>&nbsp; Edit</a>
-            		<a href="/admin/jabatan/delete/{{$jabatan->id}}" class="btn btn-danger btn-fill"><i class="fa fa-trash"></i>&nbsp; Hapus</a>
+            		<a href="/jabatan" class="btn btn-default btn-fill"><i class="fa fa-arrow-left"></i>&nbsp; Kembali</a>
+            		<a href="/jabatan/edit/{{$jabatan->id}}" class="btn btn-primary btn-fill"><i class="fa fa-pencil"></i>&nbsp; Edit</a>
+            		<a href="/jabatan/delete/{{$jabatan->id}}" class="btn btn-danger btn-fill"><i class="fa fa-trash"></i>&nbsp; Hapus</a>
             		<hr>
 
 				</div>

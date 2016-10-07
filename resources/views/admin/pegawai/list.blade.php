@@ -1,11 +1,12 @@
 @extends('layouts.master')
 
 @section('page_title')
-Dashboard
+Manajemen Pegawai
 @endsection
 
 @section('css')
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+{{-- <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"> --}}
+<link rel="stylesheet" type="text/css" href="{{asset('css/dataTables.bootstrap.min.css')}}">
 <script type="text/javascript" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 
 @endsection
@@ -20,11 +21,10 @@ Dashboard
     <div class="col-md-12">
         <div class="card">
             <div class="header">
-            <br>
-            	<button style="float:right;" class="btn btn-success"  data-toggle="modal" data-target="#modalPegawai">Tambah Pegawai</button>
-            	<br>
-            	<br>
+            
                 <h4 class="title"><strong>Data Pegawai</strong></h4>
+                <br>
+                <a class="btn btn-success btn-fill" href="{{url('pegawai/create')}}"><i class="fa fa-plus"></i>&nbsp; Tambah Pegawai</a>
             </div>
             <div class="content">
                 <table class ="table table-responsive table-full-width" id="users-table">
@@ -61,7 +61,10 @@ Dashboard
                         <td style="text-align: center;">{{$data->name}}</td>
                         <td style="text-align: center;">{{$dataUnit}}</td>
                         <td style="text-align: center;">{{$dataJabatan}}</td>
-                        <td style="text-align: center;"><a href="#" onclick="loadData('{{$data->id}}');"><i class="ti-slice"></i></a>&nbsp;&nbsp;<a href="delete-pegawai/{{$data->id}}"><i class="ti-close"></i></a></td>
+                        <td style="text-align: center;">
+                        <a href="{{url('pegawai/' . $data->id )}}" class="btn btn-default btn-sm"><i class="fa fa-eye"></i></a>
+                        <a href="{{url('delete-pegawai/' . $data->id )}}" class="btn btn-warning btn-sm"><i class="fa fa-close"></i></a>
+                        </td>
                       </tr>
                       @endforeach
                   </tbody>
