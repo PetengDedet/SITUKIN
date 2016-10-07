@@ -11,14 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', ['as' => 'login', 'uses' => 'AuthController@login']);
 
 
-#######IKHWANMAFTUH
-Route::get('admin/dashboard', ['as' => 'admin.dashboard', 'uses' => 'DashboardController@index']);
+//IKHWANMAFTUH
+Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@index']);
 Route::get('userdatatables', ['as' => 'admin.dashboard.user.datatables', 'uses' => 'DashboardController@listData']);
+Route::get('jabatan', ['as' => 'admin.jabatan', 'uses' => 'JabatanController@index']);
+Route::get('unit', ['as' => 'admin.unit', 'uses' => 'UnitController@index']);
+Route::post('unit', ['as' => 'admin.unit', 'uses' => 'UnitController@store']);
 
 #Jabatan
 Route::get('admin/jabatan', 			['as' => 'admin.jabatan', 			'uses' => 'JabatanController@index']);
@@ -40,5 +41,15 @@ Route::get('admin/grade', 				['as' => 'admin.grade.get', 	'uses' => 'GradeContr
 Route::post('admin/grade/update', 		['as' => 'admin.grade.post', 	'uses' => 'GradeController@update']);
 Route::get('admin/grade/{id}', 			['as' => 'admin.grade.detail', 	'uses' => 'GradeController@show']);
 
+//MASAGUNG
+Route::get('login', ['as' => 'login', 'uses' => 'AuthController@login']);
+Route::post('login', ['as' => 'loginPost', 'uses' => 'AuthController@loginPost']);
+Route::get('logout', ['as' => 'logout', 'uses' => 'AuthController@logout']);
+Route::post('simpan-pegawai', ['as' => 'simpanpegawai', 'uses' => 'UserController@simpanpegawai']);
+Route::post('edit-pegawai', ['as' => 'editpegawai', 'uses' => 'UserController@editpegawai']);
+Route::get('delete-pegawai/{id}', ['as' => 'deletepegawai', 'uses' => 'UserController@deletepegawai']);
+Route::post('jabatanjson', ['as' => 'jabatanjson', 'uses' => 'JabatanController@jabatanjson']);
+Route::post('userjson', ['as' => 'userjson', 'uses' => 'UserController@userjson']);
 
-######MASAGUNG
+
+
