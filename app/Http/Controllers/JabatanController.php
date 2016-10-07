@@ -9,6 +9,7 @@ use App\Grade;
 use App\Unit;
 use Redirect;
 use Sentinel;
+use PDF;
 
 class JabatanController extends Controller
 {
@@ -108,5 +109,11 @@ class JabatanController extends Controller
            $jabatan = Jabatan::where('unit_id','=',$request->unit_id)->get(); 
            return response()->json(['Jabatan' => $jabatan]);
         }
+    }
+
+    public function tesPdf()
+    {
+        $pdf = PDF::loadView('report.1');
+        return $pdf->setPaper('legal', 'landscape')->stream('invoice.pdf');
     }
 }

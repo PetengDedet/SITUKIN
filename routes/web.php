@@ -41,6 +41,10 @@ Route::get('admin/grade', 				['as' => 'admin.grade.get', 	'uses' => 'GradeContr
 Route::post('admin/grade/update', 		['as' => 'admin.grade.post', 	'uses' => 'GradeController@update']);
 Route::get('admin/grade/{id}', 			['as' => 'admin.grade.detail', 	'uses' => 'GradeController@show']);
 
+#REPORT
+Route::get('report1', ['uses' => 'JabatanController@tesPdf']);
+
+
 //MASAGUNG
 Route::get('login', ['as' => 'login', 'uses' => 'AuthController@login']);
 Route::post('login', ['as' => 'loginPost', 'uses' => 'AuthController@loginPost']);
