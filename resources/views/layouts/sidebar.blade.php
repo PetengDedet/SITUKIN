@@ -20,15 +20,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('users')}}">
+                    <a href="{{url('rekap-data')}}">
                         <i class="ti-user"></i>
-                        <p>Pegawai</p>
+                        <p>Rekap Data</p>
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('settings')}}">
-                        <i class="fa fa-cogs"></i>
-                        <p>Settings</p>
+                    <a href="{{url('pegawai')}}">
+                        <i class="ti-user"></i>
+                        <p>Pegawai</p>
                     </a>
                 </li>
                 <li>
@@ -49,7 +49,12 @@
                         <p>Grade Gaji</p>
                     </a>
                 </li>
-
+                <li>
+                    <a href="{{url('settings')}}">
+                        <i class="fa fa-cogs"></i>
+                        <p>Settings</p>
+                    </a>
+                </li>
             </ul>
     	</div>
     </div>
