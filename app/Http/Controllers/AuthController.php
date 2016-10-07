@@ -20,6 +20,7 @@ class AuthController extends Controller
     }
 
     public function loginPost(Request $request){
+    	
     	$credentials = array(
 		    'nip'    => $request->nip,
 		    'password' => $request->password,
@@ -30,11 +31,12 @@ class AuthController extends Controller
 		}else{
 			return Redirect::route('login')->with('error', 'NIP/Password tidak cocok');
 		}
+		
     }
 
     public function logout(){
 		if(!Sentinel::check()){
-			return view('login');
+			return Redirect::route('login')->with('error', 'Silahkan melakukan login terlebih dahulu');
     	}else{
 			Sentinel::logout();
 			return Redirect::route('login')->with('success', 'Anda berhasil logout');

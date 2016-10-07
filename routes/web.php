@@ -46,6 +46,10 @@ Route::get('login', ['as' => 'login', 'uses' => 'AuthController@login']);
 Route::post('login', ['as' => 'loginPost', 'uses' => 'AuthController@loginPost']);
 Route::get('logout', ['as' => 'logout', 'uses' => 'AuthController@logout']);
 Route::post('simpan-pegawai', ['as' => 'simpanpegawai', 'uses' => 'UserController@simpanpegawai']);
+Route::post('edit-pegawai', ['as' => 'editpegawai', 'uses' => 'UserController@editpegawai']);
+Route::get('delete-pegawai/{id}', ['as' => 'deletepegawai', 'uses' => 'UserController@deletepegawai']);
+Route::post('jabatanjson', ['as' => 'jabatanjson', 'uses' => 'JabatanController@jabatanjson']);
+Route::post('userjson', ['as' => 'userjson', 'uses' => 'UserController@userjson']);
 
 
 
