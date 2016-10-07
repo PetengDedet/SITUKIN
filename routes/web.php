@@ -22,11 +22,11 @@ Route::get('userdatatables', ['as' => 'admin.dashboard.user.datatables', 'uses' 
 
 #Jabatan
 Route::get('admin/jabatan', 			['as' => 'admin.jabatan', 			'uses' => 'JabatanController@index']);
-Route::get('admin/jabatan/{id}', 		['as' => 'admin.jabatan.show', 		'uses' => 'JabatanController@show']);
 Route::get('admin/jabatan/create',	 	['as' => 'admin.jabatan.create',	'uses' => 'JabatanController@create']);
 Route::post('admin/jabatan/create', 	['as' => 'admin.jabatan.post', 		'uses' => 'JabatanController@store']);
 Route::get('admin/jabatan/edit/{id}',	['as' => 'admin.jabatan.edit.get',	'uses' => 'JabatanController@edit']);
 Route::post('admin/jabatan/edit/{id}', 	['as' => 'admin.jabatan.edit.post', 'uses' => 'JabatanController@update']);
+Route::get('admin/jabatan/{id}', 		['as' => 'admin.jabatan.show', 		'uses' => 'JabatanController@show']);
 
 #Unit
 Route::get('admin/unit', 				['as' => 'admin.unit.get', 		'uses' => 'UnitController@index']);
