@@ -24,6 +24,7 @@ Route::post('unit', ['as' => 'admin.unit', 'uses' => 'UnitController@store']);
 #Jabatan
 Route::get('admin/jabatan', 			['as' => 'admin.jabatan', 			'uses' => 'JabatanController@index']);
 Route::get('admin/jabatan/create',	 	['as' => 'admin.jabatan.create',	'uses' => 'JabatanController@create']);
+Route::get('admin/jabatan/{id}', 		['as' => 'admin.jabatan.show', 		'uses' => 'JabatanController@show']);
 Route::post('admin/jabatan/create', 	['as' => 'admin.jabatan.post', 		'uses' => 'JabatanController@store']);
 Route::get('admin/jabatan/edit/{id}',	['as' => 'admin.jabatan.edit.get',	'uses' => 'JabatanController@edit']);
 Route::post('admin/jabatan/edit/{id}', 	['as' => 'admin.jabatan.edit.post', 'uses' => 'JabatanController@update']);
@@ -46,6 +47,7 @@ Route::get('report1', ['uses' => 'JabatanController@tesPdf']);
 
 
 //MASAGUNG
+Route::get('pegawai', ['as' => 'pegawai', 'uses' => 'UserController@listpegawai']);
 Route::get('login', ['as' => 'login', 'uses' => 'AuthController@login']);
 Route::post('login', ['as' => 'loginPost', 'uses' => 'AuthController@loginPost']);
 Route::get('logout', ['as' => 'logout', 'uses' => 'AuthController@logout']);
@@ -54,6 +56,6 @@ Route::post('edit-pegawai', ['as' => 'editpegawai', 'uses' => 'UserController@ed
 Route::get('delete-pegawai/{id}', ['as' => 'deletepegawai', 'uses' => 'UserController@deletepegawai']);
 Route::post('jabatanjson', ['as' => 'jabatanjson', 'uses' => 'JabatanController@jabatanjson']);
 Route::post('userjson', ['as' => 'userjson', 'uses' => 'UserController@userjson']);
-
+Route::get('rekap-data', ['as' => 'rekapdata', 'uses' => 'RekapController@rekapdata']);
 
 

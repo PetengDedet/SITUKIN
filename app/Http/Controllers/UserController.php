@@ -11,6 +11,14 @@ use App\User;
 class UserController extends Controller
 {
     //
+    public function listpegawai(){
+        if(!Sentinel::check()){
+            return Redirect::route('login')->with('error', 'Silahkan melakukan login terlebih dahulu');
+        }else{
+            return view('admin.pegawai.list');
+        }
+    }
+
     public function simpanpegawai(Request $request){
     	if(!Sentinel::check()){
 			return Redirect::route('login')->with('error', 'Silahkan melakukan login terlebih dahulu');
