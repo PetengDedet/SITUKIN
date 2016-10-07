@@ -46,5 +46,6 @@ return array(
     'Cartalyst\\Support\\' => array($vendorDir . '/cartalyst/support/src'),
     'Cartalyst\\Sentinel\\' => array($vendorDir . '/cartalyst/sentinel/src'),
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
+    'Barryvdh\\DomPDF\\' => array($vendorDir . '/barryvdh/laravel-dompdf/src'),
     'App\\' => array($baseDir . '/app'),
 );

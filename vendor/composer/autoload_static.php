@@ -102,6 +102,10 @@ class ComposerStaticInit2d9b69e4f548748b4d16f84469fb4b51
             'Cartalyst\\Sentinel\\' => 19,
             'Carbon\\' => 7,
         ),
+        'B' => 
+        array (
+            'Barryvdh\\DomPDF\\' => 16,
+        ),
         'A' => 
         array (
             'App\\' => 4,
@@ -270,6 +274,10 @@ class ComposerStaticInit2d9b69e4f548748b4d16f84469fb4b51
         'Carbon\\' => 
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
+        ),
+        'Barryvdh\\DomPDF\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src',
         ),
         'App\\' => 
         array (
