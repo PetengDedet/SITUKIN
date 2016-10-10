@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('page_title')
-Tambah Hukuman Disiplin
+Detail Hukuman Disiplin
 @endsection
 
 @section('css')

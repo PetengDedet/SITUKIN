@@ -28,10 +28,27 @@ class UserController extends Controller
     		$user->name = $request->name;
     		$user->unit_id = $request->unit_id;
     		$user->jabatan_id = $request->jabatan_id;
-    		$user->gaji_pokok = $request->gaji_pokok;
+            $user->atasan_id = $request->atasan_id;
+    		$user->status_pegawai = $request->status_pegawai;
+            $user->npwp = $request->npwp;
+            $user->nm_bank = $request->nm_bank;
+            $user->nmrek = $request->nmrek;
+            $user->rekening = $request->rekening;
+            $user->gjpokok = $request->gjpokok;
+            $user->tjistri = $request->tjistri;
+            $user->tjanak = $request->tjanak;
+            $user->tjupns = $request->tjupns;
+            $user->tjstruk = $request->tjstruk;
+            $user->tjfungs = $request->tjfungs;
+            $user->tjdaerah = $request->tjdaerah;
+            $user->tjpencil = $request->tjpencil;
+            $user->tjlain = $request->tjlain;
+            $user->tjkompen = $request->tjkompen;
+            $user->pembul = $request->pembul;
+            $user->tjberas = $request->tjberas;
     		$user->save();
 
-	    	return Redirect::route('dashboard')->with('success', 'Pegawai berhasil ditambahkan');
+	    	return Redirect::route('pegawai')->with('success', 'Pegawai berhasil ditambahkan');
 	    }
     }
 
@@ -41,13 +58,30 @@ class UserController extends Controller
     	}else{
     		$user = User::find($request->id);
     		$user->nip = $request->nip;
-    		$user->name = $request->name;
-    		$user->unit_id = $request->unit_id;
-    		$user->jabatan_id = $request->jabatan_id;
-    		$user->gaji_pokok = $request->gaji_pokok;
+            $user->name = $request->name;
+            $user->unit_id = $request->unit_id;
+            $user->jabatan_id = $request->jabatan_id;
+            $user->atasan_id = $request->atasan_id;
+            $user->status_pegawai = $request->status_pegawai;
+            $user->npwp = $request->npwp;
+            $user->nm_bank = $request->nm_bank;
+            $user->nmrek = $request->nmrek;
+            $user->rekening = $request->rekening;
+            $user->gjpokok = $request->gjpokok;
+            $user->tjistri = $request->tjistri;
+            $user->tjanak = $request->tjanak;
+            $user->tjupns = $request->tjupns;
+            $user->tjstruk = $request->tjstruk;
+            $user->tjfungs = $request->tjfungs;
+            $user->tjdaerah = $request->tjdaerah;
+            $user->tjpencil = $request->tjpencil;
+            $user->tjlain = $request->tjlain;
+            $user->tjkompen = $request->tjkompen;
+            $user->pembul = $request->pembul;
+            $user->tjberas = $request->tjberas;
     		$user->save();
 
-	    	return Redirect::route('dashboard')->with('success', 'Data Pegawai berhasil dirubah');
+	    	return Redirect::route('pegawai')->with('success', 'Data Pegawai berhasil dirubah');
 	    }
     }
 
@@ -84,6 +118,14 @@ class UserController extends Controller
             return Redirect::route('login')->with('error', 'Silahkan melakukan login terlebih dahulu');
         }else{
             return view('admin.pegawai.detail')->with('id',$id);
+        }
+    }
+
+    public function pegawaijson(Request $request){
+        $count = User::where('unit_id','=',$request->unit_id)->count();
+        if($count > 0){
+           $user = User::where('unit_id','=',$request->unit_id)->get(); 
+           return response()->json(['User' => $user]);
         }
     }
 }

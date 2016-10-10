@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('page_title')
-Dashboard
+Detail Pegawai
 @endsection
 
 @section('css')
@@ -21,13 +21,14 @@ Dashboard
 ?>
 <div class="row">
     <div class="col-md-12">
-      <form action="simpan-pegawai" method="post">
+      <form action="{{url('pegawai/edit-pegawai')}}" method="post">
         <div class="card">
           <div class="header">
               <h4 class="title"><strong>Data Pegawai</strong></h4>
           </div>
           <div class="content">
             {{csrf_field()}}
+            <input type="hidden" name="id" value="{{$data->id}}"/>
             <div class="form-group">
                 <label>NIP</label>
                 <input type="text" value="{{$data->nip}}" class="form-control border-input" name="nip" placeholder="Nomor Induk Pegawai" required="">
@@ -63,8 +64,21 @@ Dashboard
                 </select>
             </div>
             <div class="form-group">
+                <label>Atasan</label>
+                <select name="atasan_id" id="atasan_id" class="form-control border-input">
+                   <option></option>
+                   @foreach(App\User::where('nip','!=','admin')->get() as $dataAtasan)
+                      @if($dataAtasan->id == $data->atasan_id)
+                        <option selected="" value="{{$dataAtasan->id}}">{{$dataAtasan->name}}</option>
+                      @else
+                        <option value="{{$dataAtasan->id}}">{{$dataAtasan->name}}</option>
+                      @endif
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
                 <label>Status Kepegawaian</label>
-                <select name="jabatan_id" id="jabatan_id" class="form-control border-input" required="" >
+                <select name="status_pegawai" id="status_pegawai" class="form-control border-input" required="" >
                    <option></option>
                    @foreach(App\StatusPegawai::get() as $datasss)
                       @if($datasss->id == $data->status_pegawai)
@@ -214,6 +228,7 @@ var urlRoot = '{{url('/')}}';
     });
 
     $("#unit_id").change(function () {
+      //load for jabatan
       var values = "unit_id=" + $('select[name=unit_id]').val() + "&_token={{csrf_token()}}";
       $.ajax({
         url: urlRoot + "/jabatanjson",
@@ -226,6 +241,24 @@ var urlRoot = '{{url('/')}}';
               html += "<option value='" + response.Jabatan[i].id + "'>" + response.Jabatan[i].nama_jabatan + "</option>";
             }
             $('#jabatan_id').html(html);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+      });
+
+      //load for atasan
+      $.ajax({
+        url: urlRoot + "/pegawaijson",
+        type: "post",
+        data: values ,
+        success: function (response) {
+          $('#atasan_id').html('');
+          var html = "";
+            for(i = 0; i < response.User.length; i++){
+              html += "<option value='" + response.User[i].id + "'>" + response.User[i].name + "</option>";
+            }
+            $('#atasan_id').html(html);
         },
         error: function(jqXHR, textStatus, errorThrown) {
            console.log(textStatus, errorThrown);

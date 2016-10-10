@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('page_title')
-Manajemen Unit
+Manajemen Grade
 @endsection
 
 @section('css')

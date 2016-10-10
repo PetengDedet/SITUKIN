@@ -49,12 +49,13 @@ Route::get('report1', ['uses' => 'JabatanController@tesPdf']);
 //MASAGUNG
 #UserController
 Route::get('pegawai', ['as' => 'pegawai', 'uses' => 'UserController@listpegawai']);
-Route::post('simpan-pegawai', ['as' => 'simpanpegawai', 'uses' => 'UserController@simpanpegawai']);
-Route::post('edit-pegawai', ['as' => 'editpegawai', 'uses' => 'UserController@editpegawai']);
+Route::post('pegawai/simpan-pegawai', ['as' => 'simpanpegawai', 'uses' => 'UserController@simpanpegawai']);
+Route::post('pegawai/edit-pegawai', ['as' => 'editpegawai', 'uses' => 'UserController@editpegawai']);
 Route::get('delete-pegawai/{id}', ['as' => 'deletepegawai', 'uses' => 'UserController@deletepegawai']);
 Route::post('userjson', ['as' => 'userjson', 'uses' => 'UserController@userjson']);
 Route::get('pegawai/create', ['as' => 'pegawaicreate', 'uses' => 'UserController@pegawaicreate']);
 Route::get('pegawai/{id}', ['as' => 'detailpegawai', 'uses' => 'UserController@detailpegawai']);
+Route::post('pegawaijson', ['as' => 'pegawaijson', 'uses' => 'UserController@pegawaijson']);
 
 #AuthController
 Route::get('login', ['as' => 'login', 'uses' => 'AuthController@login']);

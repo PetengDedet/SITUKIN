@@ -1,11 +1,12 @@
 @extends('layouts.master')
 
 @section('page_title')
-Dashboard
+Detail Pegawai
 @endsection
 
 @section('css')
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+{{-- <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"> --}}
+<link rel="stylesheet" type="text/css" href="{{asset('css/dataTables.bootstrap.min.css')}}">
 <script type="text/javascript" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 
 @endsection
@@ -15,10 +16,9 @@ Dashboard
   }
 </style>
 @section('content')
-
 <div class="row">
     <div class="col-md-12">
-      <form action="simpan-pegawai" method="post">
+      <form action="{{url('pegawai/simpan-pegawai')}}" method="post">
         <div class="card">
           <div class="header">
               <h4 class="title"><strong>Data Pegawai</strong></h4>
@@ -36,16 +36,34 @@ Dashboard
             <div class="form-group">
                 <label>Unit Kerja</label>
                 <select name="unit_id" id="unit_id" class="form-control border-input" required="" >
-                      <option ></option>
-                    @foreach(App\Unit::get() as $data)
-                      <option value="{{$data->id}}">{{$data->nama_unit}}</option>
+                    <option></option>
+                    @foreach(App\Unit::get() as $datas)
+                        <option value="{{$datas->id}}">{{$datas->nama_unit}}</option>
                     @endforeach
                 </select>
             </div>
             <div class="form-group">
                 <label>Jabatan</label>
                 <select name="jabatan_id" id="jabatan_id" class="form-control border-input" required="" >
-                  <span id="dataJabatan"></span>
+                   <option></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Atasan</label>
+                <select name="atasan_id" id="atasan_id" class="form-control border-input" >
+                   <option></option>
+                   @foreach(App\User::where('nip','!=','admin')->get() as $dataAtasan)
+                      <option value="{{$dataAtasan->id}}">{{$dataAtasan->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Status Kepegawaian</label>
+                <select name="status_pegawai" id="status_pegawai" class="form-control border-input" required="" >
+                   <option></option>
+                   @foreach(App\StatusPegawai::get() as $datasss)
+                      <option selected="" value="{{$datasss->id}}">{{$datasss->nama}}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="form-group">
@@ -108,7 +126,7 @@ Dashboard
           </div>
           <div class="form-group">
               <label>Tunjangan Daerah Terpencil</label>
-              <input type="number" class="form-control border-input" name="tjpencil" placeholder="Tunjangan Daerah Terpencil" required="">
+              <input type="number" class="form-control border-input" name="tjpencil" placeholder="Tunjangan Daerah Terpencil<" required="">
           </div>
           <div class="form-group">
               <label>Tunjangan Lainnya</label>
@@ -126,7 +144,9 @@ Dashboard
               <label>Tunjangan Beras</label>
               <input type="number" class="form-control border-input" name="tjberas" placeholder="Tunjangan Beras" required="">
           </div>
-          <button type="submit" class="btn btn-default">Simpan</button>
+          <span style="text-align: center;">
+          <button type="submit" width="300px" class="btn btn-success btn-fill">Simpan</button>
+          </span>
         </div>
       </div>
     </form>
@@ -136,10 +156,20 @@ Dashboard
 @endsection
 
 @section('js')
+<script type="text/javascript" src="{{asset('js/jquery.dataTables.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/dataTables.bootstrap.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/dataTables.buttons.min.js')}}"></script>
 <script type="text/javascript">
 var urlRoot = '{{url('/')}}';
   $(document).ready(function(){
+    $('#hukuman-table').DataTable({
+      "language": {
+        "emptyTable": "Pegawai ini tidak mempunyai riwayat hukuman disiplin"
+      }
+    });
+
     $("#unit_id").change(function () {
+      //load for jabatan
       var values = "unit_id=" + $('select[name=unit_id]').val() + "&_token={{csrf_token()}}";
       $.ajax({
         url: urlRoot + "/jabatanjson",
@@ -152,6 +182,24 @@ var urlRoot = '{{url('/')}}';
               html += "<option value='" + response.Jabatan[i].id + "'>" + response.Jabatan[i].nama_jabatan + "</option>";
             }
             $('#jabatan_id').html(html);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+      });
+
+      //load for atasan
+      $.ajax({
+        url: urlRoot + "/pegawaijson",
+        type: "post",
+        data: values ,
+        success: function (response) {
+          $('#atasan_id').html('');
+          var html = "";
+            for(i = 0; i < response.User.length; i++){
+              html += "<option value='" + response.User[i].id + "'>" + response.User[i].name + "</option>";
+            }
+            $('#atasan_id').html(html);
         },
         error: function(jqXHR, textStatus, errorThrown) {
            console.log(textStatus, errorThrown);

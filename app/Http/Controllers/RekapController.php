@@ -17,22 +17,17 @@ class RekapController extends Controller
         if(!Sentinel::check()){
             return Redirect::route('login')->with('error', 'Silahkan melakukan login terlebih dahulu');
         }else{
-        	return view('admin.rekap.list');
+        	return view('admin.rekapdata.list');
         }
     }
 
 
     public function update(){
-    	/*$data = DB::table('jabatan')->get();
+    	$data = DB::table('table 19')->get();
 
     	foreach($data as $datas){
-			$unit = DB::table('unit')->get();
-
-			foreach ($unit as $units) {
-				if($units->nama_unit == $datas->nama_jabatan){
-					DB::table('jabatan')->where('id','=',$datas->id)->delete();
-				}
-			}
-    	}*/
+            $idBaru = $datas->id + 430;
+			DB::table('table 19')->where('id','=',$datas->id)->update(['id'=>$idBaru]);
+    	}
     }
 }

@@ -106,7 +106,7 @@ class JabatanController extends Controller
     public function jabatanjson(Request $request){
         $count = Jabatan::where('unit_id','=',$request->unit_id)->count();
         if($count > 0){
-           $jabatan = Jabatan::where('unit_id','=',$request->unit_id)->get(); 
+           $jabatan = Jabatan::where('unit_id','=',$request->unit_id)->orWhere('unit_id','=','999')->get(); 
            return response()->json(['Jabatan' => $jabatan]);
         }
     }

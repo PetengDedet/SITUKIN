@@ -15,13 +15,13 @@
             <ul class="nav">
                 <li>
                     <a href="{{url('dashboard')}}">
-                        <i class="ti-pie-chart"></i>
+                        <i class="fa fa-tachometer"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li>
                     <a href="{{url('rekap-data')}}">
-                        <i class="ti-user"></i>
+                        <i class="fa fa-bar-chart "></i>
                         <p>Rekap Data</p>
                     </a>
                 </li>
@@ -33,7 +33,7 @@
                 </li>
                 <li>
                     <a href="{{url('hukuman-disiplin')}}">
-                        <i class="ti-user"></i>
+                        <i class="fa fa-balance-scale"></i>
                         <p>Hukuman Disiplin</p>
                     </a>
                 </li>
