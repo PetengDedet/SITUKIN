@@ -21,7 +21,7 @@
                 </li>
                 <li>
                     <a href="{{url('rekap-data')}}">
-                        <i class="fa fa-bar-chart "></i>
+                        <i class="fa fa-folder"></i>
                         <p>Rekap Data</p>
                     </a>
                 </li>
@@ -33,7 +33,7 @@
                 </li>
                 <li>
                     <a href="{{url('hukuman-disiplin')}}">
-                        <i class="fa fa-balance-scale"></i>
+                        <i class="fa fa-legal"></i>
                         <p>Hukuman Disiplin</p>
                     </a>
                 </li>
@@ -61,6 +61,13 @@
                         <p>Settings</p>
                     </a>
                 </li>
+                <li>
+                    <a href="{{url('manajemen-user')}}">
+                        <i class="fa fa-user-secret"></i>
+                        <p>Manajemen User</p>
+                    </a>
+                </li>
+
             </ul>
     	</div>
     </div>
