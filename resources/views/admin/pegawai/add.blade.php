@@ -62,7 +62,7 @@ Detail Pegawai
                 <select name="status_pegawai" id="status_pegawai" class="form-control border-input" required="" >
                    <option></option>
                    @foreach(App\StatusPegawai::get() as $datasss)
-                      <option selected="" value="{{$datasss->id}}">{{$datasss->nama}}</option>
+                      <option value="{{$datasss->id}}">{{$datasss->nama}}</option>
                     @endforeach
                 </select>
             </div>
