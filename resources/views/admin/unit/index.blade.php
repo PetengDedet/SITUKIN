@@ -54,8 +54,8 @@ Manajemen Unit
 			        			<td>{{($v->id)}}</td>
 			        			<td>{{$v->nama_unit}}</td>
 			        			<td>
-			        				<a href="{{url('/unit/' . $v->id )}}" class="btn btn-default btn-sm"><i class="fa fa-eye"></i></a>
-			        				<a href="{{url('/unit/edit/' . $v->id )}}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
+			        				<a href="{{url('/unit/' . $v->id )}}" class="btn btn-default btn-sm btn-fill"><i class="fa fa-eye"></i></a>
+			        				<a href="{{url('/unit/edit/' . $v->id )}}" class="btn btn-warning btn-sm btn-fill"><i class="fa fa-pencil"></i></a>
 			        			</td>
 			        		</tr>
 			        	@empty

@@ -34,8 +34,8 @@ Manajemen Jabatan
 			        			<td>{{$v->kelas_jabatan}}</td>
 			        			<td>{{\App\Unit::find($v->unit_id)->nama_unit}}</td>
 			        			<td>
-			        				<a href="{{url('/jabatan/' . $v->id )}}" class="btn btn-default btn-sm"><i class="fa fa-eye"></i></a>
-			        				<a href="{{url('/jabatan/edit/' . $v->id )}}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
+			        				<a href="{{url('/jabatan/' . $v->id )}}" class="btn btn-default btn-sm btn-fill"><i class="fa fa-eye"></i></a>
+			        				<a href="{{url('/jabatan/edit/' . $v->id )}}" class="btn btn-warning btn-sm btn-fill"><i class="fa fa-pencil"></i></a>
 			        			</td>
 			        		</tr>
 			        	@empty

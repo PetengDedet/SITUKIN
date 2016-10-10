@@ -62,8 +62,8 @@ Manajemen Pegawai
                         <td style="text-align: center;">{{$dataUnit}}</td>
                         <td style="text-align: center;">{{$dataJabatan}}</td>
                         <td style="text-align: center;">
-                        <a href="{{url('pegawai/' . $data->id )}}" class="btn btn-default btn-sm"><i class="fa fa-eye"></i></a>
-                        <a href="{{url('delete-pegawai/' . $data->id )}}" class="btn btn-warning btn-sm"><i class="fa fa-close"></i></a>
+                        <a href="{{url('pegawai/' . $data->id )}}" class="btn btn-default btn-sm btn-fill"><i class="fa fa-eye"></i></a>
+                        <a href="{{url('delete-pegawai/' . $data->id )}}" class="btn btn-warning btn-sm btn-fill"><i class="fa fa-close"></i></a>
                         </td>
                       </tr>
                       @endforeach
