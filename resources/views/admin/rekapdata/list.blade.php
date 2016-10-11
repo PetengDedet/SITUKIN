@@ -247,39 +247,39 @@ Rekap Data
                     <strong><b>Cuti-Cuti</b></strong>
                     <div class="form-group">
                         Cuti Tahunan
-                        <input style="text-align: center;" type="text" class="form-control border-input" name="cuti_tahunan" id="cuti_tahunan" placeholder="">
+                        <input onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_tahunan" id="cuti_tahunan" placeholder="">
                     </div>
                     <div class="form-group">
                         Cuti Alasan Penting
-                        <input style="text-align: center;" type="text" class="form-control border-input" name="cuti_alasan_penting" id="cuti_alasan_penting" placeholder="">
+                        <input onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_alasan_penting" id="cuti_alasan_penting" placeholder="">
                     </div>
                     <div class="form-group">
                         Cuti Sakit Tidak Rawat Inap
-                        <input style="text-align: center;" type="text" class="form-control border-input" name="cuti_sakit_tidak_rawat_inap" id="cuti_sakit_tidak_rawat_inap" placeholder="">
+                        <input onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_sakit_tidak_rawat_inap" id="cuti_sakit_tidak_rawat_inap" placeholder="">
                     </div>
                     <div class="form-group">
                         Cuti Sakit Rawat Inap
-                        <input style="text-align: center;" type="text" class="form-control border-input" name="cuti_sakit_rawat_inap" id="cuti_sakit_rawat_inap" placeholder="">
+                        <input onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_sakit_rawat_inap" id="cuti_sakit_rawat_inap" placeholder="">
                     </div>
                     <div class="form-group">
                         Cuti Sakit Rawat Jalan
-                        <input style="text-align: center;" type="text" class="form-control border-input" name="cuti_sakit_rawat_jalan" id="cuti_sakit_rawat_jalan" placeholder="">
+                        <input onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_sakit_rawat_jalan" id="cuti_sakit_rawat_jalan" placeholder="">
                     </div>
                     <div class="form-group">
                         Cuti Gugur Kandungan
-                        <input style="text-align: center;" type="text" class="form-control border-input" name="cuti_gugur_kandungan" id="cuti_gugur_kandungan" placeholder="">
+                        <input onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_gugur_kandungan" id="cuti_gugur_kandungan" placeholder="">
                     </div>
                     <div class="form-group">
                         Cuti Bersalin
-                        <input style="text-align: center;" type="text" class="form-control border-input" name="cuti_bersalin" id="cuti_bersalin" placeholder="">
+                        <input onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_bersalin" id="cuti_bersalin" placeholder="">
                     </div>
                     <div class="form-group">
                         Cuti Besar
-                        <input style="text-align: center;" type="text" class="form-control border-input" name="cuti_besar" id="cuti_besar" placeholder="">
+                        <input onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_besar" id="cuti_besar" placeholder="">
                     </div>
                     <div class="form-group">
                         Cuti Luar Tanggungan Negara
-                        <input style="text-align: center;" type="text" class="form-control border-input" name="cuti_luar_tanggungan_negara" id="cuti_luar_tanggungan_negara" placeholder="">
+                        <input onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_luar_tanggungan_negara" id="cuti_luar_tanggungan_negara" placeholder="">
                     </div>
                 </div>
                 <div class="col-md-4">
