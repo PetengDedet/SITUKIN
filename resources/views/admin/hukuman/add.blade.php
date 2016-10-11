@@ -10,6 +10,31 @@ Tambah Hukuman Disiplin
 
 @endsection
 <style type="text/css">
+  body > div > div.main-panel > div > div > div > div > div > form > div > div.content > div:nth-child(1) > span > span.selection > span
+  {
+    vertical-align: middle;
+    height: 40px;
+  }
+  body > div > div.main-panel > div > div > div > div > div > form > div > div.content > div:nth-child(2) > span > span.selection > span
+  {
+    vertical-align: middle;
+    height: 40px;
+  }
+
+  .badge-warning {
+    background: #FF9800;
+  }
+  .badge-info {
+    background: #2196F3;
+  }
+  .badge-success {
+    background: #4CAF50;
+  }
+  .badge-danger {
+    background: #f44336;
+  }
+</style>
+<style type="text/css">
   .modal-backdrop.fade{
     z-index: 0;  
   }

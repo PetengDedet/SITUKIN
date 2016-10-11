@@ -30,12 +30,11 @@ Manajemen Pegawai
                 <table class ="table table-responsive table-full-width" id="users-table">
     			        <thead>
     			            <tr>
-    			                <th style="text-align: center;">ID</th>
     			                <th style="text-align: center;">NIP</th>
     			                <th style="text-align: center;">Name</th>
     			                <th style="text-align: center;">Unit</th>
                           <th style="text-align: center;">Jabatan</th>
-    			                <th style="text-align: center;">Action</th>
+    			                <th style="text-align: center;width: 120px;">Action</th>
     			            </tr>
     			        </thead>
                   <tbody>
@@ -56,14 +55,12 @@ Manajemen Pegawai
                         }
                       ?>
                       <tr>
-                        <td style="text-align: center;">{{$data->id}}</td>
                         <td style="text-align: center;">{{$data->nip}}</td>
                         <td style="text-align: center;">{{$data->name}}</td>
                         <td style="text-align: center;">{{$dataUnit}}</td>
                         <td style="text-align: center;">{{$dataJabatan}}</td>
                         <td style="text-align: center;">
-                        <a href="{{url('pegawai/' . $data->id )}}" class="btn btn-default btn-sm btn-fill"><i class="fa fa-eye"></i></a>
-                        <a href="{{url('delete-pegawai/' . $data->id )}}" class="btn btn-warning btn-sm btn-fill"><i class="fa fa-close"></i></a>
+                        <a href="{{url('pegawai/' . $data->id )}}" class="btn btn-default btn-sm btn-fill"><i class="fa fa-eye"></i></a><a href="{{url('delete-pegawai/' . $data->id )}}" class="btn btn-warning btn-sm btn-fill"><i class="fa fa-close"></i></a>
                         </td>
                       </tr>
                       @endforeach

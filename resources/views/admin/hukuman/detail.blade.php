@@ -12,6 +12,16 @@ Detail Hukuman Disiplin
 
 @endsection
 <style type="text/css">
+  body > div > div.main-panel > div > div > div > div > div > form > div > div.content > div:nth-child(1) > span > span.selection > span
+  {
+    vertical-align: middle;
+    height: 40px;
+  }
+  body > div > div.main-panel > div > div > div > div > div > form > div > div.content > div:nth-child(2) > span > span.selection > span
+  {
+    vertical-align: middle;
+    height: 40px;
+  }
   .modal-backdrop.fade{
     z-index: 0;  
   }
