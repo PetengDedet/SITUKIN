@@ -25,6 +25,10 @@ Rekap Data
 @endsection
 
 @section('content')
+<?php
+    use App\Library\RoleLib;
+    use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+?>
 <div class="row">
     <div class="col-md-12">
         <div class="card">
@@ -91,6 +95,7 @@ Rekap Data
                 <div class="form-group">
                     <label>Unit Kerja</label>
                     <select name="unit_kerja" class="form-control border-input" required="" >
+                        <option></option>
                       @foreach(App\Unit::get() as $dataUnit)
 
                         @if($request->unit_kerja == $dataUnit->id)
@@ -125,7 +130,7 @@ Rekap Data
       			        </thead>
                     <tbody>
                         <script type="text/javascript">var dataInput = "";</script>
-                        @foreach(App\User::where('nip','!=','admin')->where('unit_id','=',$request->unit_kerja)->get() as $data)
+                        @foreach(App\User::where('nip','!=','admin')->where('unit_id','=',$request->unit_kerja)->where('id','!=',Sentinel::getUser()->id)->get() as $data)
                         <input type="hidden" name="pegawai_id[]" value="{{$data->id}}">
                         <?php
                           $dataUnit = "";
@@ -146,6 +151,8 @@ Rekap Data
                           <td style="text-align: center;" style="width: 10%">{{$data->nip}}</td>
                           <td style="text-align: center;" style="width: 45%">{{$data->name}}</td>
                           <td align="center" style="width: 15%">
+                          @if(RoleLib::limitThis('2',Sentinel::getUser()->id))
+                          <input type="hidden" name="from" value="protakel">
                           <?php
                             $checkRekapDataKinerjaBulanan = App\KinerjaBulanan::where('pegawai_id','=',$data->id)->where('bulan','=',$request->bulan)->where('tahun','=',$request->tahun)->count();
                           ?>
@@ -171,7 +178,37 @@ Rekap Data
                               </div>
                             </div>
                           @endif
+                          @else
+                            <?php
+                            $checkRekapDataKinerjaBulanan = App\KinerjaBulanan::where('pegawai_id','=',$data->id)->where('bulan','=',$request->bulan)->where('tahun','=',$request->tahun)->count();
+                          ?>
+                          @if($checkRekapDataKinerjaBulanan > 0)
+                            <?php 
+                              $dataKinerjaBulanan = App\KinerjaBulanan::where('pegawai_id','=',$data->id)->where('bulan','=',$request->bulan)->where('tahun','=',$request->tahun)->first();
+                            ?>
+                            <div class="form-group border-input">
+                              <div class="input-group">
+                                <input readonly onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="{{$dataKinerjaBulanan->persentase}}" style="text-align: center;" class="form-control border-input"  min="0" max="100" intOnly="true"  name="kinerja_bulanan[]" id="kinerja_bulanan_{{$data->id}}" type="text">
+                                <span class="input-group-addon" required>
+                                  <span class="fa fa-percent"></span>
+                                </span>
+                              </div>
+                            </div>
+                          @else
+                            <div class="form-group border-input">
+                              <div class="input-group">
+                                <input readonly onkeypress='return event.charCode >= 48 && event.charCode <= 57' style="text-align: center;" class="form-control border-input"  min="0" max="100" intOnly="true" value="" name="kinerja_bulanan[]" id="kinerja_bulanan_{{$data->id}}" type="text" required>
+                                <span class="input-group-addon">
+                                  <span class="fa fa-percent"></span>
+                                </span>
+                              </div>
+                            </div>
+                          @endif
+                          @endif
                           </td>
+                          
+                          @if(RoleLib::limitThis('3',Sentinel::getUser()->id))
+                          <input type="hidden" name="from" value="sdm">
                           <td align="center" onclick="showModal('{{$data->id}}','{{$data->name}}');" style="width: 15%">
                           <?php
                             $checkRekapDataPotonganAbsensi = App\PotonganAbsensi::where('pegawai_id','=',$data->id)->where('bulan','=',$request->bulan)->where('tahun','=',$request->tahun)->count();
@@ -198,6 +235,34 @@ Rekap Data
                               </div>
                             </div>
                             @endif
+                          @else
+                          <td align="center" style="width: 15%">
+                            <?php
+                                $checkRekapDataPotonganAbsensi = App\PotonganAbsensi::where('pegawai_id','=',$data->id)->where('bulan','=',$request->bulan)->where('tahun','=',$request->tahun)->count();
+                            ?>
+                            @if($checkRekapDataPotonganAbsensi > 0)
+                            <?php
+                                $dataRekapDataPotonganAbsensi = App\PotonganAbsensi::where('pegawai_id','=',$data->id)->where('bulan','=',$request->bulan)->where('tahun','=',$request->tahun)->first();
+                            ?>
+                            <div class="form-group border-input" >
+                              <div class="input-group">
+                                <input readonly value="{{$dataRekapDataPotonganAbsensi->total_potongan_absen}}" style="text-align: center;" class="readonly form-control border-input"  min="0" max="100" intOnly="true"  required="" id="potongan_absen_{{$data->id}}" name="potongan_absen[]" "type="text">
+                                <span class="input-group-addon">
+                                  <span class="fa fa-percent"></span>
+                                </span>
+                              </div>
+                            </div>
+                            @else
+                            <div class="form-group border-input" >
+                              <div class="input-group">
+                                <input readonly  style="text-align: center;" class="readonly form-control border-input"  min="0" max="100" intOnly="true" id="potongan_absen_{{$data->id}}"  required="" name="potongan_absen[]" "type="text">
+                                <span class="input-group-addon">
+                                  <span class="fa fa-percent"></span>
+                                </span>
+                              </div>
+                            </div>
+                            @endif
+                          @endif
                           </td>
                           <td align="center" style="width:15%">
                             <?php

@@ -79,6 +79,9 @@ Manajemen User
             		</div>
             <div class="form-group">
             	<button class="btn btn-success btn-fill" type="submit">Simpan</button>
+            	<br>
+            	<br>
+            	<font color="red">*default password untuk Protakel/SDM adalah : <b>1234</b></font>
             </div>
         </div>
     </div>

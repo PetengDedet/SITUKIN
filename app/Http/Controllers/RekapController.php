@@ -33,6 +33,7 @@ class RekapController extends Controller
     public function tambahpotonganabsen(Request $request){
         $check = PotonganAbsensi::where('pegawai_id','=',$request->pegawai_id)->where('bulan','=',$request->bulan)->where('tahun','=',$request->tahun)->count();
 
+        
         if($check > 0){
             $data = PotonganAbsensi::where('pegawai_id','=',$request->pegawai_id)->where('bulan','=',$request->bulan)->where('tahun','=',$request->tahun)->first();
             $data->pegawai_id = $request->pegawai_id;
@@ -97,22 +98,25 @@ class RekapController extends Controller
     public function simpanrekapdata(Request $request){
         for($i = 0 ; $i < count($request->pegawai_id) ; $i++){
             
-            $checkKinerja = KinerjaBulanan::where('pegawai_id','=',$request->pegawai_id[$i])->where('bulan','=',$request->bulan)->where('tahun','=',$request->tahun)->count();
-            if($checkKinerja > 0){
-                $dataKinerja = KinerjaBulanan::where('pegawai_id','=',$request->pegawai_id[$i])->where('bulan','=',$request->bulan)->where('tahun','=',$request->tahun)->first();
-                $dataKinerja->pegawai_id = $request->pegawai_id[$i];
-                $dataKinerja->bulan = $request->bulan;
-                $dataKinerja->tahun = $request->tahun;
-                $dataKinerja->persentase = $request->kinerja_bulanan[$i];
-                $dataKinerja->update();
-            }else{
-                $dataKinerja = new KinerjaBulanan();
-                $dataKinerja->pegawai_id = $request->pegawai_id[$i];
-                $dataKinerja->bulan = $request->bulan;
-                $dataKinerja->tahun = $request->tahun;
-                $dataKinerja->persentase = $request->kinerja_bulanan[$i];
-                $dataKinerja->save();
+            if($request->from == "protakel"){
+                $checkKinerja = KinerjaBulanan::where('pegawai_id','=',$request->pegawai_id[$i])->where('bulan','=',$request->bulan)->where('tahun','=',$request->tahun)->count();
+                if($checkKinerja > 0){
+                    $dataKinerja = KinerjaBulanan::where('pegawai_id','=',$request->pegawai_id[$i])->where('bulan','=',$request->bulan)->where('tahun','=',$request->tahun)->first();
+                    $dataKinerja->pegawai_id = $request->pegawai_id[$i];
+                    $dataKinerja->bulan = $request->bulan;
+                    $dataKinerja->tahun = $request->tahun;
+                    $dataKinerja->persentase = $request->kinerja_bulanan[$i];
+                    $dataKinerja->update();
+                }else{
+                    $dataKinerja = new KinerjaBulanan();
+                    $dataKinerja->pegawai_id = $request->pegawai_id[$i];
+                    $dataKinerja->bulan = $request->bulan;
+                    $dataKinerja->tahun = $request->tahun;
+                    $dataKinerja->persentase = $request->kinerja_bulanan[$i];
+                    $dataKinerja->save();
+                }
             }
+            
 
             $checkDisiplin = PotonganDisiplin::where('pegawai_id','=',$request->pegawai_id[$i])->where('bulan','=',$request->bulan)->where('tahun','=',$request->tahun)->count();
             if($checkDisiplin > 0){
