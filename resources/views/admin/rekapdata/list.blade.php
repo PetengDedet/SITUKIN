@@ -40,13 +40,31 @@ Rekap Data
                             $i = 1;
                             $month = strtotime('2016-01-01');
                             $monthNow = date("F");
+                            $monthStatus = true;
                             while($i <= 12)
                             {
                                 $month_name = date('F', $month);
-                                if($month_name == $monthNow){
-                                  echo '<option selected value="'. $month_name. '">'.$month_name.'</option>';
+                                
+
+
+                                if($request->bulan == $month_name){
+                                    if($monthStatus){
+                                        $monthStatus = false;
+                                        echo '<option selected value="'. $month_name. '">'.$month_name.'</option>';    
+                                    }else{
+                                        echo '<option value="'. $month_name. '">'.$month_name.'</option>';
+                                    }
+                                    
                                 }else{
-                                  echo '<option value="'. $month_name. '">'.$month_name.'</option>';
+                                    if($month_name == $monthNow){
+                                        if($monthStatus){
+                                            echo '<option selected value="'. $month_name. '">'.$month_name.'</option>';
+                                        }else{
+                                          echo '<option value="'. $month_name. '">'.$month_name.'</option>';
+                                        }
+                                    }else{
+                                      echo '<option value="'. $month_name. '">'.$month_name.'</option>';
+                                    }
                                 }
                                 
                                 $month = strtotime('+1 month', $month);
@@ -59,7 +77,7 @@ Rekap Data
                       </div>
                       <div class="col-md-6">
                         <select name="tahun" class="form-control border-input" required="" >
-                          @for($i = 2000; $i < 2019; $i++)
+                          @for($i = 2016; $i <= $yearNow; $i++)
                             @if($i == $yearNow)
                               <option selected="" value="{{$i}}">{{$i}}</option>
                             @else
@@ -74,7 +92,12 @@ Rekap Data
                     <label>Unit Kerja</label>
                     <select name="unit_kerja" class="form-control border-input" required="" >
                       @foreach(App\Unit::get() as $dataUnit)
+
+                        @if($request->unit_kerja == $dataUnit->id)
+                            <option selected value="{{$dataUnit->id}}">{{$dataUnit->nama_unit}}</option>
+                        @else
                           <option value="{{$dataUnit->id}}">{{$dataUnit->nama_unit}}</option>
+                        @endif
                       @endforeach
                     </select>
                 </div>
@@ -85,12 +108,15 @@ Rekap Data
                 <br>
             </div>
             </form>
-            <form action="" method="post">
+            <form action="simpan-rekap-data" method="post">
+              {{csrf_field()}}
+              <input type="hidden" name="tahun" value="{{$request->tahun}}"/>
+              <input type="hidden" name="bulan" value="{{$request->bulan}}"/>
               <div class="content">
                   <table class ="table table-responsive table-full-width" id="users-table">
       			        <thead>
       			            <tr>
-      			                <th style="text-align: center;">ID</th>
+      			                <th style="text-align: center;">NIP</th>
       			                <th style="text-align: center;">Nama Pegawai</th>
       			                <th style="text-align: center;">Kinerja Bulanan</th>
                             <th style="text-align: center;">Potongan Absensi</th>
@@ -100,6 +126,7 @@ Rekap Data
                     <tbody>
                         <script type="text/javascript">var dataInput = "";</script>
                         @foreach(App\User::where('nip','!=','admin')->where('unit_id','=',$request->unit_kerja)->get() as $data)
+                        <input type="hidden" name="pegawai_id[]" value="{{$data->id}}">
                         <?php
                           $dataUnit = "";
                           $checkUnit = App\Unit::where('id','=',$data->unit_id)->count();
@@ -116,7 +143,7 @@ Rekap Data
                           }
                         ?>
                         <tr>
-                          <td style="text-align: center;" style="width: 10%">{{$data->id}}</td>
+                          <td style="text-align: center;" style="width: 10%">{{$data->nip}}</td>
                           <td style="text-align: center;" style="width: 45%">{{$data->name}}</td>
                           <td align="center" style="width: 15%">
                           <?php
@@ -128,8 +155,8 @@ Rekap Data
                             ?>
                             <div class="form-group border-input">
                               <div class="input-group">
-                                <input value="{{$dataKinerjaBulanan->persentase}}" style="text-align: center;" class="form-control border-input"  min="0" max="100" intOnly="true"  name="kinerja_bulanan[]" id="kinerja_bulanan_{{$data->id}}" type="text">
-                                <span class="input-group-addon">
+                                <input onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="{{$dataKinerjaBulanan->persentase}}" style="text-align: center;" class="form-control border-input"  min="0" max="100" intOnly="true"  name="kinerja_bulanan[]" id="kinerja_bulanan_{{$data->id}}" type="text">
+                                <span class="input-group-addon" required>
                                   <span class="fa fa-percent"></span>
                                 </span>
                               </div>
@@ -137,7 +164,7 @@ Rekap Data
                           @else
                             <div class="form-group border-input">
                               <div class="input-group">
-                                <input style="text-align: center;" class="form-control border-input"  min="0" max="100" intOnly="true"  name="kinerja_bulanan[]" id="kinerja_bulanan_{{$data->id}}" type="text">
+                                <input onkeypress='return event.charCode >= 48 && event.charCode <= 57' style="text-align: center;" class="form-control border-input"  min="0" max="100" intOnly="true" value="" name="kinerja_bulanan[]" id="kinerja_bulanan_{{$data->id}}" type="text" required>
                                 <span class="input-group-addon">
                                   <span class="fa fa-percent"></span>
                                 </span>
@@ -146,14 +173,31 @@ Rekap Data
                           @endif
                           </td>
                           <td align="center" onclick="showModal('{{$data->id}}','{{$data->name}}');" style="width: 15%">
+                          <?php
+                            $checkRekapDataPotonganAbsensi = App\PotonganAbsensi::where('pegawai_id','=',$data->id)->where('bulan','=',$request->bulan)->where('tahun','=',$request->tahun)->count();
+                          ?>
+                            @if($checkRekapDataPotonganAbsensi > 0)
+                            <?php
+                                $dataRekapDataPotonganAbsensi = App\PotonganAbsensi::where('pegawai_id','=',$data->id)->where('bulan','=',$request->bulan)->where('tahun','=',$request->tahun)->first();
+                            ?>
                             <div class="form-group border-input" >
                               <div class="input-group">
-                                <input  style="text-align: center;" class="readonly form-control border-input"  min="0" max="100" intOnly="true"  required="" name="potongan_absen[]" "type="text">
+                                <input value="{{$dataRekapDataPotonganAbsensi->total_potongan_absen}}" style="text-align: center;" class="readonly form-control border-input"  min="0" max="100" intOnly="true"  required="" id="potongan_absen_{{$data->id}}" name="potongan_absen[]" "type="text">
                                 <span class="input-group-addon">
                                   <span class="fa fa-percent"></span>
                                 </span>
                               </div>
                             </div>
+                            @else
+                            <div class="form-group border-input" >
+                              <div class="input-group">
+                                <input  style="text-align: center;" class="readonly form-control border-input"  min="0" max="100" intOnly="true" id="potongan_absen_{{$data->id}}"  required="" name="potongan_absen[]" "type="text">
+                                <span class="input-group-addon">
+                                  <span class="fa fa-percent"></span>
+                                </span>
+                              </div>
+                            </div>
+                            @endif
                           </td>
                           <td align="center" style="width:15%">
                             <?php
@@ -162,7 +206,14 @@ Rekap Data
                                 $dataHukumanPegawai = App\HukumanPegawai::where('user_id','=',$data->id)->orderBy('id','DESC')->first();
                                 $getDataHukuman = App\HukumanDisiplin::where('id','=',$dataHukumanPegawai->hukuman_id)->first();
 
-                                $persentaseHukumanPegawai = $getDataHukuman->potongan;
+                                $curdate=strtotime(date('Y-m-d H:i:s'));
+                                $mydate=strtotime($dataHukumanPegawai->berakhir);
+                                if($curdate > $mydate)
+                                {
+                                    $persentaseHukumanPegawai = "0";
+                                }else{
+                                    $persentaseHukumanPegawai = $getDataHukuman->potongan;
+                                }
                               }else{
                                 $persentaseHukumanPegawai = "0";
                               }
@@ -182,12 +233,13 @@ Rekap Data
                     </tbody>
                     <div style="float: right;">
                       <button type="submit" class="btn btn-success btn-fill">Simpan Data</button>
+                      <a href="{{url('export/'.$request->unit_kerja.'/'.$request->bulan.'/'.$request->tahun)}}" class="btn btn-success btn-fill">Export Data</a>
                     </div>
   			          </table>
               </div>
 
               <br>
-            <form>
+            </form>
             
         </div>
     </div>
@@ -197,9 +249,11 @@ Rekap Data
 
     <!-- Modal content-->
     <div class="modal-content">
-      <form action="simpan-potongan-absensi" method="post">
+      <form id="formAbsensis">
+      <input type="hidden" name="pegawai_id" id="pegawai_id">
+      <input type="hidden" name="tahun" id="tahuns">
+      <input type="hidden" name="bulan" id="bulans">
       {{csrf_field()}}
-        <input type="hidden" id="pegawai_id"/>
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h6>Potongan Absensi untuk "<strong id="nama_pegawai"></strong>"</h6>
@@ -210,99 +264,99 @@ Rekap Data
                     <strong><b>Terlambat Masuk Kantor</b></strong>
                     <div class="form-group">
                         TL 1: 07:31 - 08:31
-                        <input onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="tl1" id="tl1" placeholder="">
+                        <input onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="tl1" id="tl1" placeholder="">
                     </div>
                     <div class="form-group">
                         TL 2: 08:31 - 09:01
-                        <input onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="tl2" id="tl2" placeholder="">
+                        <input onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="tl2" id="tl2" placeholder="">
                     </div>
                     <div class="form-group">
                         TL 3: 09:01 - 09:31
-                        <input onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="tl3" id="tl3" placeholder="">
+                        <input onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="tl3" id="tl3" placeholder="">
                     </div>
                     <div class="form-group">
                         TL 4: 09:31 - 10:00
-                        <input onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="tl4" id="tl4" placeholder="">
+                        <input onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="tl4" id="tl4" placeholder="">
                     </div>
                     <div style="margin-bottom: 70px;"></div>
                     <strong><b>Pulang Sebelum Waktunya</b></strong>
                     <div class="form-group">
                         PSW 1: 15:31 - < 16:00
-                        <input onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="psw1" id="psw1" placeholder="">
+                        <input onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="psw1" id="psw1" placeholder="">
                     </div>
                     <div class="form-group">
                         PSW 2: 15:01 - 15:31
-                        <input onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="psw2" id="psw2" placeholder="">
+                        <input onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="psw2" id="psw2" placeholder="">
                     </div>
                     <div class="form-group">
                         PSW 3: 14:01 - 15:01
-                        <input onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="psw3" id="psw3" placeholder="">
+                        <input onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="psw3" id="psw3" placeholder="">
                     </div>
                     <div class="form-group">
                         PSW 4: < 14:00
-                        <input onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="psw4" id="psw4" placeholder="">
+                        <input onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="psw4" id="psw4" placeholder="">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <strong><b>Cuti-Cuti</b></strong>
                     <div class="form-group">
                         Cuti Tahunan
-                        <input onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_tahunan" id="cuti_tahunan" placeholder="">
+                        <input onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_tahunan" id="cuti_tahunan" placeholder="">
                     </div>
                     <div class="form-group">
                         Cuti Alasan Penting
-                        <input onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_alasan_penting" id="cuti_alasan_penting" placeholder="">
+                        <input onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_alasan_penting" id="cuti_alasan_penting" placeholder="">
                     </div>
                     <div class="form-group">
                         Cuti Sakit Tidak Rawat Inap
-                        <input onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_sakit_tidak_rawat_inap" id="cuti_sakit_tidak_rawat_inap" placeholder="">
+                        <input onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_sakit_tidak_rawat_inap" id="cuti_sakit_tidak_rawat_inap" placeholder="">
                     </div>
                     <div class="form-group">
                         Cuti Sakit Rawat Inap
-                        <input onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_sakit_rawat_inap" id="cuti_sakit_rawat_inap" placeholder="">
+                        <input onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_sakit_rawat_inap" id="cuti_sakit_rawat_inap" placeholder="">
                     </div>
                     <div class="form-group">
                         Cuti Sakit Rawat Jalan
-                        <input onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_sakit_rawat_jalan" id="cuti_sakit_rawat_jalan" placeholder="">
+                        <input onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_sakit_rawat_jalan" id="cuti_sakit_rawat_jalan" placeholder="">
                     </div>
                     <div class="form-group">
                         Cuti Gugur Kandungan
-                        <input onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_gugur_kandungan" id="cuti_gugur_kandungan" placeholder="">
+                        <input onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_gugur_kandungan" id="cuti_gugur_kandungan" placeholder="">
                     </div>
                     <div class="form-group">
                         Cuti Bersalin
-                        <input onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_bersalin" id="cuti_bersalin" placeholder="">
+                        <input onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_bersalin" id="cuti_bersalin" placeholder="">
                     </div>
                     <div class="form-group">
                         Cuti Besar
-                        <input onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_besar" id="cuti_besar" placeholder="">
+                        <input onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_besar" id="cuti_besar" placeholder="">
                     </div>
                     <div class="form-group">
                         Cuti Luar Tanggungan Negara
-                        <input onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_luar_tanggungan_negara" id="cuti_luar_tanggungan_negara" placeholder="">
+                        <input onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_luar_tanggungan_negara" id="cuti_luar_tanggungan_negara" placeholder="">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <strong><b>Cuti Lainnya</b></strong>
                     <div class="form-group">
                         Alpha
-                        <input style="text-align: center;" type="text" class="form-control border-input" name="cuti_alpha" id="cuti_alpha" placeholder="">
+                        <input onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_alpha" id="cuti_alpha" placeholder="">
                     </div>
                     <div class="form-group">
                         Izin
-                        <input style="text-align: center;" type="text" class="form-control border-input" name="cuti_ijin" id="cuti_ijin" placeholder="">
+                        <input onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_ijin" id="cuti_ijin" placeholder="">
                     </div>
                     <div class="form-group">
                         Dinas Luar
-                        <input style="text-align: center;" type="text" class="form-control border-input" name="cuti_dinas_luar" id="cuti_dinas_luar" placeholder="">
+                        <input onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_dinas_luar" id="cuti_dinas_luar" placeholder="">
                     </div>
                     <div class="form-group">
                         Tugas Belajar
-                        <input style="text-align: center;" type="text" class="form-control border-input" name="cuti_tugas_belajar" id="cuti_tugas_belajar" placeholder="">
+                        <input onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="cuti_tugas_belajar" id="cuti_tugas_belajar" placeholder="">
                     </div>
                     <div class="form-group">
                         Bebas Tugas
-                        <input style="text-align: center;" type="text" class="form-control border-input" name="bebas_tugas" id="bebas_tugas" placeholder="">
+                        <input onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeyup="hitungAbsensi();" style="text-align: center;" type="text" class="form-control border-input" name="bebas_tugas" id="bebas_tugas" placeholder="">
                     </div>
                     
                     <div style="margin-top: 241px;">
@@ -335,6 +389,7 @@ Rekap Data
 <script type="text/javascript" src="{{asset('js/dataTables.bootstrap.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/dataTables.buttons.min.js')}}"></script>
 <script type="text/javascript">
+  var urlRoot = '{{url('/')}}';
   $(".readonly").keydown(function(e){
         e.preventDefault();
   });
@@ -345,8 +400,30 @@ Rekap Data
     }
 
     $(".save_absensi").click(function(){
-        alert("button");
-         $('#modalPotonganAbsensi').modal('hide');
+        var formnya = $("form").serialize();
+
+        $.ajax( {
+          type: "POST",
+          url: urlRoot + "/tambah-potongan-absen",
+          data: formnya,
+          success: function( response ) {
+            console.log( response );
+          }
+        });
+        $('#modalPotonganAbsensi').modal('hide');
+
+        $.notify({
+          message: 'Data absensi berhasil disimpan.' 
+        },{
+          placement: {
+                    from: "bottom",
+                    align: "left"
+                },
+          type: 'success'
+        });
+
+        $('#potongan_absen_' + $('#pegawai_id').val()).val($('#total_potongan_absen').val());
+
     });
   });
 
@@ -379,10 +456,70 @@ Rekap Data
   function showModal(id,nama){
     $('#pegawai_id').val(id);
     $('#nama_pegawai').html(nama);
+    $('#bulans').val('{{$request->bulan}}');
+    $('#tahuns').val('{{$request->tahun}}');
     $('#modalPotonganAbsensi').modal('show');
+
+    var dataPostPostAbsensi = "pegawai_id=" + id + "&bulan={{$request->bulan}}&tahun={{$request->tahun}}&_token={{csrf_token()}}";
+    $.ajax( {
+      type: "POST",
+      url: urlRoot + "/datapotonganabsensi",
+      data: dataPostPostAbsensi,
+      success: function( response ) {
+        if(response.PotonganAbsensi.length > 0){
+            $('#tl1').val(response.PotonganAbsensi[0].tl1);
+            $('#tl2').val(response.PotonganAbsensi[0].tl2);
+            $('#tl3').val(response.PotonganAbsensi[0].tl3);
+            $('#tl4').val(response.PotonganAbsensi[0].tl4);
+            $('#psw1').val(response.PotonganAbsensi[0].psw1);
+            $('#psw2').val(response.PotonganAbsensi[0].psw2);
+            $('#psw3').val(response.PotonganAbsensi[0].psw3);
+            $('#psw4').val(response.PotonganAbsensi[0].psw4);
+            $('#cuti_tahunan').val(response.PotonganAbsensi[0].cuti_tahunan);
+            $('#cuti_alasan_penting').val(response.PotonganAbsensi[0].cuti_alasan_penting);
+            $('#cuti_sakit_tidak_rawat_inap').val(response.PotonganAbsensi[0].cuti_sakit_tidak_rawat_inap);
+            $('#cuti_sakit_rawat_inap').val(response.PotonganAbsensi[0].cuti_sakit_rawat_inap);
+            $('#cuti_sakit_rawat_jalan').val(response.PotonganAbsensi[0].cuti_sakit_rawat_jalan);
+            $('#cuti_gugur_kandungan').val(response.PotonganAbsensi[0].cuti_gugur_kandungan);
+            $('#cuti_bersalin').val(response.PotonganAbsensi[0].cuti_bersalin);
+            $('#cuti_besar').val(response.PotonganAbsensi[0].cuti_besar);
+            $('#cuti_luar_tanggungan_negara').val(response.PotonganAbsensi[0].cuti_luar_tanggungan_negara);
+            $('#cuti_alpha').val(response.PotonganAbsensi[0].cuti_alpha);
+            $('#cuti_ijin').val(response.PotonganAbsensi[0].cuti_ijin);
+            $('#cuti_dinas_luar').val(response.PotonganAbsensi[0].cuti_dinas_luar);
+            $('#cuti_tugas_belajar').val(response.PotonganAbsensi[0].cuti_tugas_belajar);
+            $('#bebas_tugas').val(response.PotonganAbsensi[0].bebas_tugas);
+            $('#total_potongan_absen').val(response.PotonganAbsensi[0].total_potongan_absen);
+        }else{
+            $('#tl1').val("");
+            $('#tl2').val("");
+            $('#tl3').val("");
+            $('#tl4').val("");
+            $('#psw1').val("");
+            $('#psw2').val("");
+            $('#psw3').val("");
+            $('#psw4').val("");
+            $('#cuti_tahunan').val("");
+            $('#cuti_alasan_penting').val("");
+            $('#cuti_sakit_tidak_rawat_inap').val("");
+            $('#cuti_sakit_rawat_inap').val("");
+            $('#cuti_sakit_rawat_jalan').val("");
+            $('#cuti_gugur_kandungan').val("");
+            $('#cuti_bersalin').val("");
+            $('#cuti_besar').val("");
+            $('#cuti_luar_tanggungan_negara').val("");
+            $('#cuti_alpha').val("");
+            $('#cuti_ijin').val("");
+            $('#cuti_dinas_luar').val("");
+            $('#cuti_tugas_belajar').val("");
+            $('#bebas_tugas').val("");
+            $('#total_potongan_absen').val("0");
+        }
+      }
+    });
   }
 
-  var tl1, tl2, tl3, tl4, psw1, psw2, psw3, psw4, cuti_tahunan, cuti_alasan_penting, cuti_sakit_tidak_rawat_inap, cuti_sakit_rawat_inap,cuti_sakit_rawat_jalan,cuti_gugur_kandungan, cuti_bersalin,cuti_besar,cuti_luar_tanggungan_negara,cuti_alpha,cuti_ijin,cuti_dinas_luar, cuti_tugas_belajar, bebas_tugas;
+  var tl1, tl2, tl3, tl4, psw1, psw2, psw3, psw4, cuti_tahunan, cuti_alasan_penting, cuti_sakit_tidak_rawat_inap, cuti_sakit_rawat_inap,cuti_sakit_rawat_jalan,cuti_gugur_kandungan, cuti_bersalin,cuti_besar,cuti_luar_tanggungan_negara,cuti_alpha,cuti_ijin,cuti_dinas_luar, cuti_tugas_belajar, bebas_tugas, cuti_alpha, cuti_ijin, cuti_dinas_luar , cuti_tugas_belajar, bebas_tugas;
   function hitungAbsensi(){
     if($('#tl1').val() == ""){
         tl1 = 0;
@@ -542,7 +679,9 @@ Rekap Data
         bebas_tugas = parseFloat($('#bebas_tugas').val());
     }
 
-    var total = (tl1 * 0) + (tl2 * 1) + (tl3 * 1.25) + (tl4 * 1.5) + (psw1 * 0.5) + (psw2 * 1) + (psw3 * 1.25) + (psw4 * 1.5) + (cuti_tahunan * 0) + (cuti_alasan_penting * 3) + (cuti_sakit_tidak_rawat_inap * 3) + (cuti_sakit_rawat_inap * 2.5) + (cuti_sakit_rawat_jalan * 2.5) + (cuti_gugur_kandungan * 3) + (cuti_bersalin * 3) + (cuti_besar * 100) + (cuti_luar_tanggungan_negara * 100);
+    
+
+    var total = (tl1 * 0) + (tl2 * 1) + (tl3 * 1.25) + (tl4 * 1.5) + (psw1 * 0.5) + (psw2 * 1) + (psw3 * 1.25) + (psw4 * 1.5) + (cuti_tahunan * 0) + (cuti_alasan_penting * 3) + (cuti_sakit_tidak_rawat_inap * 3) + (cuti_sakit_rawat_inap * 2.5) + (cuti_sakit_rawat_jalan * 2.5) + (cuti_gugur_kandungan * 3) + (cuti_bersalin * 3) + (cuti_besar * 100) + (cuti_luar_tanggungan_negara * 100) + (cuti_alpha * 3) + (cuti_ijin * 3) + (  cuti_dinas_luar * 0) + (cuti_tugas_belajar * 0) + ( bebas_tugas * 100);
     $('#total_potongan_absen').val(total);
   }
 
