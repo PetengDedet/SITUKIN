@@ -18,7 +18,16 @@ class DashboardController extends Controller
         if(!Sentinel::check()){
             return Redirect::route('login')->with('error', 'Silahkan melakukan login terlebih dahulu');
         }else{
-        	return view('admin.dashboard');
+            $pegawai = User::all()->count();
+            $unit = \App\Unit::all()->count();
+            $jabatan = \App\Jabatan::all()->count();
+            $grade = \App\Grade::all()->count();
+        	return view('admin.dashboard')->with([
+                'pegawai' => $pegawai,
+                'unit' => $unit,
+                'jabatan' => $jabatan,
+                'grade' => $grade
+            ]);
         }
     }
 

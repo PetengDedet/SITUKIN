@@ -1,8 +1,9 @@
 @if ($errors->any())
+@foreach ($errors->all() as $error)
 <script type="text/javascript">
 $.notify({
 // options
-  message: 'terdapat kesalahan' 
+  message: '{{ $error }}' 
 },{
   // settings
   placement: {
@@ -12,6 +13,7 @@ $.notify({
   type: 'danger'
 });
 </script>
+@endforeach
 @endif
 
 @if ($message = Session::get('success'))

@@ -1,7 +1,7 @@
 <style type="text/css">
 	.tg  {border-collapse:collapse;border-spacing:0;}
 	.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
-	.tg th{font-family:Arial, sans-serif;font-size:14px;padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:break-all;}
+	.tg th{background:#eee;font-family:Arial, sans-serif;font-size:14px;padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:break-all;}
 	.tg .tg-0ord{text-align:right}
 	.tg .tg-s6z2{text-align:center}
 	.tg .tg-baqh{text-align:center;vertical-align:top}
@@ -53,15 +53,15 @@
 						C. GAJI KOTOR<br>
 					</th>
 					<th class="tg-9hbo" style="text-align: left;width: 110px;" rowspan="2">D. TUNJANGAN<br>KINERJA<br><br>E. TUNJANGAN<br>PENYESUAIAN<br>PENGHASILAN<br><br>F. TUNJANGAN<br>KHUSUS<br><br>G. POT ABSEN<br>(%)</th>
-					<th class="tg-9hbo" style="text-align: left;width: 110px;" rowspan="2">H. T. KINERJA BERSIH (D+E+F-G)<br>I. TJ. PPH 21<br>J. T. KINERJA KOTOR (H+1)<br>K. POT PPH 21</th>
-					<th class="tg-9hbo" style="text-align: left;width: 110px;" rowspan="2">T. KINERJA YANG DIBAYARKAN (J-K)</th>
+					<th class="tg-9hbo" style="text-align: left;width: 110px;" rowspan="2">H. TUNJANGAN<br>KINERJA BERSIH<br>(D+E+F-G)<br><br>I. TUNJANGAN PPH 21<br><br>J. TUNJANGAN KINERJA KOTOR (H+1)<br><br>K. POT PPH 21</th>
+					<th class="tg-9hbo" style="text-align: left;width: 110px;" rowspan="2">TUNJANGAN KINERJA YANG DIBAYARKAN (J-K)</th>
 					<th class="tg-hgcj" rowspan="2">REKENING</th>
 					<th class="tg-hgcj" rowspan="2">KETERANGAN</th>
 				</tr>
 				<tr>
-					<td class="tg-hgcj">NIP</td>
-					<td class="tg-e3zv">STATUS KAWIN</td>
-					<td class="tg-e3zv">JUMLAH ANAK</td>
+					<th class="tg-hgcj">NIP</th>
+					<th class="tg-e3zv">STATUS KAWIN</th>
+					<th class="tg-e3zv">JUMLAH ANAK</th>
 				</tr>
 				<tr>
 					<td class="tg-hgcj">1</td>
@@ -101,8 +101,7 @@
 			$status = true;
 		?>
 				<tr>
-					<td class="tg-s6z2"></td>
-					<td class="tg-031e" colspan="6">JUMLAH LEMBAR KE :{{$hal}}</td>
+					<td class="tg-031e" colspan="7">JUMLAH LEMBAR KE :{{$i}}</td>
 					<td class="tg-0ord">6,456,600,<br>8,750,000<br>16,131,426</td>
 					<td class="tg-0ord">48,810,000<br>0<br>0<br>0</td>
 					<td class="tg-0ord">48,810,000<br>8,886,210<br>57,696,210<br>8,886,210</td>

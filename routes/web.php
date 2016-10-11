@@ -48,6 +48,10 @@ Route::get('getselected/{id}', 			['as' => 'getselected', 			'uses' => 'Manajeme
 Route::post('manajemen/simpan',			['as' => 'manajemen.user',			'uses' => 'ManajemenUserController@simpan']);
 Route::post('manajemen/hapus',			['as' => 'manajemen.hapus',			'uses' => 'ManajemenUserController@hapus']);
 
+#SETTING
+Route::get('setting', 					['as' => 'setting', 				'uses' => 'SettingController@index']);
+Route::post('setting', 					['as' => 'setting.post', 			'uses' => 'SettingController@savePassword']);
+
 #REPORT
 Route::get('report1', ['uses' => 'JabatanController@tesPdf']);
 
