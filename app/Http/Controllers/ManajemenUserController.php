@@ -7,7 +7,8 @@ use App\Http\Requests;
 use Session;
 use App\Library\RoleLib;
 use Sentinel;
-
+use Hash;
+use DB;
 use App\User;
 use App\Role;
 
@@ -58,6 +59,9 @@ class ManajemenUserController extends Controller
     	$role->user_id = $r->user_id;
     	$role->role_id = $r->role;
     	$role->save();
+
+        DB::table('activations')->insert(['user_id'=>$r->user_id,'code'=>1234,'completed'=>'1']);
+        DB::table('users')->where('id','=',$r->user_id)->update(['password'=>Hash::make('1234')]);
 
     	Session::flash('message', 'Berhasil disimpan'); 
         Session::flash('alert-class', 'alert-success');

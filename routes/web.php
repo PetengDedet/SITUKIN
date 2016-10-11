@@ -60,8 +60,8 @@ Route::get('export/{unit}/{bulan}/{tahun}', ['uses' => 'ReportController@export'
 //MASAGUNG
 #UserController
 Route::get('pegawai', 					['as' => 'pegawai', 				'uses' => 'UserController@listpegawai']);
-Route::post('simpan-pegawai', 			['as' => 'simpanpegawai', 			'uses' => 'UserController@simpanpegawai']);
-Route::post('edit-pegawai', 			['as' => 'editpegawai', 			'uses' => 'UserController@editpegawai']);
+Route::post('pegawai/simpan-pegawai', 			['as' => 'simpanpegawai', 			'uses' => 'UserController@simpanpegawai']);
+Route::post('pegawai/edit-pegawai', 			['as' => 'editpegawai', 			'uses' => 'UserController@editpegawai']);
 Route::get('delete-pegawai/{id}', 		['as' => 'deletepegawai', 			'uses' => 'UserController@deletepegawai']);
 Route::post('userjson', 				['as' => 'userjson', 				'uses' => 'UserController@userjson']);
 Route::get('pegawai/create', 			['as' => 'pegawaicreate', 			'uses' => 'UserController@pegawaicreate']);

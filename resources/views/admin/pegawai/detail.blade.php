@@ -161,47 +161,47 @@ Detail Pegawai
           </div>
           <div class="form-group">
               <label>Tunjangan Istri</label>
-              <input type="number" value="{{$data->tjistri}}" class="form-control border-input" name="tjistri" placeholder="Tunjangan Istri" required="">
+              <input type="number" value="{{$data->tjistri}}" class="form-control border-input" name="tjistri" placeholder="Tunjangan Istri" >
           </div>
           <div class="form-group">
               <label>Tunjangan Anak</label>
-              <input type="number" value="{{$data->tjanak}}" class="form-control border-input" name="tjanak" placeholder="Tunjangan Anak" required="">
+              <input type="number" value="{{$data->tjanak}}" class="form-control border-input" name="tjanak" placeholder="Tunjangan Anak" >
           </div>
           <div class="form-group">
               <label>Tunjangan Umum PNS</label>
-              <input type="number" value="{{$data->tjupns}}" class="form-control border-input" name="tjupns" placeholder="Tunjangan Umum PNS" required="">
+              <input type="number" value="{{$data->tjupns}}" class="form-control border-input" name="tjupns" placeholder="Tunjangan Umum PNS" >
           </div>
           <div class="form-group">
               <label>Tunjangan Struktural</label>
-              <input type="number" value="{{$data->tjstruk}}" class="form-control border-input" name="tjstruk" placeholder="Tunjangan Struktural" required="">
+              <input type="number" value="{{$data->tjstruk}}" class="form-control border-input" name="tjstruk" placeholder="Tunjangan Struktural" >
           </div>
           <div class="form-group">
               <label>Tunjangan Fungsional</label>
-              <input type="number" value="{{$data->tjfungs}}" class="form-control border-input" name="tjfungs" placeholder="Tunjangan Fungsional" required="">
+              <input type="number" value="{{$data->tjfungs}}" class="form-control border-input" name="tjfungs" placeholder="Tunjangan Fungsional" >
           </div>
           <div class="form-group">
               <label>Tunjangan Daerah</label>
-              <input type="number" value="{{$data->tjdaerah}}" class="form-control border-input" name="tjdaerah" placeholder="Tunjangan Daerah" required="">
+              <input type="number" value="{{$data->tjdaerah}}" class="form-control border-input" name="tjdaerah" placeholder="Tunjangan Daerah" >
           </div>
           <div class="form-group">
               <label>Tunjangan Daerah Terpencil</label>
-              <input type="number" value="{{$data->tjpencil}}" class="form-control border-input" name="tjpencil" placeholder="Tunjangan Daerah Terpencil<" required="">
+              <input type="number" value="{{$data->tjpencil}}" class="form-control border-input" name="tjpencil" placeholder="Tunjangan Daerah Terpencil<" >
           </div>
           <div class="form-group">
               <label>Tunjangan Lainnya</label>
-              <input type="number" value="{{$data->tjlain}}" class="form-control border-input" name="tjlain" placeholder="Tunjangan Lainnya" required="">
+              <input type="number" value="{{$data->tjlain}}" class="form-control border-input" name="tjlain" placeholder="Tunjangan Lainnya" >
           </div>
           <div class="form-group">
               <label>Tunjangan Kompensasi</label>
-              <input type="number" value="{{$data->tjkompen}}" class="form-control border-input" name="tjkompen" placeholder="Tunjangan Kompensasi" required="">
+              <input type="number" value="{{$data->tjkompen}}" class="form-control border-input" name="tjkompen" placeholder="Tunjangan Kompensasi" >
           </div>
           <div class="form-group">
               <label>Tunjangan Pembulatan</label>
-              <input type="number" value="{{$data->pembul}}" class="form-control border-input" name="pembul" placeholder="Tunjangan Pembulatan" required="">
+              <input type="number" value="{{$data->pembul}}" class="form-control border-input" name="pembul" placeholder="Tunjangan Pembulatan" >
           </div>
           <div class="form-group">
               <label>Tunjangan Beras</label>
-              <input type="number" value="{{$data->tjberas}}" class="form-control border-input" name="tjberas" placeholder="Tunjangan Beras" required="">
+              <input type="number" value="{{$data->tjberas}}" class="form-control border-input" name="tjberas" placeholder="Tunjangan Beras" >
           </div>
           <span style="text-align: center;">
           <button type="submit" width="300px" class="btn btn-success btn-fill">Simpan</button>
