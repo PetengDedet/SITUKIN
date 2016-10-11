@@ -77,7 +77,10 @@ Route::post('jabatanjson', 				['as' => 'jabatanjson', 			'uses' => 'JabatanCont
 
 #RekapController
 Route::get('rekap-data', 				['as' => 'rekapdata', 				'uses' => 'RekapController@rekapdata']);
-Route::get('update', 					['as' => 'rekapdata', 				'uses' => 'RekapController@update']);
+Route::get('update', 					['as' => 'rekapdataupdate', 				'uses' => 'RekapController@update']);
+Route::post('tambah-potongan-absen',			['as' => 'tambahpotonganabsen', 				'uses' => 'RekapController@tambahpotonganabsen']);
+Route::post('datapotonganabsensi',			['as' => 'datapotonganabsensi', 				'uses' => 'RekapController@datapotonganabsensi']);
+Route::post('simpan-rekap-data',			['as' => 'simpanrekapdata', 				'uses' => 'RekapController@simpanrekapdata']);
 
 #HukumanController
 Route::get('hukuman-disiplin', 			['as' => 'hukumandisiplin', 		'uses' => 'HukumanController@hukumandisiplin']);
