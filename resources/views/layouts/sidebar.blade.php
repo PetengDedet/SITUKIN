@@ -56,12 +56,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('settings')}}">
-                        <i class="fa fa-cogs"></i>
-                        <p>Settings</p>
-                    </a>
-                </li>
-                <li>
                     <a href="{{url('manajemen-user')}}">
                         <i class="fa fa-user-secret"></i>
                         <p>Manajemen User</p>

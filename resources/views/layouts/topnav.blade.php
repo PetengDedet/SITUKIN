@@ -12,7 +12,12 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        
+                        <li>
+                            <a href="{{url('setting')}}">
+                                <i class="fa fa-cogs"></i>
+                                <p>Setting</p>
+                            </a>
+                        </li>
                         <li>
                             <a href="{{url('logout')}}">
                                 <i class="fa fa-sign-out"></i>
@@ -20,7 +25,6 @@
                             </a>
                         </li>
                     </ul>
-
                 </div>
             </div>
         </nav>

@@ -12,12 +12,12 @@ use DB;
 class RekapController extends Controller
 {
     //
-    public function rekapdata()
+    public function rekapdata(Request $request)
     {
         if(!Sentinel::check()){
             return Redirect::route('login')->with('error', 'Silahkan melakukan login terlebih dahulu');
         }else{
-        	return view('admin.rekapdata.list');
+        	return view('admin.rekapdata.list')->with('request',$request);
         }
     }
 
