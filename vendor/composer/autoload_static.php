@@ -24,6 +24,10 @@ class ComposerStaticInit2d9b69e4f548748b4d16f84469fb4b51
         array (
             'phpDocumentor\\Reflection\\' => 25,
         ),
+        'n' => 
+        array (
+            'niklasravnsborg\\LaravelPdf\\' => 27,
+        ),
         'Y' => 
         array (
             'Yajra\\Datatables\\' => 17,
@@ -118,6 +122,10 @@ class ComposerStaticInit2d9b69e4f548748b4d16f84469fb4b51
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+        ),
+        'niklasravnsborg\\LaravelPdf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/niklasravnsborg/laravel-pdf/src/LaravelPdf',
         ),
         'Yajra\\Datatables\\' => 
         array (
@@ -350,11 +358,22 @@ class ComposerStaticInit2d9b69e4f548748b4d16f84469fb4b51
     );
 
     public static $classMap = array (
+        'CGIF' => __DIR__ . '/..' . '/niklasravnsborg/mpdf/classes/gif.php',
+        'CGIFCOLORTABLE' => __DIR__ . '/..' . '/niklasravnsborg/mpdf/classes/gif.php',
+        'CGIFFILEHEADER' => __DIR__ . '/..' . '/niklasravnsborg/mpdf/classes/gif.php',
+        'CGIFIMAGE' => __DIR__ . '/..' . '/niklasravnsborg/mpdf/classes/gif.php',
+        'CGIFIMAGEHEADER' => __DIR__ . '/..' . '/niklasravnsborg/mpdf/classes/gif.php',
+        'CGIFLZW' => __DIR__ . '/..' . '/niklasravnsborg/mpdf/classes/gif.php',
         'Cpdf' => __DIR__ . '/..' . '/dompdf/dompdf/lib/Cpdf.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
+        'FPDF_TPL' => __DIR__ . '/..' . '/setasign/fpdi/fpdf_tpl.php',
+        'FPDI' => __DIR__ . '/..' . '/setasign/fpdi/fpdi.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
         'File_Iterator_Factory' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Factory.php',
+        'FilterASCII85' => __DIR__ . '/..' . '/setasign/fpdi/filters/FilterASCII85.php',
+        'FilterASCIIHexDecode' => __DIR__ . '/..' . '/setasign/fpdi/filters/FilterASCIIHexDecode.php',
+        'FilterLZW' => __DIR__ . '/..' . '/setasign/fpdi/filters/FilterLZW.php',
         'HTML5_Data' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Data.php',
         'HTML5_InputStream' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/InputStream.php',
         'HTML5_Parser' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Parser.php',
@@ -428,6 +447,8 @@ class ComposerStaticInit2d9b69e4f548748b4d16f84469fb4b51
         'Hamcrest\\Type\\IsString' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Type/IsString.php',
         'Hamcrest\\Util' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Util.php',
         'Hamcrest\\Xml\\HasXPath' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Xml/HasXPath.php',
+        'INDIC' => __DIR__ . '/..' . '/niklasravnsborg/mpdf/classes/indic.php',
+        'MYANMAR' => __DIR__ . '/..' . '/niklasravnsborg/mpdf/classes/myanmar.php',
         'Maatwebsite\\Excel\\Classes\\Cache' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Classes/Cache.php',
         'Maatwebsite\\Excel\\Classes\\FormatIdentifier' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Classes/FormatIdentifier.php',
         'Maatwebsite\\Excel\\Classes\\LaravelExcelWorksheet' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Classes/LaravelExcelWorksheet.php',
@@ -457,6 +478,8 @@ class ComposerStaticInit2d9b69e4f548748b4d16f84469fb4b51
         'Maatwebsite\\Excel\\Writers\\CellWriter' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Writers/CellWriter.php',
         'Maatwebsite\\Excel\\Writers\\LaravelExcelWriter' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Writers/LaravelExcelWriter.php',
         'MigrationCartalystSentinel' => __DIR__ . '/../..' . '/database/migrations/2014_07_02_230147_migration_cartalyst_sentinel.php',
+        'OTLdump' => __DIR__ . '/..' . '/niklasravnsborg/mpdf/classes/otl_dump.php',
+        'PDFBarcode' => __DIR__ . '/..' . '/niklasravnsborg/mpdf/classes/barcode.php',
         'PHPUnit\\Framework\\TestCase' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/TestCase.php',
         'PHPUnit_Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Exception.php',
         'PHPUnit_Extensions_GroupTestSuite' => __DIR__ . '/..' . '/phpunit/phpunit/src/Extensions/GroupTestSuite.php',
@@ -827,6 +850,8 @@ class ComposerStaticInit2d9b69e4f548748b4d16f84469fb4b51
         'PHP_Token_XOR_EQUAL' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_YIELD' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_YIELD_FROM' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
+        'SEA' => __DIR__ . '/..' . '/niklasravnsborg/mpdf/classes/sea.php',
+        'SVG' => __DIR__ . '/..' . '/niklasravnsborg/mpdf/classes/svg.php',
         'SebastianBergmann\\CodeCoverage\\CodeCoverage' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage.php',
         'SebastianBergmann\\CodeCoverage\\CoveredCodeNotExecutedException' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Exception/CoveredCodeNotExecutedException.php',
         'SebastianBergmann\\CodeCoverage\\Driver\\Driver' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Driver/Driver.php',
@@ -906,8 +931,23 @@ class ComposerStaticInit2d9b69e4f548748b4d16f84469fb4b51
         'SebastianBergmann\\RecursionContext\\InvalidArgumentException' => __DIR__ . '/..' . '/sebastian/recursion-context/src/InvalidArgumentException.php',
         'SebastianBergmann\\ResourceOperations\\ResourceOperations' => __DIR__ . '/..' . '/sebastian/resource-operations/src/ResourceOperations.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
+        'TTFontFile' => __DIR__ . '/..' . '/niklasravnsborg/mpdf/classes/ttfontsuni.php',
+        'TTFontFile_Analysis' => __DIR__ . '/..' . '/niklasravnsborg/mpdf/classes/ttfontsuni_analysis.php',
         'TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
+        'UCDN' => __DIR__ . '/..' . '/niklasravnsborg/mpdf/classes/ucdn.php',
+        'bmp' => __DIR__ . '/..' . '/niklasravnsborg/mpdf/classes/bmp.php',
+        'cssmgr' => __DIR__ . '/..' . '/niklasravnsborg/mpdf/classes/cssmgr.php',
+        'directw' => __DIR__ . '/..' . '/niklasravnsborg/mpdf/classes/directw.php',
+        'fpdi_pdf_parser' => __DIR__ . '/..' . '/setasign/fpdi/fpdi_pdf_parser.php',
+        'grad' => __DIR__ . '/..' . '/niklasravnsborg/mpdf/classes/grad.php',
+        'mPDF' => __DIR__ . '/..' . '/niklasravnsborg/mpdf/mpdf.php',
+        'meter' => __DIR__ . '/..' . '/niklasravnsborg/mpdf/classes/meter.php',
+        'mpdfform' => __DIR__ . '/..' . '/niklasravnsborg/mpdf/classes/mpdfform.php',
+        'otl' => __DIR__ . '/..' . '/niklasravnsborg/mpdf/classes/otl.php',
+        'pdf_context' => __DIR__ . '/..' . '/setasign/fpdi/pdf_context.php',
+        'tocontents' => __DIR__ . '/..' . '/niklasravnsborg/mpdf/classes/tocontents.php',
+        'wmf' => __DIR__ . '/..' . '/niklasravnsborg/mpdf/classes/wmf.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

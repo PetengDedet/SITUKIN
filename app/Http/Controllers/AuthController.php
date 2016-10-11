@@ -27,6 +27,7 @@ class AuthController extends Controller
 		);
 
 		if(Sentinel::authenticate($credentials)){
+			
 			return Redirect::route('dashboard');
 		}else{
 			return Redirect::route('login')->with('error', 'NIP/Password tidak cocok');

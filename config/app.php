@@ -171,6 +171,7 @@ return [
         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -231,6 +232,8 @@ return [
         'Reminder'   => Cartalyst\Sentinel\Laravel\Facades\Reminder::class,
         'Sentinel'   => Cartalyst\Sentinel\Laravel\Facades\Sentinel::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'MPDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
+
     ],
 
 ];

@@ -11,8 +11,8 @@ Class RoleLib
 {
 	public static function limitThis($role_id, $user_id, $redirect_to = null) {
 
-		$cekAdmin = DB::table('role_user')->where('user_id', $user_id)->where('role_id','1')->count();
-		$cekRole = DB::table('role_user')->where('user_id', $user_id)->where('role_id',$role_id)->count();;
+		$cekAdmin = DB::table('role_users')->where('user_id', $user_id)->where('role_id','4')->count();
+		$cekRole = DB::table('role_users')->where('user_id', $user_id)->where('role_id',$role_id)->count();;
 
 		$total = $cekAdmin + $cekRole;
 

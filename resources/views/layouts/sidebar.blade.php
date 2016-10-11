@@ -1,4 +1,5 @@
-	<div class="sidebar" data-background-color="white" data-active-color="danger">
+	<?php use Cartalyst\Sentinel\Laravel\Facades\Sentinel;?>
+    <div class="sidebar" data-background-color="white" data-active-color="danger">
 
     <!--
 		Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
@@ -61,7 +62,6 @@
                         <p>Manajemen User</p>
                     </a>
                 </li>
-
             </ul>
     	</div>
     </div>

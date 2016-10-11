@@ -10,6 +10,7 @@ use App\Unit;
 use Redirect;
 use Sentinel;
 use PDF;
+use MPDF;
 
 class JabatanController extends Controller
 {
@@ -113,7 +114,15 @@ class JabatanController extends Controller
 
     public function tesPdf()
     {
-        $pdf = PDF::loadView('report.1');
-        return $pdf->setPaper('legal', 'landscape')->stream('invoice.pdf');
+        // return view('report.header');
+        $pdf = PDF::loadView('report.2back');
+        return $pdf->setPaper(array(0,0,612.00,936.00), 'landscape')->stream('invoice.pdf');
+
+        // $data = [
+        //     'foo' => 'bar'
+        // ];
+        // $pdf = PDF::loadView('report.header', $data);
+        // return $pdf->stream('document.pdf');
+
     }
 }

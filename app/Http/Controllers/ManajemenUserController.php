@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Session;
+use App\Library\RoleLib;
+use Sentinel;
 
 use App\User;
 use App\Role;
@@ -15,6 +17,10 @@ class ManajemenUserController extends Controller
     //
     public function index()
     {
+    	if(!RoleLib::limitThis(4, Sentinel::getUser()->id, $redirect_to = null)) {
+        	abort(404);
+        }
+
     	$dataPegawai = User::all();
     	$roles = Role::paginate(10);
     	
@@ -32,6 +38,10 @@ class ManajemenUserController extends Controller
 
     function simpan(Request $r)
     {
+    	if(!RoleLib::limitThis(4, Sentinel::getUser()->id, $redirect_to = null)) {
+        	abort(404);
+        }
+        
     	$this->validate($r, [
     		'user_id' => 'required',
     		'role' => 'required|in:1,2,3,4'
