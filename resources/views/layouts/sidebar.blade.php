@@ -1,4 +1,5 @@
-	<div class="sidebar" data-background-color="white" data-active-color="danger">
+	<?php use Cartalyst\Sentinel\Laravel\Facades\Sentinel;?>
+    <div class="sidebar" data-background-color="white" data-active-color="danger">
 
     <!--
 		Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
@@ -61,13 +62,16 @@
                         <p>Settings</p>
                     </a>
                 </li>
+                
+                @if(App\Library\RoleLib::limitThis(4, Sentinel::getUser()->id, $redirect_to = null))
+
                 <li>
                     <a href="{{url('manajemen-user')}}">
                         <i class="fa fa-user-secret"></i>
                         <p>Manajemen User</p>
                     </a>
                 </li>
-
+                @endif
             </ul>
     	</div>
     </div>

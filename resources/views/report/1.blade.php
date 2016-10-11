@@ -5,6 +5,16 @@
 </head>
 <body>
 	<style type="text/css">
+
+		@page teacher {
+		  size: Legal landscape;
+		  /*margin: 2cm;*/
+		}
+
+		.teacherPage {
+		   page: teacher;
+		   page-break-after: always;
+		}
 		.tg  {border-collapse:collapse;border-spacing:0;}
 		.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
 		.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
@@ -22,20 +32,41 @@
 		li {
 			list-style: none;
 		}
-		@media screen and (max-width: 767px) {.tg {width: auto !important;}.tg col {width: auto !important;}.tg-wrap {overflow-x: auto;-webkit-overflow-scrolling: touch;}}</style>
-		<div class="tg-wrap">
-			<div style="text-align: center;margin-bottom: 20px;">
-				KEMENTERIAN KOORDINATOR BIDANG PEREKONOMIAN<br>
-				DAFTAR PEMBAYARAN TUNJANGAN KINERJA<br>
-				BULAN : SEPTEMBER 2016
-			</div>
-			<div>
-				<span style="left: 0;">UNIT ORGANISASI: KEMENTERIAN KOODINATOR BIDANG PEREKONOMIAN</span>
-				<span style="float: right;">TGL PROSES: 29-8-2016</span>
-			</div>
 
+		@media screen and (max-width: 767px) {.tg {width: auto !important;}.tg col {width: auto !important;}.tg-wrap {overflow-x: auto;-webkit-overflow-scrolling: touch;}}
+		html {
+			margin:5px;
+		}
+		</style>
+		<htmlpageheader name="page-header">
+		<div class="tg-wrap">
 			<table class="tg">
+				
+				<?php
+					$status = true;
+					$hal = 1;
+				?>
+				@for($ia = 1; $ia < 10; $ia++)
+				@if($status)
 				<tr>
+					<td colspan="13" style="border:0px;">
+					<div style="text-align: center;">
+						KEMENTERIAN KOORDINATOR BIDANG PEREKONOMIAN<br>
+						DAFTAR PEMBAYARAN TUNJANGAN KINERJA<br>
+						BULAN : SEPTEMBER 2016
+					</div>
+					<table width="100%">
+						<tr>
+							<td  style="border:0px;padding: 0px;" align="left">UNIT ORGANISASI: KEMENTERIAN KOODINATOR BIDANG PEREKONOMIAN</td>
+							<td  style="border:0px;padding: 0px;" align="right">TGL PROSES: 29-8-2016</td>
+						</tr>
+					</table>
+					</td>
+				</tr>
+				<?php
+					$status = false;
+				?>
+				<tr>	
 					<th class="tg-hgcj" rowspan="2">N<br>O<br>.<br>U<br>R<br>U<br>T</th>
 					<th class="tg-hgcj">NAMA</th>
 					<th class="tg-hgcj" rowspan="2">E<br>S<br>E<br>L<br>O<br>N</th>
@@ -75,7 +106,8 @@
 					<td class="tg-hgcj">12</td>
 					<td class="tg-hgcj">13</td>
 				</tr>
-				{{-- @ foreach() --}}
+				@endif
+				</htmlpageheader>
 				<tr>
 					<td class="tg-s6z2">1.</td>
 					<td class="tg-yw4l">EMANUEL CHRISTIANTOKO<br>NIP. 100000000000</td>
@@ -91,25 +123,15 @@
 					<td class="tg-yw4l">050701016367509</td>
 					<td class="tg-031e"></td>
 				</tr>
-				<tr>
-					<td class="tg-s6z2">2.</td>
-					<td class="tg-yw4l">HERU HENDRATMOKO<br>NIP. 800000000000</td>
-					<td class="tg-baqh">I.B</td>
-					<td class="tg-baqh">IV/E</td>
-					<td class="tg-baqh">K1</td>
-					<td class="tg-baqh"></td>
-					<td class="tg-baqh">16</td>
-					<td class="tg-lqy6">3,228,300<br>4,375,000<br>8,065,713</td>
-					<td class="tg-lqy6">24,405,000<br>0<br>0<br>0<br>( 0 %)</td>
-					<td class="tg-lqy6">24,405,000<br>4,443,105<br>28,848,105<br>4,443,105</td>
-					<td class="tg-lqy6">24,405,000</td>
-					<td class="tg-yw4l">050701016363505</td>
-					<td class="tg-031e"></td>
-				</tr>
 				{{-- @endforeach --}}
+				@if($ia % 2 == 0 || $ia == 10 - 1 )
+				<?php
+					$status = true;
+				?>
+				{{-- <htmlpagefooter name="page-footer"> --}}
 				<tr>
 					<td class="tg-s6z2"></td>
-					<td class="tg-031e" colspan="6">JUMLAH LEMBAR KE : 1</td>
+					<td class="tg-031e" colspan="6">JUMLAH LEMBAR KE :{{$hal}}</td>
 					<td class="tg-0ord">6,456,600,<br>8,750,000<br>16,131,426</td>
 					<td class="tg-0ord">48,810,000<br>0<br>0<br>0</td>
 					<td class="tg-0ord">48,810,000<br>8,886,210<br>57,696,210<br>8,886,210</td>
@@ -117,8 +139,15 @@
 					<td class="tg-031e"></td>
 					<td class="tg-031e"></td>
 				</tr>
-				<tr>
+				
+				<?php
+					$hal++;
+				?>
+				@endif
+				@endfor
 			</table>
+
 		</div>
+		{{-- </htmlpagefooter> --}}
 	</body>
 	</html>

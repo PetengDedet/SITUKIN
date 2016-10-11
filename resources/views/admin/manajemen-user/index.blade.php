@@ -1,3 +1,4 @@
+
 @extends('layouts.master')
 
 @section('page_title')
@@ -31,7 +32,6 @@ Manajemen User
 	}
 </style>
 @section('content')
-
 <div class="row">
 	<div class="col-md-12">
 		<form action="{{url('manajemen/simpan')}}" method="post">
