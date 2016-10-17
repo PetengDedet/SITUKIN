@@ -56,6 +56,13 @@ Route::post('setting', 					['as' => 'setting.post', 			'uses' => 'SettingContro
 Route::get('report1', ['uses' => 'JabatanController@tesPdf']);
 Route::get('export/{unit}/{bulan}/{tahun}', ['uses' => 'ReportController@export']);
 
+#Export
+Route::get('export/select', ['uses' => 'ReportController@select']);
+Route::get('export/per-golongan-jabatan', ['uses' => 'ReportController@perGolonganJabatan']);
+Route::get('export/realisasi', ['uses' => 'ReportController@realisasi']);
+Route::get('export/invoice', ['uses' => 'ReportController@invoice']);
+Route::get('export/protakel', ['uses' => 'ReportController@protakel']);
+
 
 //MASAGUNG
 #UserController

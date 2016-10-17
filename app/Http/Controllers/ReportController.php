@@ -122,4 +122,31 @@ class ReportController extends Controller
         //
         // dd($data);
     }
+
+    public function select()
+    {
+        return view('report.index');
+    }
+
+    public function perGolonganJabatan()
+    {
+        return view('report.perGolonganJabatan');
+    }
+
+    public function realisasi()
+    {
+        $pdf = PDF::loadView('report.realisasi');
+        return $pdf->setPaper(array(0,0,612.00,936.00), 'potrait')->stream('report.pdf');
+        // return view('report.realisasi');
+    }
+
+    public function invoice()
+    {
+        return view('report.invoice');
+    }
+
+    public function protakel()
+    {
+        return view('report.protakel');
+    }
 }
