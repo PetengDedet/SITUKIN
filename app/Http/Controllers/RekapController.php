@@ -124,14 +124,14 @@ class RekapController extends Controller
                 $dataDisiplin->pegawai_id = $request->pegawai_id[$i];
                 $dataDisiplin->bulan = $request->bulan;
                 $dataDisiplin->tahun = $request->tahun;
-                $dataDisiplin->persentase = $request->kinerja_bulanan[$i];
+                $dataDisiplin->persentase = $request->potongan_disiplin[$i];
                 $dataDisiplin->update();
             }else{
                 $dataDisiplin = new PotonganDisiplin();
                 $dataDisiplin->pegawai_id = $request->pegawai_id[$i];
                 $dataDisiplin->bulan = $request->bulan;
                 $dataDisiplin->tahun = $request->tahun;
-                $dataDisiplin->persentase = $request->kinerja_bulanan[$i];
+                $dataDisiplin->persentase = $request->potongan_disiplin[$i];
                 $dataDisiplin->save();
             }
         }
