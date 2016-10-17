@@ -59,6 +59,7 @@ Route::get('report1', ['uses' => 'JabatanController@tesPdf']);
 //MASAGUNG
 #UserController
 Route::get('pegawai', 					['as' => 'pegawai', 				'uses' => 'UserController@listpegawai']);
+Route::post('pegawai/import-data', 					['as' => 'pegawai.importdata', 				'uses' => 'UserController@pegawaiimportdata']);
 Route::post('pegawai/simpan-pegawai', 			['as' => 'simpanpegawai', 			'uses' => 'UserController@simpanpegawai']);
 Route::post('pegawai/edit-pegawai', 			['as' => 'editpegawai', 			'uses' => 'UserController@editpegawai']);
 Route::get('delete-pegawai/{id}', 		['as' => 'deletepegawai', 			'uses' => 'UserController@deletepegawai']);

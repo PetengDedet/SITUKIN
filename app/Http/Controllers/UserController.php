@@ -7,6 +7,7 @@ use App\Http\Requests;
 use Redirect;
 use Sentinel;
 use App\User;
+use Illuminate\Support\Facades\Input;
 
 class UserController extends Controller
 {
@@ -127,5 +128,59 @@ class UserController extends Controller
            $user = User::where('unit_id','=',$request->unit_id)->get(); 
            return response()->json(['User' => $user]);
         }
+    }
+
+    public function pegawaiimportdata(Request $request){
+
+        if (Input::hasFile('csv_file')){
+
+            $file = Input::file('csv_file');
+            $name = 'data-pegawai.csv';
+
+            $path = 'uploads/CSV/';
+            $file->move($path, $name);
+
+            $data = $this->csvToArray($path. "/". $name);
+            dd($data);
+            for($i = 0; $i <= count($data); $i++){
+                echo $data[$i]->nip."<br>";
+            }
+
+         }
+
+        /*echo $request->csv_file;
+
+        $file = public_path('file/test.csv');
+
+        $customerArr = $this->csvToArray($file);
+
+        for ($i = 0; $i < count($customerArr); $i ++)
+        {
+            User::firstOrCreate($customerArr[$i]);
+        }*/
+    }
+
+
+
+    function csvToArray($filename = '', $delimiter = ',')
+    {
+        if (!file_exists($filename) || !is_readable($filename))
+            return false;
+
+        $header = null;
+        $data = array();
+        if (($handle = fopen($filename, 'r')) !== false)
+        {
+            while (($row = fgetcsv($handle, 1000, $delimiter)) !== false)
+            {
+                if (!$header)
+                    $header = $row;
+                else
+                    $data[] = array_combine($header, $row);
+            }
+            fclose($handle);
+        }
+
+        return $data;
     }
 }

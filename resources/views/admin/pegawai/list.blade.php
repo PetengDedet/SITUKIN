@@ -25,6 +25,7 @@ Manajemen Pegawai
                 <h4 class="title"><strong>Data Pegawai</strong></h4>
                 <br>
                 <a class="btn btn-success btn-fill" href="{{url('pegawai/create')}}"><i class="fa fa-plus"></i>&nbsp; Tambah Pegawai</a>
+                
             </div>
             <div class="content">
                 <table class ="table table-responsive table-full-width" id="users-table">
@@ -164,6 +165,31 @@ Manajemen Pegawai
         </div>
       </form>
     </div>
+
+  </div>
+</div>
+<div id="importModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <form action="{{url('pegawai/import-data')}}" method="post" enctype="multipart/form-data">
+      {{csrf_field()}}
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Import Data</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+              <label>CSV File</label>
+              <input type="file" name="csv_file" accept=".csv" class="form-control border-input" required="" >
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-default">Save</button>
+        </div>
+      </div>
+    </form>
 
   </div>
 </div>
