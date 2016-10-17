@@ -81,10 +81,14 @@
         <th style="text-align: center;">No</th>
         <th style="text-align: center;">Nama Pegawai</th>
         <th style="text-align: center;">Kinerja Bulanan<br>(%)</th>
+        <th style="text-align: center;">Potongan Absen<br>(%)</th>
+        <th style="text-align: center;">Potongan Hukuman Disiplin<br>(%)</th>
     </tr>
     @for($i=1; $i<=10; $i++)
         <tr>
             <td>{{$i}}</td>
+            <td></td>
+            <td></td>
             <td></td>
             <td></td>
         </tr>

@@ -62,6 +62,8 @@ Route::get('export/per-golongan-jabatan', ['uses' => 'ReportController@perGolong
 Route::get('export/realisasi', ['uses' => 'ReportController@realisasi']);
 Route::get('export/invoice', ['uses' => 'ReportController@invoice']);
 Route::get('export/protakel', ['uses' => 'ReportController@protakel']);
+Route::get('export/sdm', ['uses' => 'ReportController@sdm']);
+Route::get('export/pembayaran', ['uses' => 'ReportController@pembayaran']);
 
 
 //MASAGUNG

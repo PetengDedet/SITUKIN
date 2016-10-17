@@ -149,4 +149,14 @@ class ReportController extends Controller
     {
         return view('report.protakel');
     }
+
+    public function sdm()
+    {
+        return view('report.sdm');
+    }
+
+    public function pembayaran()
+    {
+        return view('report.pembayaran');
+    }
 }
