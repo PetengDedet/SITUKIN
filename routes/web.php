@@ -54,6 +54,7 @@ Route::post('setting', 					['as' => 'setting.post', 			'uses' => 'SettingContro
 
 #REPORT
 Route::get('report1', ['uses' => 'JabatanController@tesPdf']);
+Route::get('export/{unit}/{bulan}/{tahun}', ['uses' => 'ReportController@export']);
 
 
 //MASAGUNG

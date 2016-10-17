@@ -12,14 +12,14 @@
 	.tg .tg-yw4l{vertical-align:top}
 
 </style>
-
 	<?php 
 		$status = true;
-		$max = 9;
+		$max = count($data['grade']);
 	?>
-	@for($i = 1; $i<=$max; $i++)
+	@for($i = 0; $i<$max; $i++)
 		@if($status)
 			<?php
+				
 				$status = false;
 			?>
 			<table class="tg">
@@ -80,23 +80,23 @@
 				</tr>
 		@endif
 		<tr>
-			<td class="tg-s6z2">1.</td>
-			<td class="tg-yw4l">EMANUEL CHRISTIANTOKO<br>NIP. 100000000000</td>
-			<td class="tg-baqh">I.B</td>
-			<td class="tg-baqh">IV/E</td>
-			<td class="tg-baqh">K1</td>
+			<td class="tg-s6z2">{{$i}}</td>
+			<td class="tg-yw4l">{{$data['pegawai'][$i]->name}}<br>NIP. {{$data['pegawai'][$i]->nip}}</td>
 			<td class="tg-baqh"></td>
-			<td class="tg-baqh">16</td>
-			<td class="tg-lqy6">3.228.300<br>4.375.000<br>8.065.713</td>
-			<td class="tg-lqy6">24.405.000<br>0<br>0<br>0<br>( 0% )</td>
-			<td class="tg-lqy6">24.405.000<br>4,443,105<br>28,848,105<br>4,443,105</td>
-			<td class="tg-lqy6">24.405.000</td>
-			<td class="tg-yw4l">050701016367509</td>
+			<td class="tg-baqh"></td>
+			<td class="tg-baqh"></td>
+			<td class="tg-baqh"></td>
+			<td class="tg-baqh"></td>
+			<td class="tg-lqy6">{{number_format($data['pegawai'][$i]->gjpokok,0, ',', '.')}}<br>{{number_format($data['pegawai'][$i]->tjstruk,0, ',', '.')}}<br>0</td>
+			<td class="tg-lqy6">{{number_format($data['tkjb'][$i],0, ',', '.')}}<br>0<br>0<br>0<br>( {{$data['absensi'][$i]->total_potongan_absen}}% )</td>
+			<td class="tg-lqy6">{{number_format($data['tkjd'][$i],0, ',', '.')}}<br>0<br>0<br>0</td>
+			<td class="tg-lqy6">{{number_format($data['tkjd'][$i],0, ',', '.')}}</td>
+			<td class="tg-yw4l">{{$data['pegawai'][$i]->rekening}}</td>
 			<td class="tg-031e"></td>
 		</tr>
 
 		
-		@if($i % 2 == 0 || $i == $max)
+		@if($i-1 % 2 == 0 || $i == $max)
 		<?php
 			$status = true;
 		?>
