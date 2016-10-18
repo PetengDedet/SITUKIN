@@ -25,7 +25,7 @@ Manajemen Pegawai
                 <h4 class="title"><strong>Data Pegawai</strong></h4>
                 <br>
                 <a class="btn btn-success btn-fill" href="{{url('pegawai/create')}}"><i class="fa fa-plus"></i>&nbsp; Tambah Pegawai</a>
-                
+                <button type="button" class="btn btn-success btn-fill" data-toggle="modal" data-target="#importModal"><i class="fa fa-plus"></i>&nbsp; Import Data</button>
             </div>
             <div class="content">
                 <table class ="table table-responsive table-full-width" id="users-table">

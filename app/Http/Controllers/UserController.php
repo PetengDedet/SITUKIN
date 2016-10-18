@@ -8,6 +8,7 @@ use Redirect;
 use Sentinel;
 use App\User;
 use Illuminate\Support\Facades\Input;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -133,18 +134,136 @@ class UserController extends Controller
     public function pegawaiimportdata(Request $request){
 
         if (Input::hasFile('csv_file')){
-
             $file = Input::file('csv_file');
+            $name = 'data-pegawai.csv';
+
+            $path = 'uploads/CSV/';
+            $file->move($path, $name);
+            $rows = Excel::load($path. "/". $name)->get();
+            $i = 0;
+            foreach ($rows as $value) {
+                if($value->nip){
+                    $check = User::where('nip','=',$value->nip)->count();
+                    if($check > 0){
+                        //echo $value->nip." : ada<br>";
+                        $user = User::where('nip','=',$value->nip)->first();
+                        $user->kdsatker = str_replace('.0','',$value->kdsatker);
+                        $user->kdanak = str_replace('.0','',$value->kdanak);
+                        $user->kdsubanak = str_replace('.0','',$value->kdsubanak);
+                        $user->nogaji = str_replace('.0','',$value->nogaji);
+                        $user->kdjns = str_replace('.0','',$value->kdjns);
+                        $user->name = str_replace('.0','',$value->nmpeg);
+                        $user->kdduduk = str_replace('.0','',$value->kdduduk);
+                        $user->kdgol = str_replace('.0','',$value->kdgol);
+                        $user->npwp = str_replace('.0','',$value->npwp);
+                        $user->nmrek = str_replace('.0','',$value->nmrek);
+                        $user->nm_bank  = str_replace('.0','',$value->nm_bank);
+                        $user->rekening = str_replace('.0','',$value->rekening);
+                        $user->kdbankspan = str_replace('.0','',$value->kdbankspan);
+                        $user->nmbankspan = str_replace('.0','',$value->nmbankspan);
+                        $user->kdpos = str_replace('.0','',$value->kdpos);
+                        $user->kdnegara = str_replace('.0','',$value->kdnegara);
+                        $user->kdkppn = str_replace('.0','',$value->kdkppn);
+                        $user->tipesup = str_replace('.0','',$value->tipesup);
+                        $user->gjpokok = str_replace('.0','',$value->gjpokok);
+                        $user->tjistri = str_replace('.0','',$value->tjistri);
+                        $user->tjanak = str_replace('.0','',$value->tjanak);
+                        $user->tjupns = str_replace('.0','',$value->tjupns);
+                        $user->tjstruk = str_replace('.0','',$value->tjstruk);
+                        $user->tjfungs = str_replace('.0','',$value->tjfungs);
+                        $user->tjdaerah = str_replace('.0','',$value->tjdaerah);
+                        $user->tjpencil = str_replace('.0','',$value->tjpencil);
+                        $user->tjlain = str_replace('.0','',$value->tjlain);
+                        $user->tjkompen = str_replace('.0','',$value->tjkompen);
+                        $user->pembul = str_replace('.0','',$value->pembul);
+                        $user->tjberas = str_replace('.0','',$value->tjberas);
+                        $user->tjpph = str_replace('.0','',$value->tjpph);
+                        $user->potpfkbul = str_replace('.0','',$value->potpfkbul);
+                        $user->potpfk2 = str_replace('.0','',$value->potpfk2);
+                        $user->potpfk10 = str_replace('.0','',$value->potpfk10);
+                        $user->potpph = str_replace('.0','',$value->potpph);
+                        $user->potswrum = str_replace('.0','',$value->potswrum);
+                        $user->potkelbtj = str_replace('.0','',$value->potkelbtj);
+                        $user->potlain = str_replace('.0','',$value->potlain);
+                        $user->pottabrum = str_replace('.0','',$value->pottabrum);
+                        $user->bersih = str_replace('.0','',$value->bersih);
+                        $user->sandi = str_replace('.0','',$value->sandi);
+                        $user->kdkawin = str_replace('.0','',$value->kdkawin);
+                        $user->kdjab = str_replace('.0','',$value->kdjab);
+                        $user->update();
+                    }else{
+                        //echo $value->nip." : kosong<br>";
+                        $userNew = new User();
+                        $userNew->nip = str_replace('.0','',$value->nip);
+                        $userNew->kdsatker = str_replace('.0','',$value->kdsatker);
+                        $userNew->kdanak = str_replace('.0','',$value->kdanak);
+                        $userNew->kdsubanak = str_replace('.0','',$value->kdsubanak);
+                        $userNew->nogaji = str_replace('.0','',$value->nogaji);
+                        $userNew->kdjns = str_replace('.0','',$value->kdjns);
+                        $userNew->name = str_replace('.0','',$value->nmpeg);
+                        $userNew->kdduduk = str_replace('.0','',$value->kdduduk);
+                        $userNew->kdgol = str_replace('.0','',$value->kdgol);
+                        $userNew->npwp = str_replace('.0','',$value->npwp);
+                        $userNew->nmrek = str_replace('.0','',$value->nmrek);
+                        $userNew->nm_bank  = str_replace('.0','',$value->nm_bank);
+                        $userNew->rekening = str_replace('.0','',$value->rekening);
+                        $userNew->kdbankspan = str_replace('.0','',$value->kdbankspan);
+                        $userNew->nmbankspan = str_replace('.0','',$value->nmbankspan);
+                        $userNew->kdpos = str_replace('.0','',$value->kdpos);
+                        $userNew->kdnegara = str_replace('.0','',$value->kdnegara);
+                        $userNew->kdkppn = str_replace('.0','',$value->kdkppn);
+                        $userNew->tipesup = str_replace('.0','',$value->tipesup);
+                        $userNew->gjpokok = str_replace('.0','',$value->gjpokok);
+                        $userNew->tjistri = str_replace('.0','',$value->tjistri);
+                        $userNew->tjanak = str_replace('.0','',$value->tjanak);
+                        $userNew->tjupns = str_replace('.0','',$value->tjupns);
+                        $userNew->tjstruk = str_replace('.0','',$value->tjstruk);
+                        $userNew->tjfungs = str_replace('.0','',$value->tjfungs);
+                        $userNew->tjdaerah = str_replace('.0','',$value->tjdaerah);
+                        $userNew->tjpencil = str_replace('.0','',$value->tjpencil);
+                        $userNew->tjlain = str_replace('.0','',$value->tjlain);
+                        $userNew->tjkompen = str_replace('.0','',$value->tjkompen);
+                        $userNew->pembul = str_replace('.0','',$value->pembul);
+                        $userNew->tjberas = str_replace('.0','',$value->tjberas);
+                        $userNew->tjpph = str_replace('.0','',$value->tjpph);
+                        $userNew->potpfkbul = str_replace('.0','',$value->potpfkbul);
+                        $userNew->potpfk2 = str_replace('.0','',$value->potpfk2);
+                        $userNew->potpfk10 = str_replace('.0','',$value->potpfk10);
+                        $userNew->potpph = str_replace('.0','',$value->potpph);
+                        $userNew->potswrum = str_replace('.0','',$value->potswrum);
+                        $userNew->potkelbtj = str_replace('.0','',$value->potkelbtj);
+                        $userNew->potlain = str_replace('.0','',$value->potlain);
+                        $userNew->pottabrum = str_replace('.0','',$value->pottabrum);
+                        $userNew->bersih = str_replace('.0','',$value->bersih);
+                        $userNew->sandi = str_replace('.0','',$value->sandi);
+                        $userNew->kdkawin = str_replace('.0','',$value->kdkawin);
+                        $userNew->kdjab = str_replace('.0','',$value->kdjab);
+                        /*dd($userNew);*/
+                        $userNew->save();
+                    }
+
+                }else{
+                    return Redirect::route('pegawai')->with('error', 'File Excel tidak valid');
+                }
+            }
+            return Redirect::route('pegawai')->with('success', 'Data Pegawai berhasil diimport');
+            /*$file = Input::file('csv_file');
             $name = 'data-pegawai.csv';
 
             $path = 'uploads/CSV/';
             $file->move($path, $name);
 
             $data = $this->csvToArray($path. "/". $name);
-            dd($data);
-            for($i = 0; $i <= count($data); $i++){
-                echo $data[$i]->nip."<br>";
-            }
+
+            if(isset($data[0]['nip'])){
+                //echo "ada";
+                for($i = 0; $i <= count($data); $i++){
+                    echo $data[$i]['nip']."<br>";
+                }
+            }else{
+                echo "kosong";
+            }*/
+            
 
          }
 
