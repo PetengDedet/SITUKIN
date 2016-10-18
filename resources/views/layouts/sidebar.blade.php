@@ -77,6 +77,12 @@
                     </a>
                 </li>
                 @endif
+                <li>
+                    <a href="{{url('export')}}">
+                        <i class="fa fa-cloud-download"></i>
+                        <p>Export</p>
+                    </a>
+                </li>
             </ul>
     	</div>
     </div>
