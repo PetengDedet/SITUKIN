@@ -119,11 +119,27 @@
       <tr>
         <td class="tg-s6z2">{{$j + 1}}</td>
         <td class="tg-yw4l">{{$data['pegawai'][$j]->name}}<br>NIP. {{$data['pegawai'][$j]->nip}}</td>
+        <td class="tg-baqh">
+          
+        </td> 
+        <td class="tg-baqh">
+          <?php
+            $dataExplode =  explode('(', $data['pegawai'][$j]->golongan);
+            $explodeAgain = explode(')', $dataExplode[1] );
+            echo $explodeAgain[0];
+          ?>
+        </td>
+        <td class="tg-baqh">
+          @if($data['pegawai'][$j]->kdkawin == "1000" || $data['pegawai'][$j]->kdkawin == "1001" || $data['pegawai'][$j]->kdkawin == "1002" || $data['pegawai'][$j]->kdkawin == "1003")
+            TK
+          @elseif($data['pegawai'][$j]->kdkawin == "1100" || $data['pegawai'][$j]->kdkawin == "1101" || $data['pegawai'][$j]->kdkawin == "1102" || $data['pegawai'][$j]->kdkawin == "1103")
+            K1
+          @else
+            D/J
+          @endif          
+        </td>
         <td class="tg-baqh"></td>
-        <td class="tg-baqh"></td>
-        <td class="tg-baqh"></td>
-        <td class="tg-baqh"></td>
-        <td class="tg-baqh"></td>
+        <td class="tg-baqh">{{$data['jabatan'][$j]->kelas_jabatan}}</td>
         <td class="tg-lqy6">
           {{number_format($data['pegawai'][$j]->gjpokok,0, ',', '.')}}
           <br>

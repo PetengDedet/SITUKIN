@@ -113,6 +113,7 @@ class RekapController extends Controller
                     $dataKinerja->bulan = $request->bulan;
                     $dataKinerja->tahun = $request->tahun;
                     $dataKinerja->persentase = $request->kinerja_bulanan[$i];
+                    
                     $dataKinerja->save();
                 }
             }

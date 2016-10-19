@@ -65,19 +65,28 @@ Class HitungLib
 		$sisadariLimaPersen = $PKPPertahun - 50000000;
 
 		//cek pajak 15%
-		if($sisadariLimaPersen < 200000000){
-			$pajakLimaBelasPersen = ($sisadariLimaPersen * 0.15) / 12; 
-		}else if($sisadariLimaPersen > 200000000){
-			$pajakLimaBelasPersen = (200000000 * 0.1) / 12; 
+		if($sisadariLimaPersen > 0){
+			if($sisadariLimaPersen < 200000000){
+				$pajakLimaBelasPersen = ($sisadariLimaPersen * 0.15) / 12; 
+			}else if($sisadariLimaPersen > 200000000){
+				$pajakLimaBelasPersen = (200000000 * 0.1) / 12; 
+			}else{
+				$pajakLimaBelasPersen = 0; 
+			}
 		}else{
 			$pajakLimaBelasPersen = 0; 
 		}
 
-		if($sisadariLimaPersen > 250000000){
-			$pajakDuaLimaPersen = ($sisadariLimaPersen - 250000000) * 0.25 / 12; 
+		if($sisadariLimaPersen > 0){
+			if($sisadariLimaPersen > 250000000){
+				$pajakDuaLimaPersen = ($sisadariLimaPersen - 250000000) * 0.25 / 12; 
+			}else{
+				$pajakDuaLimaPersen = 0; 
+			}
 		}else{
 			$pajakDuaLimaPersen = 0; 
 		}
+		
 
 		$total = $pajaklimapersen + $pajakLimaBelasPersen + $pajakDuaLimaPersen;
 		return $total;

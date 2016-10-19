@@ -170,7 +170,7 @@ Rekap Data {{$request->unit_kerja}}
                 @endif
             </div>
             </form>
-            <form action="simpan-rekap-data" method="post">
+            <form action="{{url('rekap-data')}}" method="post">
               {{csrf_field()}}
               <input type="hidden" name="tahun" value="{{$tahunnya}}"/>
               <input type="hidden" name="bulan" value="{{$bulannya}}"/>
@@ -191,7 +191,10 @@ Rekap Data {{$request->unit_kerja}}
       			        </thead>
                     <tbody>
                         <script type="text/javascript">var dataInput = "";</script>
-                        @forelse(App\User::where('nip','!=','admin')->where('unit_id','=',$unitnya)->get() as $data)
+                        <?php
+                          $dataUserRekap = App\User::where('nip','!=','admin')->where('unit_id','=',$unitnya)->get();
+                        ?>
+                        @forelse($dataUserRekap as $data)
                         <input type="hidden" name="pegawai_id[]" value="{{$data->id}}">
                         <?php
                           $dataUnit = "";
@@ -483,6 +486,7 @@ Rekap Data {{$request->unit_kerja}}
         e.preventDefault();
   });
   $(document).ready(function(){
+
     SplitData = dataInput.split('|');
     for(i = 0; i < SplitData.length ; i++){
       setdata(SplitData[i])

@@ -196,6 +196,7 @@ class ReportController extends Controller
                 $checkDataKinerjaBulanan = KinerjaBulanan::where('bulan',$request->bulan)->where('tahun',$request->tahun)->where('pegawai_id',$dataUser->id)->count();
                 $checkDataPotonganAbsensi = PotonganAbsensi::where('bulan',$request->bulan)->where('tahun',$request->tahun)->where('pegawai_id',$dataUser->id)->count();
                 $checkDataPotonganDisiplin = PotonganDisiplin::where('bulan',$request->bulan)->where('tahun',$request->tahun)->where('pegawai_id',$dataUser->id)->count();
+
                 if($checkDataKinerjaBulanan > 0){
                     $totalDataKinerjaBulanan++;
                 }
@@ -208,11 +209,11 @@ class ReportController extends Controller
                     $totalDataHukumanDisiplin++;
                 }
             }
-            echo $totalDataKinerjaBulanan. " : ". count($dataUser);
-            echo $totalDataPotonganAbsen. " : ". count($dataUser);
-            echo $totalDataHukumanDisiplin. " : ". count($dataUser);
+            /*echo $totalDataKinerjaBulanan. " : ". count($getDataUser)."<br>";
+            echo $totalDataPotonganAbsen. " : ". count($getDataUser)."<br>";
+            echo $totalDataHukumanDisiplin. " : ". count($getDataUser)."<br>";*/
 
-            if($totalDataKinerjaBulanan == count($dataUser) && $totalDataPotonganAbsen == count($dataUser) &&$totalDataHukumanDisiplin == count($dataUser)){
+            if($totalDataKinerjaBulanan == count($getDataUser) && $totalDataPotonganAbsen == count($getDataUser) &&$totalDataHukumanDisiplin == count($getDataUser)){
                 if($request->type == "3"){
                     $data = [];
                     $data['bulan'] = $request->bulan;
@@ -256,7 +257,7 @@ class ReportController extends Controller
                     return $pdf->setPaper(array(0,0,612.00,936.00), 'landscape')->stream('report.pdf');
                 }
             }else{
-                return Redirect::to('export')->with('error', 'Data Tukin belum tersedia untuk bulan ' . $request->bulan . ' tahun '. $request->tahun .'.');
+                //return Redirect::to('export')->with('error', 'Data Tukin belum tersedia untuk bulan ' . $request->bulan . ' tahun '. $request->tahun .'.');
             }
         }else{
             return Redirect::to('export')->with('error', 'Tidak ada pegawai di unit kerja ini.');
