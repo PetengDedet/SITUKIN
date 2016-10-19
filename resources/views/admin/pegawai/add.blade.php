@@ -70,6 +70,10 @@ Detail Pegawai
                 <label>NPWP</label>
                 <input type="text" class="form-control border-input" name="npwp" placeholder="NPWP" required="">
             </div>
+            <div class="form-group">
+                <label>Golongan</label>
+                <input type="text" class="form-control border-input" name="golongan" placeholder="Golongan" required="">
+            </div>
           </div>
       </div>
       <div class="card">

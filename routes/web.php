@@ -54,16 +54,19 @@ Route::post('setting', 					['as' => 'setting.post', 			'uses' => 'SettingContro
 
 #REPORT
 Route::get('report1', ['uses' => 'JabatanController@tesPdf']);
-Route::get('export/{unit}/{bulan}/{tahun}', ['uses' => 'ReportController@export']);
+Route::get('export/{unit}/{bulan}/{tahun}', ['uses' => 'ReportController@export']); //sudah
 
 #Export
-Route::get('export/select', ['uses' => 'ReportController@select']);
+Route::get('export', ['uses' => 'ReportController@select']);
+Route::post('export', ['uses' => 'ReportController@exportDatas']);
 Route::get('export/per-golongan-jabatan', ['uses' => 'ReportController@perGolonganJabatan']);
 Route::get('export/realisasi', ['uses' => 'ReportController@realisasi']);
 Route::get('export/invoice', ['uses' => 'ReportController@invoice']);
-Route::get('export/protakel', ['uses' => 'ReportController@protakel']);
-Route::get('export/sdm', ['uses' => 'ReportController@sdm']);
+Route::get('export/protakel', ['uses' => 'ReportController@protakel']); //sudah
+Route::get('export/sdm', ['uses' => 'ReportController@sdm']); //sudah
 Route::get('export/pembayaran', ['uses' => 'ReportController@pembayaran']);
+Route::get('export-data', ['uses' => 'ReportController@exportdata']);
+
 
 
 //MASAGUNG

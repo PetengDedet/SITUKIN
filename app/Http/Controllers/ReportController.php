@@ -12,9 +12,11 @@ use App\Grade;
 use App\KinerjaBulanan;
 use App\PotonganAbsensi;
 use App\PotonganDisiplin;
+use App\Role;
 
 use App\Library\RoleLib;
 use Sentinel;
+use Redirect;
 
 class ReportController extends Controller
 {
@@ -25,12 +27,12 @@ class ReportController extends Controller
     	// $this->validate($r, [
 
     	// ]);
-		if(!RoleLib::limitThis(4, Sentinel::getUser()->id, $redirect_to = null)) {
+		if(!RoleLib::limitThis(4, Sentinel::getUser()->id)) {
         	abort(404);
         }
 
         $data = [];
-        $users = User::where('unit_id', $unit)->get();
+        $users = User::where('nip','!=','admin')->where('nip','!=','123')->take(10)->get();
 
         foreach ($users as $k => $v) {
         	$data['pegawai'][] = $v;
@@ -67,7 +69,7 @@ class ReportController extends Controller
         }
 
         // return view('report.2back',compact('data',$data));
-        $pdf = PDF::loadView('report.2back',compact('data',$data));
+        $pdf = PDF::loadView('report.pembayaran',compact('data',$data));
         return $pdf->setPaper(array(0,0,612.00,936.00), 'landscape')->stream('report.pdf');
     }
 
@@ -158,5 +160,52 @@ class ReportController extends Controller
     public function pembayaran()
     {
         return view('report.pembayaran');
+    }
+
+    public function exportdata(){
+        $getData = Sentinel::getUser();
+        $getRole = Role::where('user_id','=',$getData->id)->first();
+        //return view('report.pembayaran')->with('unit_id', $getData->unit_id);
+
+        $data['unit_id'] = $getData->unit_id;
+
+        if($getRole->role_id == "2"){
+            $pdf = PDF::loadView('report.protakel',compact('data',$data));
+            return $pdf->setPaper(array(0,0,612.00,936.00), 'potrait')->stream('report.pdf');
+        }
+        
+        if($getRole->role_id == "3"){
+            $pdf = PDF::loadView('report.sdm',compact('data', $data));
+            return $pdf->setPaper(array(0,0,612.00,936.00), 'potrait')->stream('report.pdf');
+        }
+    }
+
+    public function exportDatas(Request $request){
+        $checkDataUser = User::where('unit_id', $request->unit_id)->count();
+
+        if($checkDataUser > 0){
+            $getDataUser = User::where('unit_id', $request->unit_id)->get();
+
+            $totalDataKinerjaBulanan = 0;
+            $totalDataPotonganAbsen = 0;
+            $totalDataHukumanDisiplin = 0;
+
+            foreach ($getDataUser as $dataUser) {
+                $checkDataKinerjaBulanan = KinerjaBulanan::where('bulan',$request->bulan)->where('tahun',$request->tahun)->where('pegawai_id',$dataUser->id)->count();
+                $totalDataPotonganAbsen = PotonganAbsensi::where('bulan',$request->bulan)->where('tahun',$request->tahun)->where('pegawai_id',$dataUser->id)->count();
+                $totalDataHukumanDisiplin = PotonganDisiplin::where('bulan',$request->bulan)->where('tahun',$request->tahun)->where('pegawai_id',$dataUser->id)->count();
+                if($checkDataKinerjaBulanan > 0){
+                    $totalDataKinerjaBulanan++;
+                }
+            }
+
+            if($totalDataKinerjaBulanan == count($dataUser) && $totalDataPotonganAbsen == count($dataUser) && $totalDataHukumanDisipli == count($dataUser)){
+                echo "data tersedia";
+            }else{
+                return Redirect::to('export')->with('error', 'Data Tukin belum tersedia untuk bulan ' . $request->bulan . ' tahun '. $request->tahun .'.');
+            }
+        }else{
+            return Redirect::to('export')->with('error', 'Tidak ada pegawai di unit kerja ini.');
+        }
     }
 }

@@ -48,6 +48,7 @@ class UserController extends Controller
             $user->tjkompen = $request->tjkompen;
             $user->pembul = $request->pembul;
             $user->tjberas = $request->tjberas;
+            $user->golongan = $request->golongan;
     		$user->save();
 
 	    	return Redirect::route('pegawai')->with('success', 'Pegawai berhasil ditambahkan');
@@ -81,6 +82,7 @@ class UserController extends Controller
             $user->tjkompen = $request->tjkompen;
             $user->pembul = $request->pembul;
             $user->tjberas = $request->tjberas;
+            $user->golongan = $request->golongan;
     		$user->save();
 
 	    	return Redirect::route('pegawai')->with('success', 'Data Pegawai berhasil dirubah');
