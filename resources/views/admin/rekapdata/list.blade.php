@@ -306,15 +306,17 @@ Rekap Data {{$request->unit_kerja}}
                           @endif
                         </tr>
                         <script>dataInput += '{{$data->id}}|'</script>
+                        @if($status)
                         <div style="float: right;">
                           @if((RoleLib::limitThis('2',Sentinel::getUser()->id) AND date('d') < 20) || (RoleLib::limitThis('3',Sentinel::getUser()->id) AND date('d') < 22))
                           <button type="submit" class="btn btn-success btn-fill">Simpan Data</button>
                           @endif
-                          @if($status)
+                          
                           <a href="{{url('export-data/'.$unitnya)}}" class="btn btn-success btn-fill">Export Data</a>
-                          <?php $status = false; ?>
-                          @endif
+                          
                         </div>
+                        <?php $status = false; ?>
+                          @endif
                         @empty
                         <tr>
                           <td colspan="5" align="center"><b>Tidak ada data pegawai di unit kerja ini.</b></td>
