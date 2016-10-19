@@ -180,7 +180,7 @@
       <td class="sikil-031e" style="padding: 0px;">STATUS KAWIN/PERKAWINAN</td>
       <td class="sikil-031e" style="padding: 0px;"></td>
       <td class="sikil-031e" style="padding: 0px;"></td>
-      <td class="sikil-031e" style="padding: 0px;">JAKARTA, 29 AGUSTUS 2016</td>
+      <td class="sikil-031e" style="padding: 0px;">JAKARTA, {{date('d')}} {{ucfirst(date('F'))}} {{date('Y')}}</td>
     </tr>
     <tr>
       <td class="sikil-031e" rowspan="5" style="vertical-align: top;">TK = TIDAK KAWIN<br>K1 = KAWIN<br>D =DUDA<br>J = JANDA</td>
