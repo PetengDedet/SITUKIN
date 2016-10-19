@@ -90,11 +90,20 @@
     <tr>
         <th style="text-align: center;">No</th>
         <th style="text-align: center;">Nama Pegawai</th>
+        <th style="text-align: center;">Kinerja Bulanan<br>(%)</th>
         <th style="text-align: center;">Potongan Absen<br>(%)</th>
         <th style="text-align: center;">Potongan Disiplin<br>(%)</th>
     </tr>
     @foreach(App\User::where('unit_id','=',$unit_id)->skip($j * 50)->take(50)->get() as $data_user)
-        
+        <?php
+          $checkKinerjaBulanan = App\KinerjaBulanan::where('pegawai_id','=',$data_user->id)->where('bulan','=',date('F'))->where('tahun','=',date('Y'))->count();
+          if($checkKinerjaBulanan > 0){
+            $getDataKinerjaBulanan = App\KinerjaBulanan::where('pegawai_id','=',$data_user->id)->where('bulan','=',date('F'))->where('tahun','=',date('Y'))->first();
+            $kinerjaBulanan = $getDataKinerjaBulanan->persentase;
+          }else{
+            $kinerjaBulanan = "97";
+          }
+        ?>
         <?php
           $checkPotonganAbsen = App\PotonganAbsensi::where('pegawai_id','=',$data_user->id)->where('bulan','=',date('F'))->where('tahun','=',date('Y'))->count();
           if($checkPotonganAbsen > 0){
@@ -117,12 +126,14 @@
         <tr>
             <td style="text-align: center; border-bottom:1px solid #000;">{{$k}}</td>
             <td style="margin-left: 5px;border-bottom:1px solid #000;">{{$data_user->name}}</td>
+            <td style="text-align: center;border-bottom:1px solid #000;">{{$kinerjaBulanan}}</td>
             <td style="text-align: center;border-bottom:1px solid #000;">{{$potonganAbsen}}</td>
             <td style="text-align: center;border-bottom:1px solid #000;">{{$potonganDisiplin}}</td>
         </tr>
         <?php $k++; ?>
     @endforeach
   </table>
+
   @if($j == round(App\User::where('unit_id','=',$unit_id)->count() / 50) - 1)
   <table class="ndas" style="margin-top: 20px;">
     <tr>

@@ -174,15 +174,12 @@ class ReportController extends Controller
         }
         
 
-        if($getRole->role_id == "2"){
-            $pdf = PDF::loadView('report.protakel',compact('data',$data));
-            return $pdf->setPaper(array(0,0,612.00,936.00), 'potrait')->stream('report.pdf');
-        }
         
-        if($getRole->role_id == "3" || $getRole->role_id == "4"){
+        
+    
             $pdf = PDF::loadView('report.sdm',compact('data', $data));
             return $pdf->setPaper(array(0,0,612.00,936.00), 'potrait')->stream('report.pdf');
-        }
+        
     }
 
     public function exportDatas(Request $request){
