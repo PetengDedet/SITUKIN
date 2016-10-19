@@ -123,7 +123,7 @@
         <?php $k++; ?>
     @endforeach
   </table>
-  @if($j == round(App\User::where('unit_id','=',$unit_id)->count() / 50))
+  @if($j == round(App\User::where('unit_id','=',$unit_id)->count() / 50) - 1)
   <table class="ndas" style="margin-top: 20px;">
     <tr>
         <td style="width: 35%;"></td>
