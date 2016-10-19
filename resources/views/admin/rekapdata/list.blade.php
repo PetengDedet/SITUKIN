@@ -2,6 +2,7 @@
 
 @section('page_title')
 Rekap Data {{$request->unit_kerja}}
+<?php $status = true; ?>
 @endsection
 
 @section('css')
@@ -309,7 +310,10 @@ Rekap Data {{$request->unit_kerja}}
                           @if((RoleLib::limitThis('2',Sentinel::getUser()->id) AND date('d') < 20) || (RoleLib::limitThis('3',Sentinel::getUser()->id) AND date('d') < 22))
                           <button type="submit" class="btn btn-success btn-fill">Simpan Data</button>
                           @endif
+                          @if($status)
                           <a href="{{url('export-data/'.$unitnya)}}" class="btn btn-success btn-fill">Export Data</a>
+                          <?php $status = false; ?>
+                          @endif
                         </div>
                         @empty
                         <tr>
