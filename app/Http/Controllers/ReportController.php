@@ -162,19 +162,24 @@ class ReportController extends Controller
         return view('report.pembayaran');
     }
 
-    public function exportdata(){
+    public function exportdata($unit_id = ""){
         $getData = Sentinel::getUser();
         $getRole = Role::where('user_id','=',$getData->id)->first();
         //return view('report.pembayaran')->with('unit_id', $getData->unit_id);
 
-        $data['unit_id'] = $getData->unit_id;
+        if($unit_id){
+            $data['unit_id'] = $unit_id;
+        }else{
+            $data['unit_id'] = $getData->unit_id;
+        }
+        
 
         if($getRole->role_id == "2"){
             $pdf = PDF::loadView('report.protakel',compact('data',$data));
             return $pdf->setPaper(array(0,0,612.00,936.00), 'potrait')->stream('report.pdf');
         }
         
-        if($getRole->role_id == "3"){
+        if($getRole->role_id == "3" || $getRole->role_id == "4"){
             $pdf = PDF::loadView('report.sdm',compact('data', $data));
             return $pdf->setPaper(array(0,0,612.00,936.00), 'potrait')->stream('report.pdf');
         }

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('page_title')
-Rekap Data
+Rekap Data {{$request->unit_kerja}}
 @endsection
 
 @section('css')
@@ -29,6 +29,27 @@ Rekap Data
     use App\Library\RoleLib;
     use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
     use App\Unit;
+
+    $getUserData = Sentinel::getUser();
+
+    if($request->tahun){
+      $tahunnya = $request->tahun;
+
+    }else{
+      $tahunnya = date('Y');
+    }
+
+    if($request->bulan){
+      $bulannya = $request->bulan;
+    }else{
+      $bulannya = date('F');
+    }
+
+    if($request->unit_kerja){
+      $unitnya = $request->unit_kerja;
+    }else{
+      $unitnya = $getUserData->unit_id;
+    }
 ?>
 <div class="row">
     <div class="col-md-12">
@@ -37,14 +58,92 @@ Rekap Data
             <div class="header">
                 <h4 class="title"><strong>Rekap Data</strong></h4>
                 <br>
+                @if(RoleLib::limitThis('4',Sentinel::getUser()->id))
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <select name="bulan" class="form-control border-input" required="" >
+                          <?php
+                            $i = 1;
+                            $month = strtotime('2016-01-01');
+                            $monthNow = $bulannya;
+                            $monthStatus = true;
+                            while($i <= 12)
+                            {
+                                $month_name = date('F', $month);
+                                
+
+
+                                if($request->bulan == $month_name){
+                                    if($monthStatus){
+                                        $monthStatus = false;
+                                        echo '<option selected value="'. $month_name. '">'.$month_name.'</option>';    
+                                    }else{
+                                        echo '<option value="'. $month_name. '">'.$month_name.'</option>';
+                                    }
+                                    
+                                }else{
+                                    if($month_name == $monthNow){
+                                        if($monthStatus){
+                                            echo '<option selected value="'. $month_name. '">'.$month_name.'</option>';
+                                        }else{
+                                          echo '<option value="'. $month_name. '">'.$month_name.'</option>';
+                                        }
+                                    }else{
+                                      echo '<option value="'. $month_name. '">'.$month_name.'</option>';
+                                    }
+                                }
+                                
+                                $month = strtotime('+1 month', $month);
+                                $i++;
+                            }
+
+                            $yearNow = date("Y");
+                          ?>
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <select name="tahun" class="form-control border-input" required="" >
+                          @for($i = 2016; $i <= $yearNow; $i++)
+                            @if($i == $yearNow)
+                              <option selected="" value="{{$i}}">{{$i}}</option>
+                            @else
+                              <option value="{{$i}}">{{$i}}</option>
+                            @endif
+                          @endfor
+                        </select>
+                      </div>
+                    </div>  
+                </div>
+                <div class="form-group">
+                    <label>Unit Kerja</label>
+                    <select name="unit_kerja" class="form-control border-input" required="" >
+                        <option></option>
+                      @foreach(App\Unit::get() as $dataUnit)
+                        @if($request->unit_kerja == $dataUnit->id)
+                            <option selected value="{{$dataUnit->id}}">{{$dataUnit->nama_unit}}</option>
+                        @else
+                          <option value="{{$dataUnit->id}}">{{$dataUnit->nama_unit}}</option>
+                        @endif
+                      @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label></label>
+                    <button type="submit" class="btn btn-success btn-fill" style="float: right;">Filter Data</button>
+                </div>
+                <br>
+                @else
+
+                
                 <div class="form-group">
                     <div class="row">
                       <div class="col-md-6">
-                        <input type="text" readonly="" class="form-control border-input"  value="{{date("F")}}" name="bulan">
+                        <input type="text" readonly="" class="form-control border-input"  value="{{$bulannya}}" name="bulan">
                         
                       </div>
                       <div class="col-md-6">
-                        <input type="text" readonly="" class="form-control border-input"  value="{{date("Y")}}" name="tahun">
+                        <input type="text" readonly="" class="form-control border-input"  value="{{$tahunnya}}" name="tahun">
                         
                       </div>
                     </div>  
@@ -52,7 +151,6 @@ Rekap Data
                 <div class="form-group">
                     <label>Unit Kerja</label>
                     <?php
-                      $getUserData = Sentinel::getUser();
                       $checkUnitKerja = Unit::where('id','=',$getUserData->unit_id)->count();
                       if($checkUnitKerja > 0){
                         $getDataUnitKerja = Unit::where('id','=',$getUserData->unit_id)->first();
@@ -60,17 +158,21 @@ Rekap Data
                       }else{
                         $nama_unit_kerja = "Anda belum memiliki unit kerja";
                       }
+                         
+
+                      echo $unitnya;                   
                     ?>
                     <input type="hidden" value="{{$getUserData->unit_id}}" name="unit_id"/>
                     <input type="text" readonly="" class="form-control border-input"  value="{{$nama_unit_kerja}}" >
                 </div>
                 <br>
+                @endif
             </div>
             </form>
             <form action="simpan-rekap-data" method="post">
               {{csrf_field()}}
-              <input type="hidden" name="tahun" value="{{date("Y")}}"/>
-              <input type="hidden" name="bulan" value="{{date("F")}}"/>
+              <input type="hidden" name="tahun" value="{{$tahunnya}}"/>
+              <input type="hidden" name="bulan" value="{{$bulannya}}"/>
               <div class="content">
                   <table class ="table table-responsive table-full-width" id="users-table">
       			        <thead>
@@ -88,7 +190,7 @@ Rekap Data
       			        </thead>
                     <tbody>
                         <script type="text/javascript">var dataInput = "";</script>
-                        @foreach(App\User::where('nip','!=','admin')->where('unit_id','=',$getUserData->unit_id)->get() as $data)
+                        @forelse(App\User::where('nip','!=','admin')->where('unit_id','=',$unitnya)->get() as $data)
                         <input type="hidden" name="pegawai_id[]" value="{{$data->id}}">
                         <?php
                           $dataUnit = "";
@@ -113,11 +215,11 @@ Rekap Data
                           <td align="center" style="width: 15%">
                           <input type="hidden" name="dari" value="protakel">
                           <?php
-                            $checkRekapDataKinerjaBulanan = App\KinerjaBulanan::where('pegawai_id','=',$data->id)->where('bulan','=',date("F"))->where('tahun','=',date("Y"))->count();
+                            $checkRekapDataKinerjaBulanan = App\KinerjaBulanan::where('pegawai_id','=',$data->id)->where('bulan','=',$bulannya)->where('tahun','=',$tahunnya)->count();
                           ?>
                           @if($checkRekapDataKinerjaBulanan > 0)
                             <?php 
-                              $dataKinerjaBulanan = App\KinerjaBulanan::where('pegawai_id','=',$data->id)->where('bulan','=',date("F"))->where('tahun','=',date("Y"))->first();
+                              $dataKinerjaBulanan = App\KinerjaBulanan::where('pegawai_id','=',$data->id)->where('bulan','=',$bulannya)->where('tahun','=',$tahunnya)->first();
                             ?>
                             <div class="form-group border-input">
                               <div class="input-group">
@@ -145,11 +247,11 @@ Rekap Data
                           <input type="hidden" name="from" value="sdm">
                           <td align="center" onclick="showModal('{{$data->id}}','{{$data->name}}');" style="width: 15%">
                           <?php
-                            $checkRekapDataPotonganAbsensi = App\PotonganAbsensi::where('pegawai_id','=',$data->id)->where('bulan','=',date('F'))->where('tahun','=',date("Y"))->count();
+                            $checkRekapDataPotonganAbsensi = App\PotonganAbsensi::where('pegawai_id','=',$data->id)->where('bulan','=',$bulannya)->where('tahun','=',$tahunnya)->count();
                           ?>
                             @if($checkRekapDataPotonganAbsensi > 0)
                             <?php
-                                $dataRekapDataPotonganAbsensi = App\PotonganAbsensi::where('pegawai_id','=',$data->id)->where('bulan','=',date("F"))->where('tahun','=',date("Y"))->first();
+                                $dataRekapDataPotonganAbsensi = App\PotonganAbsensi::where('pegawai_id','=',$data->id)->where('bulan','=',$bulannya)->where('tahun','=',$tahunnya)->first();
                             ?>
                             <div class="form-group border-input" >
                               <div class="input-group">
@@ -203,14 +305,19 @@ Rekap Data
                           @endif
                         </tr>
                         <script>dataInput += '{{$data->id}}|'</script>
-                        @endforeach
+                        <div style="float: right;">
+                          @if((RoleLib::limitThis('2',Sentinel::getUser()->id) AND date('d') < 20) || (RoleLib::limitThis('3',Sentinel::getUser()->id) AND date('d') < 22))
+                          <button type="submit" class="btn btn-success btn-fill">Simpan Data</button>
+                          @endif
+                          <a href="{{url('export-data/'.$unitnya)}}" class="btn btn-success btn-fill">Export Data</a>
+                        </div>
+                        @empty
+                        <tr>
+                          <td colspan="5" align="center"><b>Tidak ada data pegawai di unit kerja ini.</b></td>
+                        </tr>
+                        @endforelse
                     </tbody>
-                    <div style="float: right;">
-                      @if((RoleLib::limitThis('2',Sentinel::getUser()->id) AND date('d') < 20) || (RoleLib::limitThis('3',Sentinel::getUser()->id) AND date('d') < 22))
-                      <button type="submit" class="btn btn-success btn-fill">Simpan Data</button>
-                      @endif
-                      <a href="{{url('export-data')}}" class="btn btn-success btn-fill">Export Data</a>
-                    </div>
+                    
   			          </table>
               </div>
 
@@ -432,11 +539,11 @@ Rekap Data
   function showModal(id,nama){
     $('#pegawai_id').val(id);
     $('#nama_pegawai').html(nama);
-    $('#bulans').val('{{date("F")}}');
-    $('#tahuns').val('{{date("Y")}}');
+    $('#bulans').val('{{$bulannya}}');
+    $('#tahuns').val('{{$tahunnya}}');
     $('#modalPotonganAbsensi').modal('show');
 
-    var dataPostPostAbsensi = "pegawai_id=" + id + "&bulan={{date("F")}}&tahun={{date("Y")}}&_token={{csrf_token()}}";
+    var dataPostPostAbsensi = "pegawai_id=" + id + "&bulan={{$bulannya}}&tahun={{$tahunnya}}&_token={{csrf_token()}}";
     $.ajax( {
       type: "POST",
       url: urlRoot + "/datapotonganabsensi",
