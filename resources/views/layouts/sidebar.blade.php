@@ -77,12 +77,14 @@
                     </a>
                 </li>
                 @endif
+                @if(RoleLib::limitThis('4',Sentinel::getUser()->id))
                 <li>
                     <a href="{{url('export')}}">
                         <i class="fa fa-cloud-download"></i>
                         <p>Export</p>
                     </a>
                 </li>
+                @endif
             </ul>
     	</div>
     </div>

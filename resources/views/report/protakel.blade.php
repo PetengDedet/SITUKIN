@@ -1,3 +1,6 @@
+<?php
+  $unit_id = $data['unit_id'];
+?>
 <style type="text/css">
 .teacherPage {
    /*page: teacher;*/

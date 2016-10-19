@@ -31,7 +31,7 @@
         <div style="text-align: center;">
           KEMENTERIAN KOORDINATOR BIDANG PEREKONOMIAN<br>
           DAFTAR PEMBAYARAN TUNJANGAN KINERJA<br>
-          BULAN : SEPTEMBER 2016
+          BULAN : {{$data['bulan'] . ' ' .$data['tahun']}}
         </div>
         <table width="100%">
           <tr>
@@ -82,8 +82,40 @@
         <td class="tg-hgcj">13</td>
       </tr>
       @endif
+      <?php
+        $jumlahA = 0;
+        $jumlahB = 0;
+        $jumlahC = 0;
+        $jumlahD = 0;
+        $jumlahE = 0;
+        $jumlahF = 0;
+        $jumlahG = 0;
+        $jumlahH = 0;
+        $jumlahI = 0;
+        $jumlahJ = 0;
+        $jumlahK = 0;
+        $jumlahL = 0;
+      ?>
       @for($j =  $i * 3; $j <($i * 3) + 3; $j++)
+      
       @if($data['pegawai'][$j])
+      <?php
+        $gjkotor = $data['pegawai'][$j]->gjpokok + $data['pegawai'][$j]->tjistri + $data['pegawai'][$j]->tjanak + $data['pegawai'][$j]->tjupns + $data['pegawai'][$j]->tjstruk + $data['pegawai'][$j]->tjfungs + $data['pegawai'][$j]->tjdaerah + $data['pegawai'][$j]->tjpencil + $data['pegawai'][$j]->tjlain + $data['pegawai'][$j]->tjkompen + $data['pegawai'][$j]->pembul + $data['pegawai'][$j]->tjberas + $data['pegawai'][$j]->tjpph;
+        $tunjanganKinerjaBersih = $data['tkjb'][$j] + 0 + 0;
+        $tunjanganKinerjaKotor = $data['pegawai'][$j]->tjpph + $tunjanganKinerjaBersih;
+        $jumlahA = $jumlahA + $data['pegawai'][$j]->gjpokok;
+        $jumlahB = $jumlahB + $data['pegawai'][$j]->tjstruk;
+        $jumlahC = $jumlahC + $gjkotor;
+        $jumlahD = $jumlahD + $data['tkjb'][$j];
+        $jumlahE = $jumlahE + 0;
+        $jumlahF = $jumlahF + 0;
+        $jumlahG = $jumlahG + $data['absensi'][$j]->total_potongan_absen;
+        $jumlahH = $jumlahH + $tunjanganKinerjaBersih;
+        $jumlahI = $jumlahI + $data['pegawai'][$j]->tjpph;
+        $jumlahJ = $jumlahJ + $tunjanganKinerjaKotor;
+        $jumlahK = $jumlahK + App\Library\HitungLib::PPHDuaSatu($data['tkjd'][$j],$data['pegawai'][$j]->id);
+        $jumlahL = $jumlahL + ($tunjanganKinerjaKotor - App\Library\HitungLib::PPHDuaSatu($data['tkjd'][$j],$data['pegawai'][$j]->id))
+      ?>
       <tr>
         <td class="tg-s6z2">{{$j + 1}}</td>
         <td class="tg-yw4l">{{$data['pegawai'][$j]->name}}<br>NIP. {{$data['pegawai'][$j]->nip}}</td>
@@ -92,10 +124,34 @@
         <td class="tg-baqh"></td>
         <td class="tg-baqh"></td>
         <td class="tg-baqh"></td>
-        <td class="tg-lqy6">{{number_format($data['pegawai'][$j]->gjpokok,0, ',', '.')}}<br>{{number_format($data['pegawai'][$j]->tjstruk,0, ',', '.')}}<br>0</td>
-        <td class="tg-lqy6">{{number_format($data['tkjb'][$j],0, ',', '.')}}<br>0<br>0<br>0<br>( {{$data['absensi'][$j]->total_potongan_absen}}% )</td>
-        <td class="tg-lqy6">{{number_format($data['tkjd'][$j],0, ',', '.')}}<br>0<br>0<br>0</td>
-        <td class="tg-lqy6">{{number_format($data['tkjd'][$j],0, ',', '.')}}</td>
+        <td class="tg-lqy6">
+          {{number_format($data['pegawai'][$j]->gjpokok,0, ',', '.')}}
+          <br>
+          {{number_format($data['pegawai'][$j]->tjstruk,0, ',', '.')}}
+          <br>
+          {{number_format($gjkotor,0, ',', '.')}}
+        </td>
+        <td class="tg-lqy6">
+          {{number_format($data['tkjb'][$j],0, ',', '.')}}
+          <br>
+          0
+          <br>
+          0
+          <br>
+          ( {{$data['absensi'][$j]->total_potongan_absen}}% )
+        </td>
+        <td class="tg-lqy6">
+          {{number_format($tunjanganKinerjaBersih,0, ',', '.')}}
+          <br>
+          {{number_format($data['pegawai'][$j]->tjpph,0, ',', '.')}}
+          <br>
+          {{number_format($tunjanganKinerjaKotor,0, ',', '.')}}
+          <br>
+          {{number_format(App\Library\HitungLib::PPHDuaSatu($data['tkjd'][$j],$data['pegawai'][$j]->id),0,',','.')}}
+          </td>
+        <td class="tg-lqy6">
+          {{number_format($tunjanganKinerjaKotor - App\Library\HitungLib::PPHDuaSatu($data['tkjd'][$j],$data['pegawai'][$j]->id),0, ',', '.')}}
+        </td>
         <td class="tg-yw4l">{{$data['pegawai'][$j]->rekening}}</td>
         <td class="tg-031e"></td>
       </tr>
@@ -103,11 +159,11 @@
       @endfor
       
         <tr>
-          <td class="tg-031e" colspan="7">JUMLAH LEMBAR KE :{{$i}}</td>
-          <td class="tg-0ord">6,456,600,<br>8,750,000<br>16,131,426</td>
-          <td class="tg-0ord">48,810,000<br>0<br>0<br>0</td>
-          <td class="tg-0ord">48,810,000<br>8,886,210<br>57,696,210<br>8,886,210</td>
-          <td class="tg-0ord">48,810,000</td>
+          <td class="tg-031e" colspan="7">JUMLAH LEMBAR KE :{{$i + 1}}</td>
+          <td class="tg-0ord">{{number_format($jumlahA,0, ',', '.')}}<br>{{number_format($jumlahB,0, ',', '.')}}<br>{{number_format($jumlahC,0, ',', '.')}}</td>
+          <td class="tg-0ord">{{number_format($jumlahD,0, ',', '.')}}<br>{{number_format($jumlahE,0, ',', '.')}}<br>{{number_format($jumlahF,0, ',', '.')}}<br>{{number_format($jumlahG,0, ',', '.')}}</td>
+          <td class="tg-0ord">{{number_format($jumlahH,0, ',', '.')}}<br>{{number_format($jumlahI,0, ',', '.')}}<br>{{number_format($jumlahJ,0, ',', '.')}}<br>{{number_format($jumlahK,0, ',', '.')}}</td>
+          <td class="tg-0ord">{{number_format($jumlahL,0, ',', '.')}}</td>
           <td class="tg-031e"></td>
           <td class="tg-031e"></td>
         </tr>

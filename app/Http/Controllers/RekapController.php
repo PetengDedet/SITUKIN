@@ -98,7 +98,7 @@ class RekapController extends Controller
     public function simpanrekapdata(Request $request){
         for($i = 0 ; $i < count($request->pegawai_id) ; $i++){
             
-            if($request->from == "protakel"){
+            if($request->dari == "protakel"){
                 $checkKinerja = KinerjaBulanan::where('pegawai_id','=',$request->pegawai_id[$i])->where('bulan','=',$request->bulan)->where('tahun','=',$request->tahun)->count();
                 if($checkKinerja > 0){
                     $dataKinerja = KinerjaBulanan::where('pegawai_id','=',$request->pegawai_id[$i])->where('bulan','=',$request->bulan)->where('tahun','=',$request->tahun)->first();
@@ -117,22 +117,23 @@ class RekapController extends Controller
                 }
             }
             
-
-            $checkDisiplin = PotonganDisiplin::where('pegawai_id','=',$request->pegawai_id[$i])->where('bulan','=',$request->bulan)->where('tahun','=',$request->tahun)->count();
-            if($checkDisiplin > 0){
-                $dataDisiplin = PotonganDisiplin::where('pegawai_id','=',$request->pegawai_id[$i])->where('bulan','=',$request->bulan)->where('tahun','=',$request->tahun)->first();
-                $dataDisiplin->pegawai_id = $request->pegawai_id[$i];
-                $dataDisiplin->bulan = $request->bulan;
-                $dataDisiplin->tahun = $request->tahun;
-                $dataDisiplin->persentase = $request->potongan_disiplin[$i];
-                $dataDisiplin->update();
-            }else{
-                $dataDisiplin = new PotonganDisiplin();
-                $dataDisiplin->pegawai_id = $request->pegawai_id[$i];
-                $dataDisiplin->bulan = $request->bulan;
-                $dataDisiplin->tahun = $request->tahun;
-                $dataDisiplin->persentase = $request->potongan_disiplin[$i];
-                $dataDisiplin->save();
+            if($request->from == "sdm"){
+                $checkDisiplin = PotonganDisiplin::where('pegawai_id','=',$request->pegawai_id[$i])->where('bulan','=',$request->bulan)->where('tahun','=',$request->tahun)->count();
+                if($checkDisiplin > 0){
+                    $dataDisiplin = PotonganDisiplin::where('pegawai_id','=',$request->pegawai_id[$i])->where('bulan','=',$request->bulan)->where('tahun','=',$request->tahun)->first();
+                    $dataDisiplin->pegawai_id = $request->pegawai_id[$i];
+                    $dataDisiplin->bulan = $request->bulan;
+                    $dataDisiplin->tahun = $request->tahun;
+                    $dataDisiplin->persentase = $request->potongan_disiplin[$i];
+                    $dataDisiplin->update();
+                }else{
+                    $dataDisiplin = new PotonganDisiplin();
+                    $dataDisiplin->pegawai_id = $request->pegawai_id[$i];
+                    $dataDisiplin->bulan = $request->bulan;
+                    $dataDisiplin->tahun = $request->tahun;
+                    $dataDisiplin->persentase = $request->potongan_disiplin[$i];
+                    $dataDisiplin->save();
+                }
             }
         }
 

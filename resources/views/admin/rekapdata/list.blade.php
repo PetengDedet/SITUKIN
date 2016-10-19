@@ -69,8 +69,8 @@ Rekap Data
             </form>
             <form action="simpan-rekap-data" method="post">
               {{csrf_field()}}
-              <input type="hidden" name="tahun" value="{{date("F")}}"/>
-              <input type="hidden" name="bulan" value="{{date("Y")}}"/>
+              <input type="hidden" name="tahun" value="{{date("Y")}}"/>
+              <input type="hidden" name="bulan" value="{{date("F")}}"/>
               <div class="content">
                   <table class ="table table-responsive table-full-width" id="users-table">
       			        <thead>
@@ -111,7 +111,7 @@ Rekap Data
                           
                           @if(RoleLib::limitThis('2',Sentinel::getUser()->id))
                           <td align="center" style="width: 15%">
-                          <input type="hidden" name="from" value="protakel">
+                          <input type="hidden" name="dari" value="protakel">
                           <?php
                             $checkRekapDataKinerjaBulanan = App\KinerjaBulanan::where('pegawai_id','=',$data->id)->where('bulan','=',date("F"))->where('tahun','=',date("Y"))->count();
                           ?>
@@ -433,7 +433,7 @@ Rekap Data
     $('#pegawai_id').val(id);
     $('#nama_pegawai').html(nama);
     $('#bulans').val('{{date("F")}}');
-    $('#tahuns').val('{{date("F")}}');
+    $('#tahuns').val('{{date("Y")}}');
     $('#modalPotonganAbsensi').modal('show');
 
     var dataPostPostAbsensi = "pegawai_id=" + id + "&bulan={{date("F")}}&tahun={{date("Y")}}&_token={{csrf_token()}}";
