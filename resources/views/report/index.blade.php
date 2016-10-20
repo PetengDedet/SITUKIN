@@ -48,9 +48,8 @@ Export Tukin
                         <option></option>
                         <option value="1">Realisasi Per Jabatan</option>
                         <option value="2">Realisasi</option>
-                        <option value="3">Rekap</option>
+                        <option value="3">Rekap & Total</option>
                         <option value="4">Tanda Terima</option>
-                        <option value="5">Realisasi Total</option>
                     </select>
                 </div>
                 <div class="form-group col-md-6">

@@ -288,7 +288,7 @@
 @if($stt)
 <table class="ndas">
     <tr>
-        <th class="ndas-031e"style="text-align: left">KEMENTERIAN KOORDINATOR BIDANG PEREKONOMIAN</th>
+        <th class="ndas-031e"style="text-align: center;">KEMENTERIAN KOORDINATOR BIDANG PEREKONOMIAN</th>
     </tr>
 </table>
 
@@ -297,14 +297,13 @@
         <th class="ndas-031e" colspan="2" style="text-align: center;">DAFTAR PEMBAYARAN TUNJANGAN KINERJA</th>
     </tr>
     <tr>
-        <th class="ndas-031e" style="text-align: right;width: 50%;">BULAN:</th>
-        <th class="ndas-031e" style="text-align: left;width: 50%;">{{strtoupper($data['bulan']." ".$data['tahun'])}}</th>
+        <th class="ndas-031e" colspan="2" style="text-align: right;width: 50%;">BULAN: {{strtoupper($data['bulan']." ".$data['tahun'])}}</th>
     </tr>
 </table>
 
 <table class="ndas">
     <tr>
-        <th class="ndas-031e"style="text-align: left">UNIT ORGANISASI: </th>
+        <th class="ndas-031e"style="text-align: left">UNIT ORGANISASI: KEMENTERIAN KOODINATOR BIDANG PEREKONOMIAN</th>
         <th class="ndas-031e"style="text-align: right">TGL PROSES: {{strtoupper(date('d F Y'))}}</th>
     </tr>
 </table>
