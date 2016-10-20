@@ -19,8 +19,12 @@
   <?php 
     $status = true;
     $max = count($data['grade']);
+    $rekap = [];
   ?>
   @for($i = 0; $i<= round($max / 3); $i++)
+    <?php 
+      $rekap['lembar'][$i] = $i;
+    ?>
     <table class="tg">
       @if($status)
       <?php
@@ -173,7 +177,20 @@
       </tr>
       @endif
       @endfor
-      
+        <?php 
+          $rekap['jumlahA'][$i] = number_format($jumlahA,0, ',', '.');
+          $rekap['jumlahB'][$i] = number_format($jumlahB,0, ',', '.');
+          $rekap['jumlahC'][$i] = number_format($jumlahC,0, ',', '.');
+          $rekap['jumlahD'][$i] = number_format($jumlahD,0, ',', '.');
+          $rekap['jumlahE'][$i] = number_format($jumlahE,0, ',', '.');
+          $rekap['jumlahF'][$i] = number_format($jumlahF,0, ',', '.');
+          $rekap['jumlahG'][$i] = number_format($jumlahG,0, ',', '.');
+          $rekap['jumlahH'][$i] = number_format($jumlahH,0, ',', '.');
+          $rekap['jumlahI'][$i] = number_format($jumlahI,0, ',', '.');
+          $rekap['jumlahJ'][$i] = number_format($jumlahJ,0, ',', '.');
+          $rekap['jumlahK'][$i] = number_format($jumlahK,0, ',', '.');
+          $rekap['jumlahL'][$i] = number_format($jumlahL,0, ',', '.');
+        ?>
         <tr>
           <td class="tg-031e" colspan="7">JUMLAH LEMBAR KE :{{$i + 1}}</td>
           <td class="tg-0ord">{{number_format($jumlahA,0, ',', '.')}}<br>{{number_format($jumlahB,0, ',', '.')}}<br>{{number_format($jumlahC,0, ',', '.')}}</td>
@@ -184,7 +201,7 @@
           <td class="tg-031e"></td>
         </tr>
   </table>
-  @if($i == round($max /3))
+  @if($i == round($max /3) || $i == $max)
   <style type="text/css">
   .sikil  {border:none;border-collapse:collapse;border-spacing:0; width: 100%; margin-top: 20px;}
   .sikil td{border:none;font-family:Arial, sans-serif;font-size:10px;padding:5px;overflow:hidden;word-break:normal;}
@@ -196,7 +213,7 @@
       <td class="sikil-031e" style="padding: 0px;">STATUS KAWIN/PERKAWINAN</td>
       <td class="sikil-031e" style="padding: 0px;"></td>
       <td class="sikil-031e" style="padding: 0px;"></td>
-      <td class="sikil-031e" style="padding: 0px;">JAKARTA, {{date('d')}} {{ucfirst(date('F'))}} {{date('Y')}}</td>
+      <td class="sikil-031e" style="padding: 0px;">JAKARTA, {{strtoupper(date('d F Y'))}}</td>
     </tr>
     <tr>
       <td class="sikil-031e" rowspan="5" style="vertical-align: top;">TK = TIDAK KAWIN<br>K1 = KAWIN<br>D =DUDA<br>J = JANDA</td>
@@ -224,3 +241,243 @@
   <div class="teacherPage"></div>
   <?php $status = true; ?>
   @endfor
+
+<style type="text/css">
+.teacherPage {
+   /*page: teacher;*/
+   page-break-after: always;
+}
+.ndas  {border-collapse:collapse;border-spacing:0;width: 100%}
+.ndas td{
+  font-family:Arial, sans-serif;
+  font-size:12px;
+  padding:2px;
+/*  border-style:solid;
+  border-width:1px;*/
+  overflow:hidden;
+  word-break:normal;
+}
+.ndas th{
+  font-family:Arial, sans-serif;
+  font-size:12px;
+  font-weight:normal;
+  padding:2px;
+/*  border-style:solid;
+  border-width:1px;*/
+  overflow:hidden;
+  word-break:normal;
+  text-align: left;
+}
+</style>
+<?php
+  $stt = true;
+  $ttlJmlA = 0;
+  $ttlJmlB = 0;
+  $ttlJmlC = 0;
+  $ttlJmlD = 0;
+  $ttlJmlE = 0;
+  $ttlJmlF = 0;
+  $ttlJmlG = 0;
+  $ttlJmlH = 0;
+  $ttlJmlI = 0;
+  $ttlJmlJ = 0;
+  $ttlJmlK = 0;
+  $ttlJmlL = 0; 
+?>
+@for($k = 0 ; $k < round(count($rekap['jumlahA']) / 3) ; $k++) 
+@if($stt)
+<table class="ndas">
+    <tr>
+        <th class="ndas-031e"style="text-align: left">KEMENTERIAN KOORDINATOR BIDANG PEREKONOMIAN</th>
+    </tr>
+</table>
+
+<table class="ndas" style="width: 100%;">
+    <tr>
+        <th class="ndas-031e" colspan="2" style="text-align: center;">DAFTAR PEMBAYARAN TUNJANGAN KINERJA</th>
+    </tr>
+    <tr>
+        <th class="ndas-031e" style="text-align: right;width: 50%;">BULAN:</th>
+        <th class="ndas-031e" style="text-align: left;width: 50%;">{{strtoupper($data['bulan']." ".$data['tahun'])}}</th>
+    </tr>
+</table>
+
+<table class="ndas">
+    <tr>
+        <th class="ndas-031e"style="text-align: left">UNIT ORGANISASI: </th>
+        <th class="ndas-031e"style="text-align: right">TGL PROSES: {{strtoupper(date('d F Y'))}}</th>
+    </tr>
+</table>
+
+<style type="text/css">
+.tg  {
+    border-collapse:collapse;
+    border-spacing:0;
+    width: 100%;
+}
+.tg td{
+    font-family:Arial, sans-serif;
+    font-size:10px;
+    padding:5px;
+    border-style:solid;
+    border-width:1px;
+    overflow:hidden;
+    word-break:normal;
+}
+.tg th{
+    font-family:Arial, sans-serif;
+    font-size:10px;
+    font-weight:normal;
+    padding:5px;
+    border-style:solid;
+    border-width:1px;
+    overflow:hidden;
+    word-break:normal;
+}
+.tg .tg-baqh{
+    text-align:center;
+    vertical-align:top
+}
+.tg .tg-yw4l{
+    vertical-align:top
+}
+.toptobottom{
+  width: 0;
+  word-wrap: break-word;
+}
+</style>
+<table class="tg">
+  <tr>  
+        <th class="tg-hgcj" rowspan="2">N<br>O<br>.<br>U<br>R<br>U<br>T</th>
+        <th class="tg-hgcj">NAMA</th>
+        <th class="tg-hgcj" rowspan="2" >E<br>S<br>E<br>L<br>O<br>N</th>
+        <th class="tg-hgcj" rowspan="2"><br>G<br>O<br>L<br>O<br>N<br>G<br>A<br>N</th>
+        <th class="tg-hgcj" colspan="2">SUSUNAN<br>KELUARGA</th>
+        <th class="tg-hgcj" rowspan="2" style="max-width: 10px;">K<br>E<br>L<br>A<br>S<br><br>J<br>A<br>B<br>A<br>T<br>A<br>N</th>
+        <th class="tg-hgcj" style="text-align: left;width: 110px;" rowspan="2">
+          A. GAJI POKOK<br><br>
+          B. TUNJANGAN<br>
+          STRUKTURAL/<br>FUNGSIONAL/<br>UMUM<br><br>
+          C. GAJI KOTOR<br>
+        </th>
+        <th class="tg-hgcj" style="text-align: left;width: 110px;" rowspan="2">D. TUNJANGAN<br>KINERJA<br><br>E. TUNJANGAN<br>PENYESUAIAN<br>PENGHASILAN<br><br>F. TUNJANGAN<br>KHUSUS<br><br>G. POT ABSEN<br>(%)</th>
+        <th class="tg-hgcj" style="text-align: left;width: 110px;" rowspan="2">H. TUNJANGAN<br>KINERJA BERSIH<br>(D+E+F-G)<br><br>I. TUNJANGAN PPH 21<br><br>J. TUNJANGAN KINERJA KOTOR (H+1)<br><br>K. POT PPH 21</th>
+        <th class="tg-hgcj" style="text-align: left;width: 110px;" rowspan="2">TUNJANGAN KINERJA YANG DIBAYARKAN (J-K)</th>
+        <th class="tg-hgcj" rowspan="2">REKENING</th>
+        <th class="tg-hgcj" rowspan="2">KETERANGAN</th>
+      </tr>
+      <tr>
+        <td class="tg-hgcj" style="border-right: 3px; solid #000;">NIP</td>
+        <th class="tg-hgcj">STATUS KAWIN</th>
+        <th class="tg-hgcj">JUMLAH ANAK</th>
+      </tr>
+  <tr>
+    <td class="tg-baqh">1</td>
+    <td class="tg-baqh">2</td>
+    <td class="tg-baqh">3</td>
+    <td class="tg-baqh">4</td>
+    <td class="tg-baqh">5</td>
+    <td class="tg-baqh">6</td>
+    <td class="tg-baqh">7</td>
+    <td class="tg-baqh">8</td>
+    <td class="tg-baqh">9</td>
+    <td class="tg-baqh">10</td>
+    <td class="tg-baqh">11</td>
+    <td class="tg-baqh">12</td>
+    <td class="tg-baqh">13</td>
+  </tr>
+  <?php
+    $stt = false;
+  ?>
+  @endif
+  @for($l =  $k * 3; $l <($k * 3) + 3; $l++)
+  <?php
+    $ttlJmlA = $ttlJmlA + str_replace(".", "", $rekap['jumlahA'][$l]);
+    $ttlJmlB = $ttlJmlB + str_replace(".", "", $rekap['jumlahB'][$l]);
+    $ttlJmlC = $ttlJmlC + str_replace(".", "", $rekap['jumlahC'][$l]);
+    $ttlJmlD = $ttlJmlD + str_replace(".", "", $rekap['jumlahD'][$l]);
+    $ttlJmlE = $ttlJmlE + str_replace(".", "", $rekap['jumlahE'][$l]);
+    $ttlJmlF = $ttlJmlF + str_replace(".", "", $rekap['jumlahF'][$l]);
+    $ttlJmlG = $ttlJmlG + str_replace(".", "", $rekap['jumlahG'][$l]);
+    $ttlJmlH = $ttlJmlH + str_replace(".", "", $rekap['jumlahH'][$l]);
+    $ttlJmlI = $ttlJmlI + str_replace(".", "", $rekap['jumlahI'][$l]);
+    $ttlJmlJ = $ttlJmlJ + str_replace(".", "", $rekap['jumlahJ'][$l]);
+    $ttlJmlK = $ttlJmlK + str_replace(".", "", $rekap['jumlahK'][$l]);
+    $ttlJmlL = $ttlJmlL + str_replace(".", "", $rekap['jumlahL'][$l]);
+  ?>
+  <tr>
+    <td class="tg-yw4l">{{$l + 1}}</td>
+    <td class="tg-yw4l" colspan="6">LEMBAR KE : {{$l + 1}}</td>
+    <td class="tg-yw4l">{{$rekap['jumlahA'][$l]}}<br>{{$rekap['jumlahB'][$l]}}<br>{{$rekap['jumlahC'][$l]}}</td>
+    <td class="tg-yw4l">{{$rekap['jumlahD'][$l]}}<br>{{$rekap['jumlahE'][$l]}}<br>{{$rekap['jumlahF'][$l]}}<br>{{$rekap['jumlahG'][$l]}}</td>
+    <td class="tg-yw4l">{{$rekap['jumlahH'][$l]}}<br>{{$rekap['jumlahI'][$l]}}<br>{{$rekap['jumlahJ'][$l]}}<br>{{$rekap['jumlahK'][$l]}}</td>
+    <td class="tg-yw4l">{{$rekap['jumlahL'][$l]}}</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  @endfor
+  <tr>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l" colspan="6">JUMLAH</td>
+    <td class="tg-yw4l">{{number_format($ttlJmlA,0,',','.')}}<br>{{number_format($ttlJmlB,0,',','.')}}<br>{{number_format($ttlJmlC,0,',','.')}}</td>
+    <td class="tg-yw4l">{{number_format($ttlJmlD,0,',','.')}}<br>{{number_format($ttlJmlE,0,',','.')}}<br>{{number_format($ttlJmlF,0,',','.')}}<br>{{number_format($ttlJmlG,0,',','.')}}</td>
+    <td class="tg-yw4l">{{number_format($ttlJmlH,0,',','.')}}<br>{{number_format($ttlJmlI,0,',','.')}}<br>{{number_format($ttlJmlJ,0,',','.')}}<br>{{number_format($ttlJmlK,0,',','.')}}</td>
+    <td class="tg-yw4l">{{number_format($ttlJmlL,0,',','.')}}</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+{{--   <tr>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr> --}}
+</table>
+@if($k == round(count($rekap['jumlahA'])/3) -1 || $k == count($rekap['jumlahA']))
+<style type="text/css">
+.sikil  {border-collapse:collapse;border-spacing:0; width: 100%; margin-top: 20px;}
+.sikil td{font-family:Arial, sans-serif;font-size:10px;padding:5px;overflow:hidden;word-break:normal;}
+/*.sikil th{font-family:Arial, sans-serif;font-size:10px;padding:5px;overflow:hidden;word-break:normal;}*/
+.sikil .sikil-yw4l{vertical-align:top}
+</style>
+<table class="sikil">
+  <tr>
+    <td class="sikil-031e" style="padding: 0px;">STATUS KAWIN/PERKAWINAN</td>
+    <td class="sikil-031e" style="padding: 0px;"></td>
+    <td class="sikil-031e" style="padding: 0px;"></td>
+    <td class="sikil-031e" style="padding: 0px;">JAKARTA, {{strtoupper(date('d F Y'))}}</td>
+  </tr>
+  <tr>
+    <td class="sikil-031e" rowspan="5" style="vertical-align: top;">TK = TIDAK KAWIN<br>K1 = KAWIN<br>D =DUDA<br>J = JANDA</td>
+    <td class="sikil-031e" style="padding: 0px;">MENGETAHUI/MENYETUJUI :</td>
+    <td class="sikil-031e"></td>
+    <td class="sikil-031e"></td>
+  </tr>
+  <tr>
+    <td class="sikil-031e" style="padding: 0px;">PEJABAT PEMBUAT KOMITMEN</td>
+    <td class="sikil-031e" style="padding: 0px;">BENDAHARA</td>
+    <td class="sikil-031e" style="padding: 0px;">PPABP BELANJA PEGAWAI</td>
+  </tr>
+  <tr>
+    <td class="sikil-031e" style="padding: 50px 0px 0px;">Agam Embun Sunarpati</td>
+    <td class="sikil-031e" style="padding: 50px 0px 0px;">FARHANI LAINUFAR</td>
+    <td class="sikil-031e" style="padding: 50px 0px 0px;">DODI WAHYUGI, ST, MMSI</td>
+  </tr>
+  <tr>
+    <td class="sikil-yw4l" style="padding: 0px;">NIP .196309141983101001</td>
+    <td class="sikil-yw4l" style="padding: 0px;">NIP .199109282014022002</td>
+    <td class="sikil-yw4l" style="padding: 0px;">NIP .198106222003121003</td>
+  </tr>
+</table>
+<div class="teacherPage"></div>
+@endif
+@endfor

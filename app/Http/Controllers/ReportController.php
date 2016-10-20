@@ -299,6 +299,141 @@ class ReportController extends Controller
                     /*return view('report.2back',compact('data',$data));*/
                     $pdf = PDF::loadView('report.invoice',compact('data',$data));
                     return $pdf->setPaper(array(0,0,612.00,936.00), 'potrait')->stream('report.pdf');
+                }else if($request->type == "1"){
+                    $data = [];
+                    $data['unit_id'] = $request->unit_id;
+                    $data['grade_semua'] = Grade::orderBy('grade','ASC')->get();
+                    $data['bulan'] = $request->bulan;
+                    $data['tahun'] = $request->tahun;
+                    $users = User::where('unit_id',$request->unit_id)->where('nip','!=','admin')->where('nip','!=','123')->get();
+
+                    foreach ($users as $k => $v) {
+                        $data['pegawai'][] = $v;
+                        $data['dataKinerja'][] = KinerjaBulanan::where('pegawai_id', $v->id)
+                                                    ->where('bulan', $request->bulan)
+                                                    ->where('tahun', $request->tahun)->first();
+                        // 
+                        $data['unit'][] = Unit::where('id', $v->unit_id)->first();
+                        //Ambil Jabatan, kelas jabatan, dan besarnya tunjangan
+                        $data['jabatan'][] = Jabatan::where('id', $v->jabatan_id)->first();
+                        $data['grade'][] = Grade::where('id', $data['jabatan'][$k]->kelas_jabatan)->first();
+
+                        //Potongan Absesi
+                        $data['absensi'][] = PotonganAbsensi::where('pegawai_id', $v->id)
+                                                    ->where('bulan', $request->bulan)
+                                                    ->where('tahun', $request->tahun)->first();
+                        //Potongan Disiplin
+                        $data['disiplin'][] = PotonganDisiplin::where('pegawai_id', $v->id)
+                                                    ->where('bulan', $request->bulan)
+                                                    ->where('tahun', $request->tahun)->first();
+
+                        //echo $v->name . ':<br> Besar Tunjanagn = ' . $grade->tunjangan_kinerja . '<br>';
+                        //echo "Tunjangan Kinerja Bulanan = " . ($grade->tunjangan_kinerja * $dataKinerja->persentase)/100 . "<br>";
+                        $data['tkjb'][] = ($data['grade'][$k]->tunjangan_kinerja * $data['dataKinerja'][$k]->persentase)/100;
+
+                        //Tunjangan Kinerja Yang diterima
+                        // echo "Potongan Absensi : ". (($tkjb * $absensi->total_potongan_absen)/100). '<br>';
+                        // echo "Potongan Disiplin : ". (($tkjb * $disiplin->persentase)/100). '<br>';
+                        $data['tkjbpa'][] = ($data['tkjb'][$k] * $data['absensi'][$k]->total_potongan_absen)/100;
+                        $data['tkjbhd'][] = ($data['tkjb'][$k] * $data['disiplin'][$k]->persentase)/100;
+                        $data['tkjd'][] = $data['tkjb'][$k] - ($data['tkjbpa'][$k] + $data['tkjbhd'][$k]);
+                        
+
+                    }
+
+                    /*return view('report.2back',compact('data',$data));*/
+                    $pdf = PDF::loadView('report.perGolonganJabatan',compact('data',$data));
+                    return $pdf->setPaper(array(0,0,612.00,936.00), 'potrait')->stream('report.pdf');
+                }else if($request->type == "2"){
+                    $data = [];
+                    $data['unit_id'] = $request->unit_id;
+                    $data['grade_semua'] = Grade::orderBy('grade','ASC')->get();
+                    $data['bulan'] = $request->bulan;
+                    $data['tahun'] = $request->tahun;
+                    $users = User::where('unit_id',$request->unit_id)->where('nip','!=','admin')->where('nip','!=','123')->get();
+
+                    foreach ($users as $k => $v) {
+                        $data['pegawai'][] = $v;
+                        $data['dataKinerja'][] = KinerjaBulanan::where('pegawai_id', $v->id)
+                                                    ->where('bulan', $request->bulan)
+                                                    ->where('tahun', $request->tahun)->first();
+                        // 
+                        $data['unit'][] = Unit::where('id', $v->unit_id)->first();
+                        //Ambil Jabatan, kelas jabatan, dan besarnya tunjangan
+                        $data['jabatan'][] = Jabatan::where('id', $v->jabatan_id)->first();
+                        $data['grade'][] = Grade::where('id', $data['jabatan'][$k]->kelas_jabatan)->first();
+
+                        //Potongan Absesi
+                        $data['absensi'][] = PotonganAbsensi::where('pegawai_id', $v->id)
+                                                    ->where('bulan', $request->bulan)
+                                                    ->where('tahun', $request->tahun)->first();
+                        //Potongan Disiplin
+                        $data['disiplin'][] = PotonganDisiplin::where('pegawai_id', $v->id)
+                                                    ->where('bulan', $request->bulan)
+                                                    ->where('tahun', $request->tahun)->first();
+
+                        //echo $v->name . ':<br> Besar Tunjanagn = ' . $grade->tunjangan_kinerja . '<br>';
+                        //echo "Tunjangan Kinerja Bulanan = " . ($grade->tunjangan_kinerja * $dataKinerja->persentase)/100 . "<br>";
+                        $data['tkjb'][] = ($data['grade'][$k]->tunjangan_kinerja * $data['dataKinerja'][$k]->persentase)/100;
+
+                        //Tunjangan Kinerja Yang diterima
+                        // echo "Potongan Absensi : ". (($tkjb * $absensi->total_potongan_absen)/100). '<br>';
+                        // echo "Potongan Disiplin : ". (($tkjb * $disiplin->persentase)/100). '<br>';
+                        $data['tkjbpa'][] = ($data['tkjb'][$k] * $data['absensi'][$k]->total_potongan_absen)/100;
+                        $data['tkjbhd'][] = ($data['tkjb'][$k] * $data['disiplin'][$k]->persentase)/100;
+                        $data['tkjd'][] = $data['tkjb'][$k] - ($data['tkjbpa'][$k] + $data['tkjbhd'][$k]);
+                        
+
+                    }
+
+                    /*return view('report.2back',compact('data',$data));*/
+                $pdf = PDF::loadView('report.realisasi',compact('data',$data));
+                    return $pdf->setPaper(array(0,0,612.00,936.00), 'potrait')->stream('report.pdf');
+                }else if($request->type == "5"){
+                    $data = [];
+                    $data['unit_id'] = $request->unit_id;
+                    $data['grade_semua'] = Grade::orderBy('grade','ASC')->get();
+                    $data['bulan'] = $request->bulan;
+                    $data['tahun'] = $request->tahun;
+                    $users = User::where('unit_id',$request->unit_id)->where('nip','!=','admin')->where('nip','!=','123')->get();
+
+                    foreach ($users as $k => $v) {
+                        $data['pegawai'][] = $v;
+                        $data['dataKinerja'][] = KinerjaBulanan::where('pegawai_id', $v->id)
+                                                    ->where('bulan', $request->bulan)
+                                                    ->where('tahun', $request->tahun)->first();
+                        // 
+                        $data['unit'][] = Unit::where('id', $v->unit_id)->first();
+                        //Ambil Jabatan, kelas jabatan, dan besarnya tunjangan
+                        $data['jabatan'][] = Jabatan::where('id', $v->jabatan_id)->first();
+                        $data['grade'][] = Grade::where('id', $data['jabatan'][$k]->kelas_jabatan)->first();
+
+                        //Potongan Absesi
+                        $data['absensi'][] = PotonganAbsensi::where('pegawai_id', $v->id)
+                                                    ->where('bulan', $request->bulan)
+                                                    ->where('tahun', $request->tahun)->first();
+                        //Potongan Disiplin
+                        $data['disiplin'][] = PotonganDisiplin::where('pegawai_id', $v->id)
+                                                    ->where('bulan', $request->bulan)
+                                                    ->where('tahun', $request->tahun)->first();
+
+                        //echo $v->name . ':<br> Besar Tunjanagn = ' . $grade->tunjangan_kinerja . '<br>';
+                        //echo "Tunjangan Kinerja Bulanan = " . ($grade->tunjangan_kinerja * $dataKinerja->persentase)/100 . "<br>";
+                        $data['tkjb'][] = ($data['grade'][$k]->tunjangan_kinerja * $data['dataKinerja'][$k]->persentase)/100;
+
+                        //Tunjangan Kinerja Yang diterima
+                        // echo "Potongan Absensi : ". (($tkjb * $absensi->total_potongan_absen)/100). '<br>';
+                        // echo "Potongan Disiplin : ". (($tkjb * $disiplin->persentase)/100). '<br>';
+                        $data['tkjbpa'][] = ($data['tkjb'][$k] * $data['absensi'][$k]->total_potongan_absen)/100;
+                        $data['tkjbhd'][] = ($data['tkjb'][$k] * $data['disiplin'][$k]->persentase)/100;
+                        $data['tkjd'][] = $data['tkjb'][$k] - ($data['tkjbpa'][$k] + $data['tkjbhd'][$k]);
+                        
+
+                    }
+
+                    /*return view('report.2back',compact('data',$data));*/
+                $pdf = PDF::loadView('report.rekap',compact('data',$data));
+                    return $pdf->setPaper(array(0,0,612.00,936.00), 'landscape')->stream('report.pdf');
                 }
             }else{
                 //return Redirect::to('export')->with('error', 'Data Tukin belum tersedia untuk bulan ' . $request->bulan . ' tahun '. $request->tahun .'.');

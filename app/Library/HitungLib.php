@@ -2,6 +2,11 @@
 namespace App\Library;
 
 use App\User;
+use App\Jabatan;
+use App\Grade;
+use App\KinerjaBulanan;
+use App\PotonganAbsensi;
+use App\PotonganDisiplin;
 
 Class HitungLib 
 {
@@ -96,5 +101,29 @@ Class HitungLib
 		$x = $nominal;
 		$x = 1000 * floor($x/1000);
 		return $x;
+	}
+
+	public static function HitungKinerjaBulanan($user_id, $bulan, $tahun){
+		$dataUser = User::where('id',$user_id)->first();
+		$dataKinerja = KinerjaBulanan::where('pegawai_id', $user_id)
+	                                    ->where('bulan', $bulan)
+	                                    ->where('tahun', $tahun)->first();
+        $dataJabatan = Jabatan::where('id', $dataUser->jabatan_id)->first();
+        $dataGrade = Grade::where('id', $dataJabatan->kelas_jabatan)->first();
+
+        $dataPotonganAbsensi = PotonganAbsensi::where('pegawai_id', $user_id)
+                                            ->where('bulan', $bulan)
+                                            ->where('tahun', $tahun)->first();
+
+		$dataPotonganDisiplin = PotonganDisiplin::where('pegawai_id', $user_id)
+                            ->where('bulan', $bulan)
+                            ->where('tahun', $tahun)->first();
+
+		$tkjb = ($dataGrade->tunjangan_kinerja * $dataKinerja->persentase)/100;
+		$tkjbpa = ($tkjb * $dataPotonganAbsensi->total_potongan_absen)/100;
+		$tkjbhd = ($tkjb * $dataPotonganDisiplin->persentase)/100;
+		$tkjd = $tkjb - ($tkjbpa + $tkjbhd);
+
+		return $tkjd;
 	}
 }

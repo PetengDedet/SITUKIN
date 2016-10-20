@@ -21,23 +21,33 @@
   text-align: left;
 }
 </style>
+<?php
+  $stt = true;
+  $totalJmlTnjangan = 0;
+  $totalJmlPajak = 0;
+  $totalJml = 0;
+  $jmlPegawai = 0;
+
+  $status = true;
+?>
+@for($i = 0; $i < count($data['grade_semua']); $i++)
+@if($status)
 <table class="ndas">
   <tr>
-    <th class="ndas-031e"style="text-align: left">KEMENTERIAN KOORDINATOR BIDANG PEREKONOMIAN</th>
-    <th class="ndas-031e"style="text-align: right">FORMULIR III</th>
+    <th class="ndas-031e" style="text-align: center; font-weight: bold;">KEMENTERIAN KOORDINATOR BIDANG PEREKONOMIAN</th>
   </tr>
 </table>
 
 <table class="ndas" style="width: 100%;">
   <tr>
-    <th class="ndas-031e" colspan="2" style="text-align: center;">LAPORAN REALISASI PEMBAYARAN TUNJANGAN KINERJA</th>
+    <th class="ndas-031e" colspan="2" style="text-align: center; font-weight: bold;">LAPORAN REALISASI PEMBAYARAN TUNJANGAN KINERJA</th>
   </tr>
   <tr>
-    <th class="ndas-031e" style="text-align: right;width: 50%;">BULAN:</th>
-    <th class="ndas-031e" style="text-align: left;width: 50%;">SEPTEMBER 2016</th>
+    <th class="ndas-031e" style="text-align: right;width: 50%; font-weight: bold;">BULAN:</th>
+    <th class="ndas-031e" style="text-align: left;width: 50%; font-weight: bold;">{{strtoupper($data['bulan'])}} {{$data['tahun']}}</th>
   </tr>
 </table>
-
+<br>
 <table class="ndas">
   <tr>
     <th class="ndas-031e" style="width: 115px;">UNIT ORGANISASI :</th>
@@ -53,6 +63,7 @@
 </style>
 
 <table class="tg">
+
   <tr>
     <th class="tg-031e" rowspan="2">NO</th>
     <th class="tg-031e" rowspan="2">PERINGKAT JABATAN</th>
@@ -74,26 +85,47 @@
     <th class="tg-yw4l">6</th>
     <th class="tg-yw4l">7</th>
   </tr>
+  <?php
+    $status = false;
+  ?>
+  @endif
 
-  @for($i = 1; $i<=17;$i++)
+  <?php
+    $tempJabatan = 0;
+    $tempJmlTunjangan = 0;
+    $tempJmlPPH = 0;
+    $user = App\User::where('unit_id', $data['unit_id'])->get();
+
+    foreach ($user as $dataUser) {
+      $dataJabatan = App\Jabatan::where('id',$dataUser->jabatan_id)->first();
+      if($dataJabatan->kelas_jabatan == $data['grade_semua'][$i]->grade){
+        $jmlPegawai++;
+        $tempJabatan++;
+        $tempJmlTunjangan = $tempJmlTunjangan + App\Library\HitungLib::HitungKinerjaBulanan($dataUser->id,$data['bulan'], $data['tahun']);
+        $totalJmlTnjangan = $totalJmlTnjangan + App\Library\HitungLib::HitungKinerjaBulanan($dataUser->id,$data['bulan'], $data['tahun']);
+        $tempJmlPPH = $tempJmlPPH + App\Library\HitungLib::PPHDuaSatu(App\Library\HitungLib::HitungKinerjaBulanan($dataUser->id,$data['bulan'], $data['tahun']), $dataUser->id,$data['bulan']);
+        $totalJmlPajak = $totalJmlPajak + App\Library\HitungLib::PPHDuaSatu(App\Library\HitungLib::HitungKinerjaBulanan($dataUser->id,$data['bulan'], $data['tahun']), $dataUser->id,$data['bulan']);
+      }
+    }
+  ?>  
     <tr>
-      <td class="tg-031e">{{$i}}</td>
-      <td class="tg-031e"></td>
-      <td class="tg-031e"></td>
-      <td class="tg-yw4l"></td>
-      <td class="tg-yw4l"></td>
-      <td class="tg-yw4l"></td>
-      <td class="tg-yw4l"></td>
+      <td class="tg-031e" align="center">{{$i + 1}}</td>
+      <td class="tg-031e" align="center">{{$data['grade_semua'][$i]->grade}}</td>
+      <td class="tg-031e" align="center">@if($tempJabatan == 0) - @else {{$tempJabatan}} @endif</td>
+      <td class="tg-yw4l" align="center">{{number_format($tempJmlTunjangan,0,',','.')}}</td>
+      <td class="tg-yw4l" align="center">{{number_format($tempJmlPPH,0,',','.')}}</td>
+      <td class="tg-yw4l" align="center">{{number_format($tempJmlTunjangan + $tempJmlPPH,0,',','.')}}</td>
+      <td class="tg-yw4l" align="center"></td>
     </tr>
-  @endfor
-
+  
+  @if($i == 50 || $i == count($data['grade_semua']) - 1)
   <tr>
     <td class="tg-yw4l"></td>
     <td class="tg-yw4l">JUMLAH</td>
-    <td class="tg-yw4l"></td>
-    <td class="tg-yw4l"></td>
-    <td class="tg-yw4l"></td>
-    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l" align="center">{{$jmlPegawai}}</td>
+    <td class="tg-yw4l" align="center">{{number_format($totalJmlTnjangan,0,',','.')}}</td>
+    <td class="tg-yw4l" align="center">{{number_format($totalJmlPajak,0,',','.')}}</td>
+    <td class="tg-yw4l" align="center">{{number_format($totalJmlTnjangan + $totalJmlPajak,0,',','.')}}</td>
     <td class="tg-yw4l"></td>
   </tr>
 </table>
@@ -146,3 +178,5 @@
     <td class="sikil-yw4l">NIP. {{--$nip--}}</td>
   </tr>
 </table>
+@endif
+@endfor
