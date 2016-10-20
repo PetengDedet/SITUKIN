@@ -1,6 +1,6 @@
 /*      light colors - used for select dropdown         */
 .ct-blue {
-  stroke: #7A9E9F !important;
+  stroke: #3498DB !important;
 }
 
 .ct-azure {
@@ -123,7 +123,7 @@ strong {
 }
 
 .icon-primary {
-  color: #7A9E9F;
+  color: #3498DB;
 }
 
 .icon-info {
@@ -143,7 +143,7 @@ strong {
 }
 
 .chart-legend .text-primary, .chart-legend .text-primary:hover {
-  color: #7A9E9F;
+  color: #3498DB;
 }
 .chart-legend .text-info, .chart-legend .text-info:hover {
   color: #68B3C8;
@@ -309,7 +309,7 @@ hr {
 }
 .sidebar .nav li > a,
 .off-canvas-sidebar .nav li > a {
-  margin: 10px 0px;
+  margin: 0px 0px;
   padding-left: 25px;
   padding-right: 25px;
   opacity: .7;
@@ -320,7 +320,7 @@ hr {
 }
 .sidebar .nav li.active > a,
 .off-canvas-sidebar .nav li.active > a {
-  color: #7A9E9F;
+  color: #3498DB;
   opacity: 1;
 }
 .sidebar .nav li.active > a:before,
@@ -434,7 +434,7 @@ hr {
 }
 .sidebar[data-active-color="primary"] .nav li.active > a,
 .off-canvas-sidebar[data-active-color="primary"] .nav li.active > a {
-  color: #7A9E9F;
+  color: #3498DB;
   opacity: 1;
 }
 .sidebar[data-active-color="info"] .nav li.active > a,
@@ -467,8 +467,9 @@ hr {
   min-height: 100%;
 }
 .main-panel > .content {
-  padding: 30px 15px;
-  min-height: calc(100% - 123px);
+  padding: 20px 15px;
+  padding-bottom: 0px;
+  min-height: calc(100% - 126px); /* Sebelumnya 123px */
 }
 .main-panel > .footer {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
@@ -618,24 +619,24 @@ hr {
 }
 
 .navbar .navbar-nav > li > a.btn-primary, .btn-primary {
-  border-color: #7A9E9F;
-  color: #7A9E9F;
+  border-color: #3498DB;
+  color: #3498DB;
 }
 .navbar .navbar-nav > li > a.btn-primary:hover, .navbar .navbar-nav > li > a.btn-primary:focus, .navbar .navbar-nav > li > a.btn-primary:active, .navbar .navbar-nav > li > a.btn-primary.active, .open > .navbar .navbar-nav > li > a.btn-primary.dropdown-toggle, .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .btn-primary.dropdown-toggle {
-  background-color: #7A9E9F;
+  background-color: #3498DB;
   color: rgba(255, 255, 255, 0.7);
-  border-color: #7A9E9F;
+  border-color: #3498DB;
 }
 .navbar .navbar-nav > li > a.btn-primary:hover .caret, .navbar .navbar-nav > li > a.btn-primary:focus .caret, .navbar .navbar-nav > li > a.btn-primary:active .caret, .navbar .navbar-nav > li > a.btn-primary.active .caret, .open > .navbar .navbar-nav > li > a.btn-primary.dropdown-toggle .caret, .btn-primary:hover .caret, .btn-primary:focus .caret, .btn-primary:active .caret, .btn-primary.active .caret, .open > .btn-primary.dropdown-toggle .caret {
   border-top-color: rgba(255, 255, 255, 0.7);
 }
 .navbar .navbar-nav > li > a.btn-primary.disabled, .navbar .navbar-nav > li > a.btn-primary.disabled:hover, .navbar .navbar-nav > li > a.btn-primary.disabled:focus, .navbar .navbar-nav > li > a.btn-primary.disabled.focus, .navbar .navbar-nav > li > a.btn-primary.disabled:active, .navbar .navbar-nav > li > a.btn-primary.disabled.active, .navbar .navbar-nav > li > a.btn-primary:disabled, .navbar .navbar-nav > li > a.btn-primary:disabled:hover, .navbar .navbar-nav > li > a.btn-primary:disabled:focus, .navbar .navbar-nav > li > a.btn-primary:disabled.focus, .navbar .navbar-nav > li > a.btn-primary:disabled:active, .navbar .navbar-nav > li > a.btn-primary:disabled.active, .navbar .navbar-nav > li > a.btn-primary[disabled], .navbar .navbar-nav > li > a.btn-primary[disabled]:hover, .navbar .navbar-nav > li > a.btn-primary[disabled]:focus, .navbar .navbar-nav > li > a.btn-primary[disabled].focus, .navbar .navbar-nav > li > a.btn-primary[disabled]:active, .navbar .navbar-nav > li > a.btn-primary[disabled].active, fieldset[disabled] .navbar .navbar-nav > li > a.btn-primary, fieldset[disabled] .navbar .navbar-nav > li > a.btn-primary:hover, fieldset[disabled] .navbar .navbar-nav > li > a.btn-primary:focus, fieldset[disabled] .navbar .navbar-nav > li > a.btn-primary.focus, fieldset[disabled] .navbar .navbar-nav > li > a.btn-primary:active, fieldset[disabled] .navbar .navbar-nav > li > a.btn-primary.active, .btn-primary.disabled, .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled.focus, .btn-primary.disabled:active, .btn-primary.disabled.active, .btn-primary:disabled, .btn-primary:disabled:hover, .btn-primary:disabled:focus, .btn-primary:disabled.focus, .btn-primary:disabled:active, .btn-primary:disabled.active, .btn-primary[disabled], .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled].focus, .btn-primary[disabled]:active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary:hover, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary.active {
   background-color: transparent;
-  border-color: #7A9E9F;
+  border-color: #3498DB;
 }
 .navbar .navbar-nav > li > a.btn-primary.btn-fill, .btn-primary.btn-fill {
   color: #FFFFFF;
-  background-color: #7A9E9F;
+  background-color: #3498DB;
   opacity: 1;
   filter: alpha(opacity=100);
 }
@@ -655,7 +656,7 @@ hr {
   border-top-color: #FFFFFF;
 }
 .navbar .navbar-nav > li > a.btn-primary .caret, .btn-primary .caret {
-  border-top-color: #7A9E9F;
+  border-top-color: #3498DB;
 }
 
 .navbar .navbar-nav > li > a.btn-success, .btn-success {
@@ -1554,6 +1555,7 @@ textarea.form-control {
   background-attachment: fixed;
   position: relative;
   line-height: 20px;
+
 }
 .footer nav ul {
   list-style: none;
@@ -1578,12 +1580,14 @@ textarea.form-control {
 }
 .footer .copyright {
   color: #66615b;
-  padding: 10px 15px;
+  padding: 0px 15px;
   font-size: 14px;
   white-space: nowrap;
   margin: 15px 3px;
-  line-height: 20px;
+  /*line-height: 20px;*/
   text-align: center;
+  bottom: 0px;
+
 }
 .footer .heart {
   color: #EB5E28;
@@ -1681,7 +1685,7 @@ textarea.form-control {
   text-decoration: none;
 }
 .dropdown-menu.dropdown-primary > li > a:hover, .dropdown-menu.dropdown-primary > li > a:focus {
-  background-color: #7A9E9F;
+  background-color: #3498DB;
 }
 .dropdown-menu.dropdown-info > li > a:hover, .dropdown-menu.dropdown-info > li > a:focus {
   background-color: #68B3C8;
@@ -2129,10 +2133,10 @@ textarea.form-control {
 }
 
 .ct-series-e .ct-point, .ct-series-e .ct-line, .ct-series-e .ct-bar, .ct-series-e .ct-slice-donut {
-  stroke: #7A9E9F;
+  stroke: #3498DB;
 }
 .ct-series-e .ct-slice-pie, .ct-series-e .ct-area {
-  fill: #7A9E9F;
+  fill: #3498DB;
 }
 
 .ct-series-f .ct-point, .ct-series-f .ct-line, .ct-series-f .ct-bar, .ct-series-f .ct-slice-donut {
