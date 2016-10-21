@@ -321,7 +321,8 @@ if($request->unit_kerja){
             <script>dataInput += '{{$data->id}}|'</script>
             @if($status)
             <div style="float: right;">
-              @if((RoleLib::limitThis('2',Sentinel::getUser()->id) AND date('d') < 20) || (RoleLib::limitThis('3',Sentinel::getUser()->id) AND date('d') < 22))
+              {{-- @if((RoleLib::limitThis('2',Sentinel::getUser()->id) AND date('d') < 20) || (RoleLib::limitThis('3',Sentinel::getUser()->id) AND date('d') < 22)) --}}
+              @if((RoleLib::limitThis('2',Sentinel::getUser()->id)) || (RoleLib::limitThis('3',Sentinel::getUser()->id)))
               <button type="submit" class="btn btn-primary btn-fill">Simpan Data</button>
               @endif
 
