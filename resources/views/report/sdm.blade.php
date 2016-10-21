@@ -137,9 +137,9 @@
   @if($j == round(App\User::where('unit_id','=',$unit_id)->count() / 50))
   <table class="ndas" style="margin-top: 20px;">
     <tr>
+        <td style="width: 25%;"></td>
         <td style="width: 35%;"></td>
-        <td style="width: 35%;"></td>
-        <td style="width: 30%;">Jakarta, {{date('d F Y')}}</td>
+        <td style="width: 40%;">Jakarta, {{date('d F Y')}}</td>
     </tr>
         <tr>
         <td style="width: 35%;"></td>

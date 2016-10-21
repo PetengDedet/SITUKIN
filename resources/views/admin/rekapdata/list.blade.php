@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('page_title')
-Rekap Data {{$request->unit_kerja}}
+Rekap Data
 <?php $status = true; ?>
 @endsection
 
@@ -820,7 +820,11 @@ if($request->unit_kerja){
   }
 
   function exportNow(){
+    @if($request->unit_kerja)
       location.href='{{url('export-data/'.$request->unit_kerja)}}/' + $('#eselon_satu').val();
+    @else
+      location.href='{{url('export-data/'.$getUserData->unit_id)}}/' + $('#eselon_satu').val();
+    @endif
   }
 </script>
 @include('notification')

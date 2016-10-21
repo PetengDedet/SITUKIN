@@ -128,7 +128,11 @@ class ReportController extends Controller
 
     public function select()
     {
-        return view('report.index');
+        if(!Sentinel::check()){
+            return Redirect::route('login')->with('error', 'Silahkan melakukan login terlebih dahulu');
+        }else{
+            return view('report.index');
+        }
     }
 
     public function perGolonganJabatan()
