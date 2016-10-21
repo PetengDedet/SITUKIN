@@ -94,7 +94,7 @@ Route::get('rekap-data', 				['as' => 'rekapdata', 				'uses' => 'RekapControlle
 Route::get('update', 					['as' => 'rekapdataupdate', 				'uses' => 'RekapController@update']);
 Route::post('tambah-potongan-absen',			['as' => 'tambahpotonganabsen', 				'uses' => 'RekapController@tambahpotonganabsen']);
 Route::post('datapotonganabsensi',			['as' => 'datapotonganabsensi', 				'uses' => 'RekapController@datapotonganabsensi']);
-Route::post('rekap-data',			['as' => 'simpanrekapdata', 				'uses' => 'RekapController@simpanrekapdata']);
+Route::post('simpan-rekap-data',			['as' => 'simpanrekapdata', 				'uses' => 'RekapController@simpanrekapdata']);
 
 #HukumanController
 Route::get('hukuman-disiplin', 			['as' => 'hukumandisiplin', 		'uses' => 'HukumanController@hukumandisiplin']);
