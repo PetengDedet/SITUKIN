@@ -90,8 +90,8 @@
       $user = App\User::where('unit_id', $data['unit_id'])->get();
 
       foreach ($user as $dataUser) {
-        $dataJabatan = App\Jabatan::where('id',$dataUser->jabatan_id)->first();
-        if($dataJabatan->kelas_jabatan == $data['grade_semua'][$j]->grade){
+        //$dataJabatan = App\Jabatan::where('id',$dataUser->jabatan_id)->first();
+        if($dataUser->kelas_jabatan == $data['grade_semua'][$j]->grade){
           $tempJabatan++;
           $jmlPegawai++;
           $tempJmlTunjangan = $tempJmlTunjangan + App\Library\HitungLib::HitungKinerjaBulanan($dataUser->id,$data['bulan'], $data['tahun']);

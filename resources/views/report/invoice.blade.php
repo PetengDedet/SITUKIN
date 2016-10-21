@@ -84,7 +84,7 @@
       echo $explodeAgain[0];
     ?> 
     /
-    {{$data['jabatan'][$i]->kelas_jabatan}}</td>
+    {{$data['pegawai'][$i]->kelas_jabatan}}</td>
   </tr>
   <tr>
     <td class="tg-031e">UNIT KERJA</td>

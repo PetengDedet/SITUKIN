@@ -13,7 +13,7 @@ Manajemen Unit
 	<div class="col-md-12">
 		<div class="card">
 			<div class="header">
-				<h4 class="title">Tambah Unit/Deputi</h4>
+				<h4 class="title"><strong>Tambah Unit/Deputi</strong></h4>
 			</div>
 			<div class="content">
 				<form role="form" class="form-horizontal" method="post" action="">
@@ -26,7 +26,7 @@ Manajemen Unit
             		<div class="form-group">
             			<input type="hidden" name="_token" value="{{csrf_token()}}">
             			<div class="col-md-12">
-            				<button type="submit" class="btn btn-primary pull-right"><i class="fa fa-floppy-o"></i>&nbsp; Simpan</button>
+            				<button type="submit" class="btn btn-success btn-fill pull-right">Simpan</button>
             			</div>
             		</div>
             	</form>
@@ -37,23 +37,23 @@ Manajemen Unit
     <div class="col-md-12">
         <div class="card">
             <div class="header">
-                <h4 class="title">Data Unit / Deputi</h4>
+                <h4 class="title"><strong>Data Unit / Deputi</strong></h4>
             </div>
             <div class="content">
                 <table class="table table-responsive table-full-width" id="users-table">
 			        <thead>
 			            <tr>
-			                <th>Id</th>
-			                <th>Nama</th>
-			                <th>Action</th>
+			                <th class="text-center"><b>No</b></th>
+			                <th class="text-center"><b>Nama</b></th>
+			                <th class="text-center"><b>Action</b></th>
 			            </tr>
 			        </thead>
 			        <tbody>
 			        	@forelse($unit as $k => $v)
 			        		<tr>
-			        			<td>{{($v->id)}}</td>
-			        			<td>{{$v->nama_unit}}</td>
-			        			<td>
+			        			<td class="text-center">{{($v->id)}}</td>
+			        			<td class="text-center">{{$v->nama_unit}}</td>
+			        			<td class="text-center">
 			        				<a href="{{url('/unit/' . $v->id )}}" class="btn btn-default btn-sm btn-fill"><i class="fa fa-eye"></i></a>
 			        				<a href="{{url('/unit/edit/' . $v->id )}}" class="btn btn-warning btn-sm btn-fill"><i class="fa fa-pencil"></i></a>
 			        			</td>

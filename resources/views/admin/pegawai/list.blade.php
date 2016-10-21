@@ -18,58 +18,58 @@ Manajemen Pegawai
 @section('content')
 
 <div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="header">
-            
-                <h4 class="title"><strong>Data Pegawai</strong></h4>
-                <br>
-                <a class="btn btn-success btn-fill" href="{{url('pegawai/create')}}"><i class="fa fa-plus"></i>&nbsp; Tambah Pegawai</a>
-                <button type="button" class="btn btn-success btn-fill" data-toggle="modal" data-target="#importModal"><i class="fa fa-plus"></i>&nbsp; Import Data</button>
-            </div>
-            <div class="content">
-                <table class ="table table-responsive table-full-width" id="users-table">
-    			        <thead>
-    			            <tr>
-    			                <th style="text-align: center;">NIP</th>
-    			                <th style="text-align: center;">Name</th>
-    			                <th style="text-align: center;">Unit</th>
-                          <th style="text-align: center;">Jabatan</th>
-    			                <th style="text-align: center;width: 120px;">Action</th>
-    			            </tr>
-    			        </thead>
-                  <tbody>
-                      @foreach(App\User::where('nip','!=','admin')->get() as $data)
-                      <?php
-                        $dataUnit = "";
-                        $checkUnit = App\Unit::where('id','=',$data->unit_id)->count();
-                        if($checkUnit > 0){
-                            $getDataUnit = App\Unit::where('id','=',$data->unit_id)->first();
-                            $dataUnit = $getDataUnit->nama_unit;
-                        }
+  <div class="col-md-12">
+    <div class="card">
+      <div class="header">
+        <h4 class="title"><strong>Data Pegawai</strong></h4>        
+        <br>
+         <button type="button" class="btn btn-warning btn-fill pull-right" data-toggle="modal" data-target="#importModal"><i class="fa fa-plus"></i>&nbsp; Import Data</button>
+         <a class="btn btn-primary btn-fill pull-right" href="{{url('pegawai/create')}}"><i class="fa fa-plus"></i>&nbsp; Tambah Pegawai</a>
+        <br><br>
+     </div>
+     <div class="content">
+      <table class ="table table-full-width" id="users-table" style="margin-top:50px;">
+       <thead>
+         <tr>
+           <th style="text-align: center;"><b>NIP</b></th>
+           <th style="text-align: center;"><b>Name</b></th>
+           <th style="text-align: center;"><b>Unit</b></th>
+           <th style="text-align: center;"><b>Jabatan</b></th>
+           <th style="text-align: center;width: 120px;"><b>Action</b></th>
+         </tr>
+       </thead>
+       <tbody>
+        @foreach(App\User::where('nip','!=','admin')->get() as $data)
+        <?php
+        $dataUnit = "";
+        $checkUnit = App\Unit::where('id','=',$data->unit_id)->count();
+        if($checkUnit > 0){
+          $getDataUnit = App\Unit::where('id','=',$data->unit_id)->first();
+          $dataUnit = $getDataUnit->nama_unit;
+        }
 
-                        $dataJabatan = "";
-                        $checkJabatan = App\Jabatan::where('id','=',$data->jabatan_id)->count();
-                        if($checkJabatan > 0){
-                            $getDataJabatan = App\Jabatan::where('id','=',$data->jabatan_id)->first();
-                            $dataJabatan = $getDataJabatan->nama_jabatan;
-                        }
-                      ?>
-                      <tr>
-                        <td style="text-align: center;">{{$data->nip}}</td>
-                        <td style="text-align: center;">{{$data->name}}</td>
-                        <td style="text-align: center;">{{$dataUnit}}</td>
-                        <td style="text-align: center;">{{$dataJabatan}}</td>
-                        <td style="text-align: center;">
-                        <a href="{{url('pegawai/' . $data->id )}}" class="btn btn-default btn-sm btn-fill"><i class="fa fa-eye"></i></a><a href="{{url('delete-pegawai/' . $data->id )}}" class="btn btn-warning btn-sm btn-fill"><i class="fa fa-close"></i></a>
-                        </td>
-                      </tr>
-                      @endforeach
-                  </tbody>
-			          </table>
-            </div>
-        </div>
-    </div>
+        $dataJabatan = "";
+        $checkJabatan = App\Jabatan::where('id','=',$data->jabatan_id)->count();
+        if($checkJabatan > 0){
+          $getDataJabatan = App\Jabatan::where('id','=',$data->jabatan_id)->first();
+          $dataJabatan = $getDataJabatan->nama_jabatan;
+        }
+        ?>
+        <tr>
+          <td style="text-align: center;"><span style="font-size:14px;">{{$data->nip}}</span></td>
+          <td style="text-align: center;"><span style="font-size:14px;">{{$data->name}}</span></td>
+          <td style="text-align: center;"><span style="font-size:14px;">{{$dataUnit}}</span></td>
+          <td style="text-align: center;"><span style="font-size:14px;">{{$dataJabatan}}</span></td>
+          <td style="text-align: center;">
+            <a href="{{url('pegawai/' . $data->id )}}" class="btn btn-default btn-sm btn-fill"><i class="fa fa-eye"></i></a><a onclick="return confirm('Apa anda yakin ingin menhapus data ini ?');" href="{{url('delete-pegawai/' . $data->id )}}" class="btn btn-danger btn-sm btn-fill"><i class="fa fa-close"></i></a>
+          </td>
+        </tr>
+        @endforeach
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
 </div>
 <div id="modalPegawai" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -77,38 +77,38 @@ Manajemen Pegawai
     <!-- Modal content-->
     <div class="modal-content">
       <form action="simpan-pegawai" method="post">
-      {{csrf_field()}}
+        {{csrf_field()}}
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Tambah Data Pegawai</h4>
         </div>
         <div class="modal-body">
           <div class="form-group">
-              <label>NIP</label>
-              <input type="text" class="form-control border-input" name="nip" placeholder="Nomor Induk Pegawai" required="">
+            <label>NIP</label>
+            <input type="text" class="form-control border-input" name="nip" placeholder="Nomor Induk Pegawai" required="">
           </div>
           <div class="form-group">
-              <label>Nama</label>
-              <input type="text" class="form-control border-input" name="name" placeholder="Nama" required="">
+            <label>Nama</label>
+            <input type="text" class="form-control border-input" name="name" placeholder="Nama" required="">
           </div>
           <div class="form-group">
-              <label>Unit Kerja</label>
-              <select name="unit_id" id="unit_id" class="form-control border-input" required="" >
-                    <option ></option>
-                  @foreach(App\Unit::get() as $data)
-                    <option value="{{$data->id}}">{{$data->nama_unit}}</option>
-                  @endforeach
-              </select>
+            <label>Unit Kerja</label>
+            <select name="unit_id" id="unit_id" class="form-control border-input" required="" >
+              <option ></option>
+              @foreach(App\Unit::get() as $data)
+              <option value="{{$data->id}}">{{$data->nama_unit}}</option>
+              @endforeach
+            </select>
           </div>
           <div class="form-group">
-              <label>Jabatan</label>
-              <select name="jabatan_id" id="jabatan_id" class="form-control border-input" required="" >
-                <span id="dataJabatan"></span>
-              </select>
+            <label>Jabatan</label>
+            <select name="jabatan_id" id="jabatan_id" class="form-control border-input" required="" >
+              <span id="dataJabatan"></span>
+            </select>
           </div>
           <div class="form-group">
-              <label>Gaji Pokok</label>
-              <input type="number" class="form-control border-input" name="gaji_pokok" placeholder="Gaji Pokok" required="">
+            <label>Gaji Pokok</label>
+            <input type="number" class="form-control border-input" name="gaji_pokok" placeholder="Gaji Pokok" required="">
           </div>
         </div>
         <div class="modal-footer">
@@ -125,39 +125,39 @@ Manajemen Pegawai
     <!-- Modal content-->
     <div class="modal-content">
       <form action="edit-pegawai" method="post">
-      <input type="hidden" name="id" id="id" required="" />
-      {{csrf_field()}}
+        <input type="hidden" name="id" id="id" required="" />
+        {{csrf_field()}}
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Edit Data Pegawai</h4>
         </div>
         <div class="modal-body">
           <div class="form-group">
-              <label>NIP</label>
-              <input type="text" id="nip" class="form-control border-input" name="nip" placeholder="Nomor Induk Pegawai" required="">
+            <label>NIP</label>
+            <input type="text" id="nip" class="form-control border-input" name="nip" placeholder="Nomor Induk Pegawai" required="">
           </div>
           <div class="form-group">
-              <label>Nama</label>
-              <input type="text" id="name" class="form-control border-input" name="name" placeholder="Nama" required="">
+            <label>Nama</label>
+            <input type="text" id="name" class="form-control border-input" name="name" placeholder="Nama" required="">
           </div>
           <div class="form-group">
-              <label>Unit Kerja</label>
-              <select name="unit_id" id="unit_id" class="form-control border-input" required="" >
-                    <option value=""></option>
-                  @foreach(App\Unit::get() as $data)
-                    <option value="{{$data->id}}">{{$data->nama_unit}}</option>
-                  @endforeach
-              </select>
+            <label>Unit Kerja</label>
+            <select name="unit_id" id="unit_id" class="form-control border-input" required="" >
+              <option value=""></option>
+              @foreach(App\Unit::get() as $data)
+              <option value="{{$data->id}}">{{$data->nama_unit}}</option>
+              @endforeach
+            </select>
           </div>
           <div class="form-group">
-              <label>Jabatan</label>
-              <select name="jabatan_id" id="jabatan_id_edit" class="form-control border-input" required="" >
-                <span id="dataJabatan"></span>
-              </select>
+            <label>Jabatan</label>
+            <select name="jabatan_id" id="jabatan_id_edit" class="form-control border-input" required="" >
+              <span id="dataJabatan"></span>
+            </select>
           </div>
           <div class="form-group">
-              <label>Gaji Pokok</label>
-              <input type="number" id="gaji_pokok" class="form-control border-input" name="gaji_pokok" placeholder="Gaji Pokok" required="">
+            <label>Gaji Pokok</label>
+            <input type="number" id="gaji_pokok" class="form-control border-input" name="gaji_pokok" placeholder="Gaji Pokok" required="">
           </div>
         </div>
         <div class="modal-footer">
@@ -181,8 +181,8 @@ Manajemen Pegawai
         </div>
         <div class="modal-body">
           <div class="form-group">
-              <label>CSV File</label>
-              <input type="file" name="csv_file" accept=".csv" class="form-control border-input" required="" >
+            <label>CSV File</label>
+            <input type="file" name="csv_file" accept=".csv" class="form-control border-input" required="" >
           </div>
         </div>
         <div class="modal-footer">
@@ -216,31 +216,31 @@ Manajemen Pegawai
         success: function (response) {
           $('#jabatan_id').html('');
           var html = "";
-            for(i = 0; i < response.Jabatan.length; i++){
-              html += "<option value='" + response.Jabatan[i].id + "'>" + response.Jabatan[i].nama_jabatan + "</option>";
-            }
-            $('#jabatan_id').html(html);
+          for(i = 0; i < response.Jabatan.length; i++){
+            html += "<option value='" + response.Jabatan[i].id + "'>" + response.Jabatan[i].nama_jabatan + "</option>";
+          }
+          $('#jabatan_id').html(html);
         },
         error: function(jqXHR, textStatus, errorThrown) {
-           console.log(textStatus, errorThrown);
-        }
-      });
+         console.log(textStatus, errorThrown);
+       }
+     });
     });
   });
 
   function loadData(id){
     var responses = "";
     var values = "id=" + id + "&_token={{csrf_token()}}";
-      $.ajax({
-        url: "userjson",
-        type: "post",
-        data: values ,
-        success: function (response) {
-          $('#id').val(response.User.id);
-          $('#nip').val(response.User.nip);
-          $('#name').val(response.User.name);
-          $('#unit_id').val(response.User.unit_id).change();
-          responses = response.User.jabatan_id;
+    $.ajax({
+      url: "userjson",
+      type: "post",
+      data: values ,
+      success: function (response) {
+        $('#id').val(response.User.id);
+        $('#nip').val(response.User.nip);
+        $('#name').val(response.User.name);
+        $('#unit_id').val(response.User.unit_id).change();
+        responses = response.User.jabatan_id;
           //$('#jabatan_id').val(response.User.jabatan_id);
           $('#gaji_pokok').val(response.User.gjpokok);
 
@@ -253,7 +253,7 @@ Manajemen Pegawai
             success: function (responsedua) {
               $('#jabatan_id').html('');
               var html = "";
-                for(i = 0; i < responsedua.Jabatan.length; i++){
+              for(i = 0; i < responsedua.Jabatan.length; i++){
                   //alert(responsedua.Jabatan[i].nama_jabatan);
                   html += "<option value='" + responsedua.Jabatan[i].id + "'>" + responsedua.Jabatan[i].nama_jabatan + "</option>";
                 }
@@ -261,18 +261,18 @@ Manajemen Pegawai
                 $('#jabatan_id_edit').html(html);
 
                 $("select#jabatan_id_edit option")
-                  .each(function() { 
-                    this.selected = ($(this).val() == responses); 
+                .each(function() { 
+                  this.selected = ($(this).val() == responses); 
                 });
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
+              },
+              error: function(jqXHR, textStatus, errorThrown) {
                console.log(textStatus, errorThrown);
-            }
-          });
+             }
+           });
 
           $("select#unit_id option")
-            .each(function() { 
-              this.selected = ($(this).val() == response.User.unit_id); 
+          .each(function() { 
+            this.selected = ($(this).val() == response.User.unit_id); 
           });
 
           $('#modalEditPegawai').modal('show')
@@ -280,9 +280,9 @@ Manajemen Pegawai
 
         },
         error: function(jqXHR, textStatus, errorThrown) {
-           console.log(textStatus, errorThrown);
-        }
-      });
+         console.log(textStatus, errorThrown);
+       }
+     });
   }
 </script>
 @include('notification')

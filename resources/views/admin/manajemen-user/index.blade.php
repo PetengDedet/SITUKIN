@@ -40,14 +40,14 @@ Manajemen User
 				<div class="header">
 					{{-- <h4 class="title"><strong>Data Hukuman Displin</strong></h4> --}}
 					@if(Session::has('message'))
-						<p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+					<p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
 					@endif
 				</div>
 				<div class="content">
 					<div class="form-group">
 						<label>Pegawai</label>
 						<select required="" name="user_id" id="user_id" class="form-control border-input">
-							<option></option>
+							<option>-- Nama Pegawai --</option>
 							@foreach($dataPegawai as $dataPegawai)
 							<option value="{{$dataPegawai->id}}">{{$dataPegawai->name}} - {{$dataPegawai->nip}}</option>
 							@endforeach
@@ -71,72 +71,73 @@ Manajemen User
 					<div class="form-group">
 						<label>Role</label>
 						<select required="" name="role" id="role" class="form-control border-input">
+							<option>-- Role --</option>
 							<option value="1">Pegawai</option>
 							<option value="2">Protakel</option>
 							<option value="3">SDM</option>
 							<option value="4">Administrator</option>
-                		</select>
-            		</div>
-            <div class="form-group">
-            	<button class="btn btn-success btn-fill" type="submit">Simpan</button>
-            	<br>
-            	<br>
-            	<font color="red">*default password untuk Protakel/SDM adalah : <b>1234</b></font>
-            </div>
-        </div>
-    </div>
-</form>
-</div>
+						</select>
+					</div>
+					<div class="form-group">
+						<button class="btn btn-success btn-fill pull-right" type="submit">Simpan</button>
+						<br>
+						<br>
+						<font color="red">*default password untuk Protakel/SDM adalah : <b>1234</b></font>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
 	<div class="col-md-12">
 		<div class="card">
 			<div class="header">
 				<h4>Data Role</h4>
 			</div>
 			<div class="content">
-				<table class="table table-responsive table-condensed table-full-width">
+				<table class="table table-full-width">
 					<thead>
 						<tr>
-							<th>No</th>
-							<th>Pegawai</th>
-							<th>Sebagai</th>
-							<th>Action</th>
+							<th class="text-center"><b>No</b></th>
+							<th class="text-center"><b>Pegawai</b></th>
+							<th class="text-center"><b>Sebagai</b></th>
+							<th class="text-center"><b>Action</b></th>
 						</tr>
 					</thead>
 					<tbody>
 						@forelse($roles as $key => $role)
-							<tr>
-								<td>{{ ($roles->currentpage()-1) * $roles->perpage() + $key + 1 }}</td>
-								<td>{{App\User::where('id', $role->user_id)->first()->name}}</td>
-								<td>
-									<?php
-										switch ($role->role_id) {
-											case 1:
-												echo '<span class="badge badge-default">&nbsp;</span>&nbsp; Pegawai';
-												break;
-											case 2:
-												echo '<span class="badge badge-info">&nbsp;</span>&nbsp; Protakel';
-												break;
-											case 3:
-												echo '<span class="badge badge-success">&nbsp;</span>&nbsp; SDM';
-												break;
-											case 4:
-												echo '<span class="badge badge-danger">&nbsp;</span>&nbsp; Administrator';
-												break;
-											default:
-												echo '<span class="badge badge-default">&nbsp;</span>&nbsp; Pegawai';
-												break;
-										}
-									?>
-								</td>
-								<td>
-									<form method="post" action="{{url('manajemen/hapus')}}">
-										{{csrf_field()}}
-										<input type="hidden" name="role_id" value="{{$role->role_id}}">
-										<input type="hidden" name="user_id" value="{{$role->user_id}}">
-										<button type="submit" class="btn btn-fill btn-danger btn-sm" onclick="return confirm('Yakin?')"><i class="fa fa-trash"></i></button>
-									</form>
-								</td>
-							</tr>
+						<tr>
+							<td class="text-center"><span style="font-size:14px;">{{ ($roles->currentpage()-1) * $roles->perpage() + $key + 1 }}</span></td>
+							<td class="text-center"><span style="font-size:14px;">{{App\User::where('id', $role->user_id)->first()->name}}</span></td>
+							<td class="text-center">
+								<?php
+								switch ($role->role_id) {
+									case 1:
+									echo '<span class="badge badge-default">&nbsp;</span>&nbsp; Pegawai';
+									break;
+									case 2:
+									echo '<span class="badge badge-info">&nbsp;</span>&nbsp; Protakel';
+									break;
+									case 3:
+									echo '<span class="badge badge-success">&nbsp;</span>&nbsp; SDM';
+									break;
+									case 4:
+									echo '<span class="badge badge-danger">&nbsp;</span>&nbsp; Administrator';
+									break;
+									default:
+									echo '<span class="badge badge-default">&nbsp;</span>&nbsp; Pegawai';
+									break;
+								}
+								?>
+							</td>
+							<td class="text-center">
+								<form method="post" action="{{url('manajemen/hapus')}}">
+									{{csrf_field()}}
+									<input type="hidden" name="role_id" value="{{$role->role_id}}">
+									<input type="hidden" name="user_id" value="{{$role->user_id}}">
+									<button type="submit" class="btn btn-fill btn-danger btn-sm" onclick="return confirm('Apa anda yakin ingin mengahpus data ini ?')"><i class="fa fa-trash"></i></button>
+								</form>
+							</td>
+						</tr>
 						@empty
 						@endforelse
 					</tbody>

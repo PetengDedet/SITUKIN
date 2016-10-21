@@ -74,6 +74,24 @@ Detail Pegawai
                 <label>Golongan</label>
                 <input type="text" class="form-control border-input" name="golongan" placeholder="Golongan" required="">
             </div>
+            <div class="form-group">
+                <label>Kelas Jabatan</label>
+                <select name="kelas_jabatan" id="kelas_jabatan" class="form-control border-input" required="" >
+                   <option></option>
+                   @foreach(App\Grade::get() as $dataJabatan)
+                        <option value="{{$dataJabatan->grade}}">{{$dataJabatan->grade}}</option>
+                   @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Status Kawin</label>
+                <select name="kelas_jabatan" id="kelas_jabatan" class="form-control border-input" required="" >
+                   <option></option>
+                   @foreach(App\Grade::get() as $dataJabatan)
+                        <option value="{{$dataJabatan->grade}}">{{$dataJabatan->grade}}</option>
+                   @endforeach
+                </select>
+            </div>
           </div>
       </div>
       <div class="card">

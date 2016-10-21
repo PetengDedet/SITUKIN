@@ -42,20 +42,16 @@ Class HitungLib
 			$penghasilanSetaunTidakKenaPajak = 126000000;
 		}
 
-		$gajiSetahun = $getDataUser->gjpokok * 12;
+		$gajiSetahun = $getDataUser->bersih * 12;
 		$tukinSetahun = $tukin * 12;
 
-		if($getDataUser->gjpokok + $tukin < 10000000){
-			$hasilHitungJabatanDanIuranPensiun = (($getDataUser->gjpokok + $tukin) * 0.5) + ($getDataUser->gjpokok * 0.475);
-
-			if($hasilHitungJabatanDanIuranPensiun > 500000){
-				$biayaJabatanDanIuranPensiun = 500000 * 12;
-			}else{
-				$biayaJabatanDanIuranPensiun = $hasilHitungJabatanDanIuranPensiun * 12;
-			}
+		if(($getDataUser->bersih + $tukin) <= 10000000){
+			$hasilHitungJabatan = ($getDataUser->bersih + $tukin) * 0.5;
 		}else{
-			$biayaJabatanDanIuranPensiun = 500000 * 12;
+			$hasilHitungJabatan = 500000;
 		}
+
+		$biayaJabatanDanIuranPensiun  =  (($hasilHitungJabatan + ($getDataUser->bersih * 0.0475)) * 12);
 
 		$PKPPertahun = (($gajiSetahun + $tukinSetahun) - $penghasilanSetaunTidakKenaPajak - $biayaJabatanDanIuranPensiun);
 		//cek pajak 5%
@@ -94,6 +90,10 @@ Class HitungLib
 		
 
 		$total = $pajaklimapersen + $pajakLimaBelasPersen + $pajakDuaLimaPersen;
+
+		if($total < 0){
+			$total = 0;
+		}
 		return $total;
 	}
 

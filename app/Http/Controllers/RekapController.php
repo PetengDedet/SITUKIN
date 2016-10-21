@@ -142,12 +142,12 @@ class RekapController extends Controller
     }
 
 
-    /*public function update(){
-    	$data = DB::table('table 19')->get();
+    public function update(){
+    	$data = DB::table('users')->get();
 
     	foreach($data as $datas){
-            $idBaru = $datas->id + 430;
-			DB::table('table 19')->where('id','=',$datas->id)->update(['id'=>$idBaru]);
+           $getDataJabatan = DB::table('jabatan')->where('id',$datas->jabatan_id)->first();
+			DB::table('users')->where('id','=',$datas->id)->update(['kelas_jabatan'=>$getDataJabatan->kelas_jabatan]);
     	}
-    }*/
+    }
 }

@@ -143,7 +143,7 @@
           @endif          
         </td>
         <td class="tg-baqh"></td>
-        <td class="tg-baqh">{{$data['jabatan'][$j]->kelas_jabatan}}</td>
+        <td class="tg-baqh">{{$data['pegawai'][$j]->kelas_jabatan}}</td>
         <td class="tg-lqy6">
           {{number_format($data['pegawai'][$j]->gjpokok,0, ',', '.')}}
           <br>

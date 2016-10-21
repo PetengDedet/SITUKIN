@@ -42,7 +42,7 @@ class ReportController extends Controller
         								->where('tahun', $tahun)->first();
         	//Ambil Jabatan, kelas jabatan, dan besarnya tunjangan
         	$data['jabatan'][] = Jabatan::where('id', $v->jabatan_id)->first();
-        	$data['grade'][] = Grade::where('id', $data['jabatan'][$k]->kelas_jabatan)->first();
+        	$data['grade'][] = Grade::where('id', $v->kelas_jabatan)->first();
 
         	//Potongan Absesi
         	$data['absensi'][] = PotonganAbsensi::where('pegawai_id', $v->id)
@@ -94,7 +94,7 @@ class ReportController extends Controller
         								->where('tahun', $tahun)->first();
         	//Ambil Jabatan, kelas jabatan, dan besarnya tunjangan
         	$jabatan = Jabatan::where('id', $v->jabatan_id)->first();
-        	$grade = Grade::where('id', $jabatan->kelas_jabatan)->first();
+        	$grade = Grade::where('id', $v->kelas_jabatan)->first();
 
         	//Potongan Absesi
         	$absensi = PotonganAbsensi::where('pegawai_id', $v->id)
@@ -228,7 +228,7 @@ class ReportController extends Controller
                                                     ->where('tahun', $request->tahun)->first();
                         //Ambil Jabatan, kelas jabatan, dan besarnya tunjangan
                         $data['jabatan'][] = Jabatan::where('id', $v->jabatan_id)->first();
-                        $data['grade'][] = Grade::where('id', $data['jabatan'][$k]->kelas_jabatan)->first();
+                        $data['grade'][] = Grade::where('id', $v->kelas_jabatan)->first();
 
                         //Potongan Absesi
                         $data['absensi'][] = PotonganAbsensi::where('pegawai_id', $v->id)
@@ -271,7 +271,7 @@ class ReportController extends Controller
                         $data['unit'][] = Unit::where('id', $v->unit_id)->first();
                         //Ambil Jabatan, kelas jabatan, dan besarnya tunjangan
                         $data['jabatan'][] = Jabatan::where('id', $v->jabatan_id)->first();
-                        $data['grade'][] = Grade::where('id', $data['jabatan'][$k]->kelas_jabatan)->first();
+                        $data['grade'][] = Grade::where('id', $v->kelas_jabatan)->first();
 
                         //Potongan Absesi
                         $data['absensi'][] = PotonganAbsensi::where('pegawai_id', $v->id)
@@ -316,7 +316,7 @@ class ReportController extends Controller
                         $data['unit'][] = Unit::where('id', $v->unit_id)->first();
                         //Ambil Jabatan, kelas jabatan, dan besarnya tunjangan
                         $data['jabatan'][] = Jabatan::where('id', $v->jabatan_id)->first();
-                        $data['grade'][] = Grade::where('id', $data['jabatan'][$k]->kelas_jabatan)->first();
+                        $data['grade'][] = Grade::where('id', $v->kelas_jabatan)->first();
 
                         //Potongan Absesi
                         $data['absensi'][] = PotonganAbsensi::where('pegawai_id', $v->id)
@@ -361,7 +361,7 @@ class ReportController extends Controller
                         $data['unit'][] = Unit::where('id', $v->unit_id)->first();
                         //Ambil Jabatan, kelas jabatan, dan besarnya tunjangan
                         $data['jabatan'][] = Jabatan::where('id', $v->jabatan_id)->first();
-                        $data['grade'][] = Grade::where('id', $data['jabatan'][$k]->kelas_jabatan)->first();
+                        $data['grade'][] = Grade::where('id', $v->kelas_jabatan)->first();
 
                         //Potongan Absesi
                         $data['absensi'][] = PotonganAbsensi::where('pegawai_id', $v->id)
@@ -406,7 +406,7 @@ class ReportController extends Controller
                         $data['unit'][] = Unit::where('id', $v->unit_id)->first();
                         //Ambil Jabatan, kelas jabatan, dan besarnya tunjangan
                         $data['jabatan'][] = Jabatan::where('id', $v->jabatan_id)->first();
-                        $data['grade'][] = Grade::where('id', $data['jabatan'][$k]->kelas_jabatan)->first();
+                        $data['grade'][] = Grade::where('id', $v->kelas_jabatan)->first();
 
                         //Potongan Absesi
                         $data['absensi'][] = PotonganAbsensi::where('pegawai_id', $v->id)
