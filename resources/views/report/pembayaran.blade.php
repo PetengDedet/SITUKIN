@@ -227,14 +227,14 @@
       <td class="sikil-031e" style="padding: 0px;">PPABP BELANJA PEGAWAI</td>
     </tr>
     <tr>
-      <td class="sikil-031e" style="padding: 50px 0px 0px;">Agam Embun Sunarpati</td>
-      <td class="sikil-031e" style="padding: 50px 0px 0px;">FARHANI LAINUFAR</td>
-      <td class="sikil-031e" style="padding: 50px 0px 0px;">DODI WAHYUGI, ST, MMSI</td>
+      <td class="sikil-031e" style="padding: 50px 0px 0px;">{{App\User::where('id',$data['pejabat_pembuat_komitmen'])->first()->name}}</td>
+      <td class="sikil-031e" style="padding: 50px 0px 0px;">{{App\User::where('id',$data['bendahara'])->first()->name}}</td>
+      <td class="sikil-031e" style="padding: 50px 0px 0px;">{{App\User::where('id',$data['belanja_pegawai'])->first()->name}}</td>
     </tr>
     <tr>
-      <td class="sikil-yw4l" style="padding: 0px;">NIP .196309141983101001</td>
-      <td class="sikil-yw4l" style="padding: 0px;">NIP .199109282014022002</td>
-      <td class="sikil-yw4l" style="padding: 0px;">NIP .198106222003121003</td>
+      <td class="sikil-yw4l" style="padding: 0px;">NIP. {{App\User::where('id',$data['pejabat_pembuat_komitmen'])->first()->nip}}</td>
+      <td class="sikil-yw4l" style="padding: 0px;">NIP. {{App\User::where('id',$data['bendahara'])->first()->nip}}</td>
+      <td class="sikil-yw4l" style="padding: 0px;">NIP. {{App\User::where('id',$data['belanja_pegawai'])->first()->nip}}</td>
     </tr>
   </table>
   @endif
@@ -467,14 +467,14 @@
     <td class="sikil-031e" style="padding: 0px;">PPABP BELANJA PEGAWAI</td>
   </tr>
   <tr>
-    <td class="sikil-031e" style="padding: 50px 0px 0px;">Agam Embun Sunarpati</td>
-    <td class="sikil-031e" style="padding: 50px 0px 0px;">FARHANI LAINUFAR</td>
-    <td class="sikil-031e" style="padding: 50px 0px 0px;">DODI WAHYUGI, ST, MMSI</td>
+    <td class="sikil-031e" style="padding: 50px 0px 0px;">{{App\User::where('id',$data['pejabat_pembuat_komitmen'])->first()->name}}</td>
+    <td class="sikil-031e" style="padding: 50px 0px 0px;">{{App\User::where('id',$data['bendahara'])->first()->name}}</td>
+    <td class="sikil-031e" style="padding: 50px 0px 0px;">{{App\User::where('id',$data['belanja_pegawai'])->first()->name}}</td>
   </tr>
   <tr>
-    <td class="sikil-yw4l" style="padding: 0px;">NIP .196309141983101001</td>
-    <td class="sikil-yw4l" style="padding: 0px;">NIP .199109282014022002</td>
-    <td class="sikil-yw4l" style="padding: 0px;">NIP .198106222003121003</td>
+    <td class="sikil-yw4l" style="padding: 0px;">NIP. {{App\User::where('id',$data['pejabat_pembuat_komitmen'])->first()->nip}}</td>
+    <td class="sikil-yw4l" style="padding: 0px;">NIP. {{App\User::where('id',$data['bendahara'])->first()->nip}}</td>
+    <td class="sikil-yw4l" style="padding: 0px;">NIP. {{App\User::where('id',$data['belanja_pegawai'])->first()->nip}}</td>
   </tr>
 </table>
 <div class="teacherPage"></div>

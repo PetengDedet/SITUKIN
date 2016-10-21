@@ -86,18 +86,19 @@ Detail Pegawai
             <div class="form-group">
                 <label>Status Kawin</label>
                 <select name="kdkawin" id="kdkawin" class="form-control border-input" required="" >
-                   <option value="1000">Tidak Kawin & Anak 0</option>
-                   <option value="1001">Tidak Kawin & Anak 1</option>
-                   <option value="1002">Tidak Kawin & Anak 2</option>
-                   <option value="1003">Tidak Kawin & Anak 3</option>
-                   <option value="1100">Kawin & Anak 0</option>
-                   <option value="1101">Kawin & Anak 1</option>
-                   <option value="1102">Kawin & Anak 2</option>
-                   <option value="1103">Kawin & Anak 3</option>
-                   <option value="1200">Tidak Kawin & Anak 0</option>
-                   <option value="1201">Tidak Kawin & Anak 1</option>
-                   <option value="1202">Tidak Kawin & Anak 2</option>
-                   <option value="1203">Tidak Kawin & Anak 3</option>
+                    <option></option>
+                    <option value="1000">Tidak Kawin & Anak 0</option>
+                    <option value="1001">Tidak Kawin & Anak 1</option>
+                    <option value="1002">Tidak Kawin & Anak 2</option>
+                    <option value="1003">Tidak Kawin & Anak 3</option>
+                    <option value="1100">Kawin & Anak 0</option>
+                    <option value="1101">Kawin & Anak 1</option>
+                    <option value="1102">Kawin & Anak 2</option>
+                    <option value="1103">Kawin & Anak 3</option>
+                    <option value="1200">Tidak Kawin & Anak 0</option>
+                    <option value="1201">Tidak Kawin & Anak 1</option>
+                    <option value="1202">Tidak Kawin & Anak 2</option>
+                    <option value="1203">Tidak Kawin & Anak 3</option>
                 </select>
             </div>
             <div class="form-group">

@@ -266,12 +266,12 @@
   <tr>
     {{-- <td class="ttd-031e"></td> --}}
     <td class="ttd-031e"></td>
-    <td class="ttd-031e" style="padding-top: 70px">EMANUEL CHRISTIANTOKO</td>
+    <td class="ttd-031e" style="padding-top: 70px">{{strtoupper($data['pegawai'][$i]->name)}}</td>
   </tr>
   <tr>
     {{-- <td class="ttd-031e"></td> --}}
     <td class="ttd-031e"></td>
-    <td class="ttd-031e">NIP. 100000000000</td>
+    <td class="ttd-031e">NIP. {{$data['pegawai'][$i]->nip}}</td>
   </tr>
 </table>
 <div class="teacherPage"></div>

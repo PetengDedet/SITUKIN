@@ -163,11 +163,11 @@ class ReportController extends Controller
         return view('report.pembayaran');
     }
 
-    public function exportdata($unit_id = ""){
+    public function exportdata($unit_id = "", $eselon_satu){
         $getData = Sentinel::getUser();
         $getRole = Role::where('user_id','=',$getData->id)->first();
         //return view('report.pembayaran')->with('unit_id', $getData->unit_id);
-
+        $data['eselon_satu'] = $eselon_satu;
         if($unit_id){
             $data['unit_id'] = $unit_id;
         }else{
@@ -217,6 +217,9 @@ class ReportController extends Controller
             if($totalDataKinerjaBulanan == count($getDataUser) && $totalDataPotonganAbsen == count($getDataUser) &&$totalDataHukumanDisiplin == count($getDataUser)){
                 if($request->type == "3"){
                     $data = [];
+                    $data['pejabat_pembuat_komitmen'] = $request->pejabat_pembuat_komitmen;
+                    $data['bendahara'] = $request->bendahara;
+                    $data['belanja_pegawai'] = $request->belanja_pegawai;
                     $data['bulan'] = $request->bulan;
                     $data['tahun'] = $request->tahun;
                     $users = User::where('unit_id',$request->unit_id)->where('nip','!=','admin')->where('nip','!=','123')->get();
@@ -258,6 +261,9 @@ class ReportController extends Controller
                     return $pdf->setPaper(array(0,0,612.00,936.00), 'landscape')->stream('report.pdf');
                 }else if($request->type == "4"){
                     $data = [];
+                    $data['pejabat_pembuat_komitmen'] = $request->pejabat_pembuat_komitmen;
+                    $data['bendahara'] = $request->bendahara;
+                    $data['belanja_pegawai'] = $request->belanja_pegawai;
                     $data['bulan'] = $request->bulan;
                     $data['tahun'] = $request->tahun;
                     $users = User::where('unit_id',$request->unit_id)->where('nip','!=','admin')->where('nip','!=','123')->get();
@@ -301,6 +307,9 @@ class ReportController extends Controller
                     return $pdf->setPaper(array(0,0,612.00,936.00), 'potrait')->stream('report.pdf');
                 }else if($request->type == "1"){
                     $data = [];
+                    $data['pejabat_pembuat_komitmen'] = $request->pejabat_pembuat_komitmen;
+                    $data['bendahara'] = $request->bendahara;
+                    $data['belanja_pegawai'] = $request->belanja_pegawai;
                     $data['unit_id'] = $request->unit_id;
                     $data['grade_semua'] = Grade::orderBy('grade','ASC')->get();
                     $data['bulan'] = $request->bulan;
@@ -346,6 +355,9 @@ class ReportController extends Controller
                     return $pdf->setPaper(array(0,0,612.00,936.00), 'potrait')->stream('report.pdf');
                 }else if($request->type == "2"){
                     $data = [];
+                    $data['pejabat_pembuat_komitmen'] = $request->pejabat_pembuat_komitmen;
+                    $data['bendahara'] = $request->bendahara;
+                    $data['belanja_pegawai'] = $request->belanja_pegawai;
                     $data['unit_id'] = $request->unit_id;
                     $data['grade_semua'] = Grade::orderBy('grade','ASC')->get();
                     $data['bulan'] = $request->bulan;
@@ -391,6 +403,9 @@ class ReportController extends Controller
                     return $pdf->setPaper(array(0,0,612.00,936.00), 'potrait')->stream('report.pdf');
                 }else if($request->type == "5"){
                     $data = [];
+                    $data['pejabat_pembuat_komitmen'] = $request->pejabat_pembuat_komitmen;
+                    $data['bendahara'] = $request->bendahara;
+                    $data['belanja_pegawai'] = $request->belanja_pegawai;
                     $data['unit_id'] = $request->unit_id;
                     $data['grade_semua'] = Grade::orderBy('grade','ASC')->get();
                     $data['bulan'] = $request->bulan;

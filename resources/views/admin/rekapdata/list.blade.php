@@ -325,7 +325,7 @@ if($request->unit_kerja){
               <button type="submit" class="btn btn-primary btn-fill">Simpan Data</button>
               @endif
 
-              <a href="{{url('export-data/'.$unitnya)}}" class="btn btn-warning btn-fill">Export Data</a>
+              <a href="#" onclick="showExport();" class="btn btn-warning btn-fill">Export Data</a>
 
             </div>
             <?php $status = false; ?>
@@ -483,6 +483,34 @@ if($request->unit_kerja){
     </div>
 
   </div>
+</div>
+<div id="exportModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Set Tanda Tangan</h4>
+    </div>
+    <div class="modal-body">
+        <div class="content">
+            <div class="form-group">
+                <label>Pimpinan Unit Kerja Eselon I</label>
+                <div class="col-md-12">
+                    <select required="" name="eselon_satu" id="eselon_satu" class="form-control border-input" style="width: 100%;">
+                        @foreach(App\User::get() as $dataPegawaiC)
+                        <option value="{{$dataPegawaiC->id}}">{{$dataPegawaiC->name}} - {{$dataPegawaiC->nip}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a type="button" class="btn btn-default" onclick="exportNow();">Export</a>
+    </div>
 </div>
 @endsection
 
@@ -787,7 +815,13 @@ if($request->unit_kerja){
     var total = (tl1 * 0) + (tl2 * 1) + (tl3 * 1.25) + (tl4 * 1.5) + (psw1 * 0.5) + (psw2 * 1) + (psw3 * 1.25) + (psw4 * 1.5) + (cuti_tahunan * 0) + (cuti_alasan_penting * 3) + (cuti_sakit_tidak_rawat_inap * 3) + (cuti_sakit_rawat_inap * 2.5) + (cuti_sakit_rawat_jalan * 2.5) + (cuti_gugur_kandungan * 3) + (cuti_bersalin * 3) + (cuti_besar * 100) + (cuti_luar_tanggungan_negara * 100) + (cuti_alpha * 3) + (cuti_ijin * 3) + (  cuti_dinas_luar * 0) + (cuti_tugas_belajar * 0) + ( bebas_tugas * 100);
     $('#total_potongan_absen').val(total);
   }
+  function showExport(){
+    $('#exportModal').modal('show');
+  }
 
+  function exportNow(){
+      location.href='{{url('export-data/'.$request->unit_kerja)}}/' + $('#eselon_satu').val();
+  }
 </script>
 @include('notification')
 @endsection

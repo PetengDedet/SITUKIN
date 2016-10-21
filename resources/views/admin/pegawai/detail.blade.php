@@ -186,6 +186,7 @@ Detail Pegawai
                       $a1203selected = "";
                     }
                   ?>
+                   <option></option>
                    <option value="1000" {{$a1000selected}}>Tidak Kawin & Anak 0</option>
                    <option value="1001" {{$a1001selected}}>Tidak Kawin & Anak 1</option>
                    <option value="1002" {{$a1002selected}}>Tidak Kawin & Anak 2</option>

@@ -134,7 +134,7 @@
     @endforeach
   </table>
 
-  @if($j == round(App\User::where('unit_id','=',$unit_id)->count() / 50) - 1)
+  @if($j == round(App\User::where('unit_id','=',$unit_id)->count() / 50))
   <table class="ndas" style="margin-top: 20px;">
     <tr>
         <td style="width: 35%;"></td>
@@ -149,12 +149,12 @@
         <tr>
         <td style="width: 35%;"></td>
         <td style="width: 35%;"></td>
-        <td style="width: 30%;padding-top: 70px;">Nama</td>
+        <td style="width: 30%;padding-top: 70px;">{{App\User::where('id',$data['eselon_satu'])->first()->name}}</td>
     </tr>
         <tr>
         <td style="width: 35%;"></td>
         <td style="width: 35%;"></td>
-        <td style="width: 30%;">NIP</td>
+        <td style="width: 30%;">NIP. {{App\User::where('id',$data['eselon_satu'])->first()->nip}}</td>
     </tr>
   </table>
   @endif

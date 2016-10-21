@@ -65,7 +65,7 @@ Route::get('export/invoice', ['uses' => 'ReportController@invoice']);
 Route::get('export/protakel', ['uses' => 'ReportController@protakel']); //sudah
 Route::get('export/sdm', ['uses' => 'ReportController@sdm']); //sudah
 Route::get('export/pembayaran', ['uses' => 'ReportController@pembayaran']);
-Route::get('export-data/{unit_id}', ['uses' => 'ReportController@exportdata']);
+Route::get('export-data/{unit_id}/{eselon_satu}', ['uses' => 'ReportController@exportdata']);
 
 
 

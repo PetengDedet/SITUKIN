@@ -156,26 +156,27 @@
 }
 .sikil .sikil-yw4l{vertical-align:top}
 </style>
+<br>
 <table class="sikil">
   <tr>
-    <td class="sikil-031e" style="width: 23%;"></td>
-    <td class="sikil-031e" style="width: 54%;"></td>
-    <td class="sikil-yw4l" style="width: 23%;">Jakarta...........</td>
+    <td class="sikil-031e" style="width: 30%;"></td>
+    <td class="sikil-031e" style="width: 40%;"></td>
+    <td class="sikil-yw4l" style="width: 30%;">Jakarta...........</td>
   </tr>
   <tr>
     <td class="sikil-031e">Pejabat Pembuat Komitmen</td>
     <td class="sikil-031e"></td>
-    <td class="sikil-yw4l">Bendahara</td>
+    <td class="sikil-yw4l" style="padding-top: 0px;">Bendahara</td>
   </tr>
   <tr>
-    <td class="sikil-031e" style="padding-top: 50px;">{{--$nama--}}</td>
+    <td class="sikil-031e" style="padding-top: 50px;">{{App\User::where('id',$data['pejabat_pembuat_komitmen'])->first()->name}}</td>
     <td class="sikil-031e"></td>
-    <td class="sikil-yw4l" style="padding-top: 50px;">{{--$nama--}}</td>
+    <td class="sikil-yw4l" style="padding-top: 50px;">{{App\User::where('id',$data['bendahara'])->first()->name}}</td>
   </tr>
   <tr>
-    <td class="sikil-031e">NIP. {{--$nip--}}</td>
+    <td class="sikil-031e" style="padding-top: 0px;">NIP. {{App\User::where('id',$data['pejabat_pembuat_komitmen'])->first()->nip}}</td>
     <td class="sikil-031e"></td>
-    <td class="sikil-yw4l">NIP. {{--$nip--}}</td>
+    <td class="sikil-yw4l" style="padding-top: 0px;">NIP. {{App\User::where('id',$data['bendahara'])->first()->nip}}</td>
   </tr>
 </table>
 @endif
