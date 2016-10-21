@@ -201,7 +201,10 @@ if($request->unit_kerja){
            </thead>
            <tbody>
             <script type="text/javascript">var dataInput = "";</script>
-            @forelse(App\User::where('nip','!=','admin')->where('unit_id','=',$unitnya)->get() as $data)
+            <?php
+              $dataPegawainya = App\User::where('nip','!=','admin')->where('unit_id','=',$unitnya)->paginate(10);
+            ?>
+            @forelse($dataPegawainya as $data)
             <input type="hidden" name="pegawai_id[]" value="{{$data->id}}">
             <?php
             $dataUnit = "";
@@ -275,7 +278,7 @@ if($request->unit_kerja){
                 @else
                 <div class="form-group border-input" >
                   <div class="input-group">
-                    <input  style="text-align: center;" class="readonly form-control border-input"  min="0" max="100" intOnly="true" id="potongan_absen_{{$data->id}}"  required="" name="potongan_absen[]" "type="text">
+                    <input  style="text-align: center;" class="readonly form-control border-input"  min="0" max="100" value="0" intOnly="true" id="potongan_absen_{{$data->id}}"  required="" name="potongan_absen[]" "type="text">
                     <span class="input-group-addon">
                       <span class="fa fa-percent"></span>
                     </span>
@@ -335,6 +338,7 @@ if($request->unit_kerja){
           </tbody>
 
         </table>
+        <div style="text-align: center;"> {{$dataPegawainya->links()}}</div>
       </div>
 
       <br>

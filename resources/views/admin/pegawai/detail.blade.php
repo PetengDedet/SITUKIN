@@ -111,21 +111,98 @@ Detail Pegawai
                 </select>
             </div>
             <div class="form-group">
-                <label>Kelas Jabatan</label>
-                <select name="kelas_jabatan" id="kelas_jabatan" class="form-control border-input" required="" >
-                   <option value="1000">Tidak Kawin & Anak 0</option>
-                   <option value="1001">Tidak Kawin & Anak 1</option>
-                   <option value="1002">Tidak Kawin & Anak 2</option>
-                   <option value="1003">Tidak Kawin & Anak 3</option>
-                   <option value="1100">Kawin & Anak 0</option>
-                   <option value="1101">Kawin & Anak 1</option>
-                   <option value="1102">Kawin & Anak 2</option>
-                   <option value="1103">Kawin & Anak 3</option>
-                   <option value="1200">Tidak Kawin & Anak 0</option>
-                   <option value="1201">Tidak Kawin & Anak 1</option>
-                   <option value="1202">Tidak Kawin & Anak 2</option>
-                   <option value="1203">Tidak Kawin & Anak 3</option>
+                <label>Status Kawin</label>
+                <select name="kdkawin" id="kdkawin" class="form-control border-input" required="" >
+                  <?php
+                    if($data->kdkawin == "1000"){
+                      $a1000selected = "selected";
+                    }else{
+                      $a1000selected = "";
+                    }
+
+                    if($data->kdkawin == "1001"){
+                      $a1001selected = "selected";
+                    }else{
+                      $a1001selected = "";
+                    }
+
+                    if($data->kdkawin == "1002"){
+                      $a1002selected = "selected";
+                    }else{
+                      $a1002selected = "";
+                    }
+
+                    if($data->kdkawin == "1003"){
+                      $a1003selected = "selected";
+                    }else{
+                      $a1003selected = "";
+                    }
+
+                    if($data->kdkawin == "1100"){
+                      $a1100selected = "selected";
+                    }else{
+                      $a1100selected = "";
+                    }
+
+                    if($data->kdkawin == "1101"){
+                      $a1101selected = "selected";
+                    }else{
+                      $a1101selected = "";
+                    }
+
+                    if($data->kdkawin == "1102"){
+                      $a1102selected = "selected";
+                    }else{
+                      $a1102selected = "";
+                    }
+
+                    if($data->kdkawin == "1103"){
+                      $a1103selected = "selected";
+                    }else{
+                      $a1103selected = "";
+                    }
+
+                    if($data->kdkawin == "1200"){
+                      $a1200selected = "selected";
+                    }else{
+                      $a1200selected = "";
+                    }
+
+                    if($data->kdkawin == "1201"){
+                      $a1201selected = "selected";
+                    }else{
+                      $a1201selected = "";
+                    }
+
+                    if($data->kdkawin == "1202"){
+                      $a1202selected = "selected";
+                    }else{
+                      $a1202selected = "";
+                    }
+
+                    if($data->kdkawin == "1203"){
+                      $a1203selected = "selected";
+                    }else{
+                      $a1203selected = "";
+                    }
+                  ?>
+                   <option value="1000" {{$a1000selected}}>Tidak Kawin & Anak 0</option>
+                   <option value="1001" {{$a1001selected}}>Tidak Kawin & Anak 1</option>
+                   <option value="1002" {{$a1002selected}}>Tidak Kawin & Anak 2</option>
+                   <option value="1003" {{$a1003selected}}>Tidak Kawin & Anak 3</option>
+                   <option value="1100" {{$a1100selected}}>Kawin & Anak 0</option>
+                   <option value="1101" {{$a1101selected}}>Kawin & Anak 1</option>
+                   <option value="1102" {{$a1102selected}}>Kawin & Anak 2</option>
+                   <option value="1103" {{$a1103selected}}>Kawin & Anak 3</option>
+                   <option value="1200" {{$a1200selected}}>Tidak Kawin & Anak 0</option>
+                   <option value="1201" {{$a1201selected}}>Tidak Kawin & Anak 1</option>
+                   <option value="1202" {{$a1202selected}}>Tidak Kawin & Anak 2</option>
+                   <option value="1203" {{$a1203selected}}>Tidak Kawin & Anak 3</option>
                 </select>
+            </div>
+            <div class="form-group">
+                <label>Eselon</label>
+                <input type="text" value="{{$data->eselon}}" class="form-control border-input" name="eselon" placeholder="Eselon" >
             </div>
           </div>
       </div>
